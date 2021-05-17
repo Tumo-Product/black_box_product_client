@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: rgb(40, 40, 112);
+}
+
+.inputHolder {
+    text-align: center;
+    margin: .5rem;
+}
+
+input {
+    margin: 5px;
+    width: 15vw;
+    height: 2rem;
+    padding: 1.2rem;
+    min-width: 50px;
+    border: 1px solid rgb(110, 110, 110);
+    border-radius: 1rem;
+    outline: none;
+    min-width: 200px;
+    box-shadow: 5px 5px 10px #aaaaaa;
+}
+
+.parent {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#firstParent {
+    /* background-color: rgb(238, 238, 238); */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 500% 500%;
+	animation: gradient 25s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+    }
+}
+
+#play {
+    width: 5%;
+    border: 2px solid black;
+    border-radius: 8px;
+    margin: 25px;
+    cursor: pointer;
+}
+
+#loadingScreen {
+    background: white;
+    width: 100%;
+    position: fixed;
+}
+
+#questions {
+    width: 80%;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 13px;
+}
+
+#questions div {
+    width: 100%;
+    text-align: center;
+    margin: .4rem;
+}
+
+.container {
+    width: 20%;
+    height: 40%;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: rgb(255, 255, 255);
+    min-width: 400px;
+    min-height: 500px;
+    box-shadow: 9px 11px 20px #363636;
+}
+
+.btn {
+    width: 5vw;
+    height: 2.5rem;
+    margin: 1rem;
+    border: 2px solid rgb(69, 69, 185);
+    color: #004085;
+    border-radius: 5px;
+    transition: 0.2s;
+    min-width: 70px;
+    min-height: 40px;
+    margin-top: 2.5rem;
+}
+
+.btn:hover {
+    color: white;
+    background-color: rgb(69, 69, 185);
+    transition: 0.2s;
+}
+
+#score {
+    text-align: center;
+}
+
+.images {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image {
+    min-width: 250px;
+    max-width: 400px;
+}
+
+button {
+    cursor: pointer;
+    width: 95%;
+    /* min-height: 50px; */
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 1em;
+}
+
+#loader {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+}
+
+@keyframes loading {
+    0% {
+        height: 0;
+    }
+
+    50% {
+        height: 100%;
+    }
+    
+    100% {
+        height: 0;
+    }
+}
+
+.line {
+    width: 0.3rem;
+    /* height: 100%; */
+    background: black;
+    margin: 0 0.2rem;
+    border-radius: 1rem;
+    animation: loading 0.8s linear infinite;
+}
+
+.line:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.line:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.line:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.line:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.line:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.line:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.line:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
