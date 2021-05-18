@@ -1,0 +1,12 @@
+{
+    "modules": [
+        {
+            "name": "Quiz",
+            "img": "images/quiz.png"
+        },
+        {
+            "name": "Calculator",
+            "img": "images/calculator.png"
+        }
+    ]
+}

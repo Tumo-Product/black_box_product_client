@@ -1,7 +1,57 @@
+@font-face {
+    font-family: 'Fedra Sans Alt Pro';
+    src: url('../fonts/Fedra Sans Alt Pro/FedraSansAltPro-Medium.otf') format("opentype");
+}
+
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Lato', sans-serif;
+
+    font-family: 'Fedra Sans Alt Pro', sans-serif;
+}
+
+nav {
+    position: fixed;
+    height: 100%;
+    width: 5rem;
+    background-color: #2F2F31;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    overflow: auto;
+}
+
+#settings {
+    position: fixed;
+    margin-left: 7rem;
+    height: 100%;
+    width: 0%;
+    background-color: rgb(31, 31, 31);
+    transition: 0.3s;
+}
+
+#settings header {
+    height: 5%;
+}
+
+@media only screen and (min-width: 2000px) {
+    #settings p {
+        font-size: 1.6rem;
+    }
+}
+
+.show {
+    transition: 0.3s;
+    width: 15% !important;
+}
+
+img {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
 }
 
 .inputHolder .fa{
@@ -21,6 +71,7 @@ header {
     align-items: center;
     justify-content: center;
     color: white;
+    min-height: 50px;
 }
 
 .wrap {
@@ -65,22 +116,7 @@ input {
 
 #firstParent {
     background-color: #3E4649;
-    /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 500% 500%;
-	animation: gradient 25s ease infinite; */
 }
-
-/* @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-    }
-} */
 
 #play {
     width: 5%;
@@ -88,12 +124,6 @@ input {
     border-radius: 8px;
     margin: 25px;
     cursor: pointer;
-}
-
-#loadingScreen {
-    background: white;
-    width: 100%;
-    position: fixed;
 }
 
 #questions {
@@ -154,67 +184,8 @@ input {
 button {
     cursor: pointer;
     width: 95%;
-    /* min-height: 50px; */
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
     font-size: 1em;
 }
-
-#loader {
-    height: 4rem;
-    display: flex;
-    align-items: center;
-}
-
-@keyframes loading {
-    0% {
-        height: 0;
-    }
-
-    50% {
-        height: 100%;
-    }
-    
-    100% {
-        height: 0;
-    }
-}
-
-.line {
-    width: 0.3rem;
-    /* height: 100%; */
-    background: black;
-    margin: 0 0.2rem;
-    border-radius: 1rem;
-    animation: loading 0.8s linear infinite;
-}
-
-.line:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.line:nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.line:nth-child(4) {
-    animation-delay: 0.3s;
-}
-
-.line:nth-child(5) {
-    animation-delay: 0.4s;
-}
-
-.line:nth-child(6) {
-    animation-delay: 0.5s;
-}
-
-.line:nth-child(7) {
-    animation-delay: 0.6s;
-}
-
-.line:nth-child(8) {
-    animation-delay: 0.7s;
-}
-
