@@ -1,32 +1,57 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
-h1 {
-    margin-bottom: 1rem;
+.inputHolder .fa{
+    color: white;
+    background-color: #22A86D;
+    width: 15px;
+    padding: 10px;
+}
+
+header {
     text-align: center;
     color: rgb(40, 40, 112);
+    background-color: #22A86D;
+    width: 100%;
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.wrap {
+    background-color: #2F2F31;
+    padding: 3rem;
+}
+
+header p {
+    font-size: 1.2rem;
 }
 
 .inputHolder {
     text-align: center;
-    margin: .5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 input {
-    margin: 5px;
-    width: 15vw;
-    height: 2rem;
-    padding: 1.2rem;
+    background-color: #424242;
+    width: 65%;
+    height: 2.5rem;
+    padding-left: 10px;
     min-width: 50px;
-    border: 1px solid rgb(110, 110, 110);
-    border-radius: 1rem;
+    border: none;
+    /* border-radius: 1rem; */
     outline: none;
     min-width: 200px;
-    box-shadow: 5px 5px 10px #aaaaaa;
+    /* box-shadow: 5px 5px 10px #aaaaaa; */
 }
 
 .parent {
@@ -39,13 +64,13 @@ input {
 }
 
 #firstParent {
-    /* background-color: rgb(238, 238, 238); */
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-color: #3E4649;
+    /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 500% 500%;
-	animation: gradient 25s ease infinite;
+	animation: gradient 25s ease infinite; */
 }
 
-@keyframes gradient {
+/* @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
 	}
@@ -55,7 +80,7 @@ input {
 	100% {
 		background-position: 0% 50%;
     }
-}
+} */
 
 #play {
     width: 5%;
@@ -87,32 +112,27 @@ input {
 
 .container {
     width: 20%;
-    height: 40%;
-    border-radius: 10px;
-    padding: 1rem;
     margin: 1rem;
-    background-color: rgb(255, 255, 255);
+    background-color: #2F2F31;
     min-width: 400px;
-    min-height: 500px;
-    box-shadow: 9px 11px 20px #363636;
+    text-align: center;
 }
 
 .btn {
     width: 5vw;
     height: 2.5rem;
-    margin: 1rem;
-    border: 2px solid rgb(69, 69, 185);
-    color: #004085;
-    border-radius: 5px;
+    margin-top: 5%;
+    border: 0px solid;
+    color: white;
+    background-color: #22A86D;
+    border-radius: 0px;
     transition: 0.2s;
     min-width: 70px;
     min-height: 40px;
-    margin-top: 2.5rem;
 }
 
 .btn:hover {
     color: white;
-    background-color: rgb(69, 69, 185);
     transition: 0.2s;
 }
 

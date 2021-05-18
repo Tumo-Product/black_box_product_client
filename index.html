@@ -8,23 +8,31 @@
     <title>Product Client</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
     <div id="firstParent" class="parent">
-        <div class="parent container">
-            <h1>Welcome</h1>
+        <div class="container">
+            <header>
+                <p>Login To Your Account</p>
+            </header>
 
-            <div class="inputHolder">
-                <input placeholder="Email" type="email">
+            <div class="wrap">
+                <div class="inputHolder">
+                    <i class="fa fa-user"></i>
+                    <input placeholder="Email" type="email">
+                </div>
+
+                <div class="inputHolder">
+                    <i class="fa fa-key"></i>
+                    <input placeholder="Password" password">
+                </div>
+
+                <button class="btn">Login</button>
             </div>
-
-            <div class="inputHolder">
-                <input placeholder="Password" password">
-            </div>
-
-            <button class="btn">Login</button>
         </div>
     </div>
 </body>
