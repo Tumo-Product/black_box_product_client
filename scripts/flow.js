@@ -5,7 +5,9 @@ const modules = {
 
 const onPageLoad = async () => {
     let data = await parser.fetchModules();
-    modules.all = data.modules;
+    modules.all = data.modulesArr;
+
+    
     view.toggleLoadingScreen();
     addModules(modules.all);
 }
@@ -24,7 +26,13 @@ const onModuleClick = (i) => {
     else {
         view.showSideBar(modules.all[i].name);
         modules.moduleShown = i;
-        console.log(modules.moduleShown);
+
+        if (modules.all[i].searchbar === true) view.showElement("searchbar");
+        if (modules.all[i].addButton === true) view.showElement("addButton");
+
+        if (modules.all[i].getRequest !== undefined) {
+            
+        }
     }
 }
 

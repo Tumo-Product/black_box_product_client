@@ -10,6 +10,25 @@
     font-family: 'Fedra Sans Alt Pro', sans-serif;
 }
 
+button {
+    border: none;
+    background-color: #22A86D;
+    color: white;
+    cursor: pointer;
+}
+
+input {
+    background-color: #424242;
+    width: 65%;
+    height: 2.5rem;
+    padding-left: 10px;
+    min-width: 50px;
+    border: none;
+    outline: none;
+    min-width: 200px;
+    color: white;
+}
+
 .show {
     transition: 0.3s;
     width: 15% !important;

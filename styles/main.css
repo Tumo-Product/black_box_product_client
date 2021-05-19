@@ -58,15 +58,24 @@ img {
     justify-content: center;
 }
 
-input {
-    background-color: #424242;
-    width: 65%;
-    height: 2.5rem;
-    padding-left: 10px;
-    min-width: 50px;
-    border: none;
-    outline: none;
-    min-width: 200px;
+#searchbar {
+    overflow: hidden !important;
+    height: 3%;
+    display: none;
+    margin-top: 5%;
+    overflow: auto;
+}
+
+#searchbar input {
+    min-width: 0px;
+    height: 100%;
+    width: 76%;
+}
+
+#searchbar button {
+    width: 13%;
+    margin-left: 0.1%;
+    height: 100%;
 }
 
 #firstParent {

@@ -29,15 +29,17 @@ const view = {
     showSideBar: (text) => {
         $(function() {
             $("#settings").addClass("show");
-            setTimeout(function(){
+            setTimeout(function() {
                 $("#settings p").html(text);
-            }, 75);
+            }, 50);
         });
     },
     hideSideBar: () => {
         $(function() {
             $("#settings p").html("");
             $("#settings").removeClass("show");
+            view.hideElement("searchbar");
+            view.hideElement("addButton");
         });
     },
 
