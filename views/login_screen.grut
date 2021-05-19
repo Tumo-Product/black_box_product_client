@@ -1,0 +1,21 @@
+<div id="firstParent" class="parent">
+    <div class="container">
+        <header>
+            <p>Login To Your Account</p>
+        </header>
+
+        <div class="wrap">
+            <div class="inputHolder">
+                <i class="fa fa-user"></i>
+                <input placeholder="Email" type="email">
+            </div>
+
+            <div class="inputHolder">
+                <i class="fa fa-key"></i>
+                <input placeholder="Password" />
+            </div>
+
+            <button class="btn">Login</button>
+        </div>
+    </div>
+</div>

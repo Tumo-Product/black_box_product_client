@@ -8,7 +8,7 @@ const parser = {
     axiosGet: async (request) => {
         return axios.get(request);
     }
-}
+};
 
 
 
