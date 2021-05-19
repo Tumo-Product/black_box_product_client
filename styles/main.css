@@ -1,33 +1,22 @@
-@font-face {
-    font-family: 'Fedra Sans Alt Pro';
-    src: url('../fonts/Fedra Sans Alt Pro/FedraSansAltPro-Medium.otf') format("opentype");
-}
-
-* {
-    margin: 0;
-    padding: 0;
-
-    font-family: 'Fedra Sans Alt Pro', sans-serif;
-}
-
 nav {
     position: fixed;
     height: 100%;
-    width: 5rem;
+    width: 3%;
     background-color: #2F2F31;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    align-items: center;
+    padding: 0.5%;
     overflow: auto;
 }
 
 #settings {
     position: fixed;
-    margin-left: 7rem;
+    margin-left: 4%;
     height: 100%;
     width: 0%;
-    background-color: rgb(31, 31, 31);
-    transition: 0.3s;
+    background-color: rgb(30, 30, 30);
+    transition: 0.2s;
 }
 
 #settings header {
@@ -36,13 +25,8 @@ nav {
 
 @media only screen and (min-width: 2000px) {
     #settings p {
-        font-size: 1.6rem;
+        font-size: 1.6rem !important;
     }
-}
-
-.show {
-    transition: 0.3s;
-    width: 15% !important;
 }
 
 img {
@@ -50,8 +34,7 @@ img {
     margin-top: 5px;
     cursor: pointer;
     border-radius: 50%;
-    width: 75px;
-    height: 75px;
+    width: 100%;
 }
 
 .inputHolder .fa{
@@ -61,26 +44,9 @@ img {
     padding: 10px;
 }
 
-header {
-    text-align: center;
-    color: rgb(40, 40, 112);
-    background-color: #22A86D;
-    width: 100%;
-    height: 25%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    min-height: 50px;
-}
-
 .wrap {
     background-color: #2F2F31;
     padding: 3rem;
-}
-
-header p {
-    font-size: 1.2rem;
 }
 
 .inputHolder {
@@ -99,19 +65,8 @@ input {
     padding-left: 10px;
     min-width: 50px;
     border: none;
-    /* border-radius: 1rem; */
     outline: none;
     min-width: 200px;
-    /* box-shadow: 5px 5px 10px #aaaaaa; */
-}
-
-.parent {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 #firstParent {
@@ -140,32 +95,6 @@ input {
     margin: .4rem;
 }
 
-.container {
-    width: 20%;
-    margin: 1rem;
-    background-color: #2F2F31;
-    min-width: 400px;
-    text-align: center;
-}
-
-.btn {
-    width: 5vw;
-    height: 2.5rem;
-    margin-top: 5%;
-    border: 0px solid;
-    color: white;
-    background-color: #22A86D;
-    border-radius: 0px;
-    transition: 0.2s;
-    min-width: 70px;
-    min-height: 40px;
-}
-
-.btn:hover {
-    color: white;
-    transition: 0.2s;
-}
-
 #score {
     text-align: center;
 }
@@ -179,13 +108,4 @@ input {
 .image {
     min-width: 250px;
     max-width: 400px;
-}
-
-button {
-    cursor: pointer;
-    width: 95%;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 10px;
-    font-size: 1em;
 }
