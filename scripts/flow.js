@@ -4,7 +4,7 @@ const modules = {
 }
 
 const onPageLoad = async () => {
-    let data = await parser.dataFetch();
+    let data = await parser.fetchModules();
     modules.all = data.modules;
     view.toggleLoadingScreen();
     addModules(modules.all);
