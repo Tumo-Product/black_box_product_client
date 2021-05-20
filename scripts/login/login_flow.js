@@ -1,3 +1,4 @@
 $(function () {
-    alert("ASHOT");
+    console.log("ASHOT");
+    view_loader.loadGrutList("login");
 })
