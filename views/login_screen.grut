@@ -12,7 +12,7 @@
 
             <div class="inputHolder">
                 <i class="fa fa-key"></i>
-                <input placeholder="Password" />
+                <input type="password" placeholder="Password" />
             </div>
 
             <button class="btn">Login</button>
