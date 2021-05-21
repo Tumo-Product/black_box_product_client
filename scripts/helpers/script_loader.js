@@ -1,3 +1,5 @@
+//Script loader, loads the script on opened page. Activation part is done on exact script side.
+
 const script_loader = {
     loadedScripts   : [],
 
