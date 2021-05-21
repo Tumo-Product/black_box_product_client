@@ -1,3 +1,3 @@
 $(function () {
-    script_loader.loadScriptList("login");
+    page_manager.activateLoading();
 })
