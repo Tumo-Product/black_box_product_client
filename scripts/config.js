@@ -1,3 +1,3 @@
 const config = {
-    query_url : "../test.json"
+    main_url : "https://blackboxbasic.herokuapp.com/"
 }

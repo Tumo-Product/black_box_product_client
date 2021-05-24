@@ -12,6 +12,13 @@ const script_loader = {
         }
     },
 
+    unloadScripts   : ()                => {
+        for(let i = 0; i < script_loader.loadedScripts.length; i++){
+            script_loader.loadedScripts[i].element.remove();
+        }
+        script_loader.loadedScripts = [];
+    },
+
     createScript    : (src)             => {
         return new Promise((resolve, reject) => {
             let script = document.createElement("script");

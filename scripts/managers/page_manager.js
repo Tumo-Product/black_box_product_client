@@ -6,6 +6,10 @@ const page_manager = {
         login_page      : {html: ""}
     },
 
+    clearPage           :   ()              => {
+        document.body.innerHTML = "";
+    },
+
     openView            :   async (name)    => {
         let data;
         if(page_manager._page_cache.login_page.html === ""){
