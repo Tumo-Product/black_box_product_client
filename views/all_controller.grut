@@ -1,16 +1,3 @@
-<div class="parent" id="loadingScreen">
-    <div id="loader">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-    </div>
-</div>
-
 <nav>
 </nav>
 <div id="settings">

@@ -74,3 +74,9 @@ header {
     justify-content: center;
     color: white;
 }
+
+#error_p {
+    color: crimson;
+    padding-bottom: 3rem;
+    display: none;
+}

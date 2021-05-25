@@ -5,17 +5,18 @@
         </header>
 
         <div class="wrap">
+            <p id="error_p">Unknown Username or Password</p>
             <div class="inputHolder">
                 <i class="fa fa-user"></i>
-                <input placeholder="Email" type="email">
+                <input placeholder="Email" type="email" id="email" onkeydown="login_flow.OnValueChange()"/>
             </div>
 
             <div class="inputHolder">
                 <i class="fa fa-key"></i>
-                <input placeholder="Password" />
+                <input type="password" placeholder="Password" id="pass" onkeydown="login_flow.OnValueChange()"/>
             </div>
 
-            <button class="btn">Login</button>
+            <button class="btn" onclick="login_flow.OnLoginPress()">Login</button>
         </div>
     </div>
 </div>
