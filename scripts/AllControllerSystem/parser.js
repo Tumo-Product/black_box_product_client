@@ -15,19 +15,6 @@ const parser = {
 //----------------------vvvvvvv------------DUMMY JSON DATA GOES HERE------------vvvvvvv---------------------------------
 
 let dummyJson = {
-    "modules": {
-        "qz_module" : {
-            "name": "Quiz",
-            "img": "images/quiz.png",
-            "searchbar": true,
-            "addButton": true,
-            "getRequest": "/quiz/list"
-        },
-        "cc_module" : {
-            "name": "Calculator",
-            "img": "images/calculator.png"
-        }
-    },
     "modulesArr": [
         {
             "name": "Quiz",
