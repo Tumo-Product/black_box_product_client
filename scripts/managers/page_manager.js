@@ -3,7 +3,8 @@ const page_manager = {
         loading_module  : {html: "", id:"loadingScreen"}
     },
     _page_cache     :   {
-        login_page      : {html: ""}
+        login_page              : {html: ""},
+        all_controller_page     : {html: ""}
     },
 
     clearPage           :   ()              => {
@@ -12,13 +13,13 @@ const page_manager = {
 
     openView            :   async (name)    => {
         let data;
-        if(page_manager._page_cache.login_page.html === ""){
+        if(page_manager._page_cache[name+"_page"].html === ""){
             data = await view_loader.loadGrutList(name);
             for(let i = 0; i < data.length; i++){
-                page_manager._page_cache.login_page.html += data[i].data;
+                page_manager._page_cache[name+"_page"].html += data[i].data;
             }
         }
-        document.body.innerHTML += page_manager._page_cache.login_page.html;
+        document.body.innerHTML += page_manager._page_cache[name+"_page"].html;
     },
 
     activateLoading     :   async ()        => {

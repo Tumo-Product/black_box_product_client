@@ -21,11 +21,17 @@ let LoginProcessing = async (query) => {
     await script_loader.unloadScripts();
     await page_manager.clearPage();
     await page_manager.activateLoading();
-    let resp = await axios.post(config.main_url + "ac_users/login", query);
-    if(!resp.data.data){   //Undefined or null for data
+    let resp    = await axios.post(config.main_url + "ac_users/login", query);
+    resp        = resp.data.data;
+    if(!resp){      //Undefined or null for data
         await page_manager.clearPage();
         OpenLoginScreen(true);
     } else {
-        console.log(resp);
+        acc.username    = query._username;
+        acc.uuid        = resp.uuid;
+        acc.token       = resp.token;
+        await page_manager.openView("all_controller");
+        await script_loader.loadScriptList("all_controller");
+        await page_manager.disableLoading();
     }
 }
