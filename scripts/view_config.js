@@ -19,6 +19,9 @@ const view_scripts  = {
             src     : "scripts/AllControllerSystem/flow.js"
         }
     ],
+    quiz_flow               : [
+        
+    ],
     loading_scripts         : [
 
     ]
