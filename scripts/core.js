@@ -2,11 +2,11 @@ const scriptStorage = {};
 
 $(function () {
     OnStartup();
-})
+});
 
 let OnStartup = () => {
     OpenLoginScreen(false);
-}
+};
 
 let OpenLoginScreen = async (error) => {
     await page_manager.activateLoading();
@@ -17,7 +17,7 @@ let OpenLoginScreen = async (error) => {
     if(error){
         login_flow.SetErrorTextState(true);
     }
-}
+};
 
 let LoginProcessing = async (query) => {
     await script_loader.unloadScripts();
@@ -36,4 +36,4 @@ let LoginProcessing = async (query) => {
         await script_loader.loadScriptList("all_controller");
         await page_manager.disableLoading();
     }
-}
+};

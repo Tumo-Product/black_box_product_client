@@ -1,12 +1,6 @@
-axios.defaults.baseURL = "https://blackboxbasic.herokuapp.com/";
-
-const parser = {
-    fetchModules: async () => {
-        let response = dummyJson;       //TODO: Switch to Axios
-        return response;
-    },
-    axiosGet: async (request) => {
-        return axios.get(request);
+const ac_network = {
+    load_modules : async () => {
+        return dummyJson;   //TODO: Load from Server on next iteration
     }
 };
 
@@ -19,7 +13,7 @@ let dummyJson = {
         {
             "name": "Quiz",
             "img": "images/quiz.png",
-            "searchbar": true,
+            "searchBar": true,
             "addButton": true,
             "getRequest": "/quiz/list"
         },

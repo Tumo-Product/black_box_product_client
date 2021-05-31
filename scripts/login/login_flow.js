@@ -12,14 +12,14 @@ login_flow = {
         let loginData = {
             email   :   "",
             pass    :   ""
-        }
+        };
         loginData.email     = document.getElementById("email").value;
         loginData.pass      = document.getElementById("pass").value;
         let validation = {
             filled  : false,
             long    : false,
             ok      : false
-        }
+        };
         validation.filled   = loginData.email !== "" && loginData.pass !== "";
         validation.long     = loginData.pass.length >= 4;
         validation.ok       = validation.filled && validation.long;

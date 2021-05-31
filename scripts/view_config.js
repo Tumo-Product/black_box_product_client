@@ -7,16 +7,20 @@ const view_scripts  = {
     ],
     all_controller_scripts  : [
         {
-            name    : "ac_parser",
-            src     : "scripts/AllControllerSystem/parser.js"
+            name    : "ac_sidebar",
+            src     : "scripts/AllControllerSystem/ac_sidebar.js"
+        },
+        {
+            name    : "ac_network",
+            src     : "scripts/AllControllerSystem/ac_network.js"
         },
         {
             name    : "ac_view",
-            src     : "scripts/AllControllerSystem/view.js"
+            src     : "scripts/AllControllerSystem/ac_view.js"
         },
         {
-            name    : "ac_flow",
-            src     : "scripts/AllControllerSystem/flow.js"
+            name    : "ac_main",
+            src     : "scripts/AllControllerSystem/ac_main.js"
         }
     ],
     quiz_flow               : [

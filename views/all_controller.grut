@@ -4,7 +4,7 @@
     <header>
         <p></p>
     </header>
-    <div class="inputHolder" id="searchbar">
+    <div class="inputHolder" id="searchBar">
         <input type="text" placeholder="Search">
         <button id="addButton">+</button>
     </div>

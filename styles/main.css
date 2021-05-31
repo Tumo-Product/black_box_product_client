@@ -58,7 +58,7 @@ img {
     justify-content: center;
 }
 
-#searchbar {
+#searchBar {
     overflow: hidden !important;
     height: 3%;
     display: none;
@@ -66,13 +66,13 @@ img {
     overflow: auto;
 }
 
-#searchbar input {
+#searchBar input {
     min-width: 0px;
     height: 100%;
     width: 76%;
 }
 
-#searchbar button {
+#searchBar button {
     width: 13%;
     margin-left: 0.1%;
     height: 100%;
