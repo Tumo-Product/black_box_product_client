@@ -11,15 +11,11 @@ const ac_network = {
 let dummyJson = {
     "modulesArr": [
         {
-            "name": "Quiz",
-            "img": "images/quiz.png",
+            "name": "Calculator",
+            "img": "images/calculator.png",
             "searchBar": true,
             "addButton": true,
             "getRequest": "/quiz/list"
-        },
-        {
-            "name": "Calculator",
-            "img": "images/calculator.png"
         }
     ]
 };

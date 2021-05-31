@@ -6,6 +6,7 @@ const ac_main = {
         ac_view.drawModulesList(ac_main.module_list);
         ac_view.toggleLoadingScreen();
     },
+
     on_moduleSelect : async (index) => {
         if (ac_main.mdl_index === index) {
             ac_sidebar.hideSideBar();
@@ -14,15 +15,8 @@ const ac_main = {
         else {
             ac_sidebar.showSideBar(ac_main.module_list[index].name);
             ac_main.mdl_index = index;
+            ac_sidebar.configSideBar(ac_main.module_list[index]);
 
-            if (ac_main.module_list[index].searchBar === true)  ac_view.showElement("searchBar");
-            else                                                ac_view.hideElement("searchBar");
-            if (ac_main.module_list[index].addButton === true)  ac_view.showElement("addButton");
-            else                                                ac_view.hideElement("addButton");
-
-            if (ac_main.module_list[index].getRequest !== undefined) {
-
-            }
         }
     }
 };

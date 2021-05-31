@@ -11,6 +11,10 @@
     width: 100%;
 }
 
+#smallLoadingScreen {
+
+}
+
 @keyframes loading {
     0% {
         height: 0;
@@ -61,3 +65,7 @@
 .line:nth-child(8) {
     animation-delay: 0.7s;
 }
+
+
+
+
