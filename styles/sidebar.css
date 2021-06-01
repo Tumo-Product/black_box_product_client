@@ -1,0 +1,15 @@
+.bar_names {
+    padding: 10px;
+    color: #fff;
+    background-color: #3e4649;
+    margin: 5px;
+    overflow-wrap: break-word;
+}
+
+#searchParent{
+    display: none;
+    overflow: auto;
+    height: -moz-calc(100% - 90px);
+    height: -webkit-calc(100% - 90px);
+    height: calc(100% - 90px);
+}

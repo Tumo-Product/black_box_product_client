@@ -1,18 +1,18 @@
 nav {
     position: fixed;
     height: 100%;
-    width: 3%;
+    width: 60px;
     background-color: #2F2F31;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.5%;
+    padding: 5px;
     overflow: auto;
 }
 
 #settings {
     position: fixed;
-    margin-left: 4%;
+    margin-left: 70px;
     height: 100%;
     width: 0%;
     background-color: rgb(30, 30, 30);
@@ -20,7 +20,7 @@ nav {
 }
 
 #settings header {
-    height: 5%;
+    height: 40px;
 }
 
 @media only screen and (min-width: 2000px) {
@@ -51,7 +51,8 @@ img {
 
 .inputHolder {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 5%;
+    margin-top: 5%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -60,16 +61,13 @@ img {
 
 #searchBar {
     overflow: hidden !important;
-    height: 3%;
+    height: 30px;
     display: none;
-    margin-top: 5%;
     overflow: auto;
-}
+    margin-top : 10px;
+    margin-bottom: 10px;
 
-#searchParent{
-    display: none;
 }
-
 
 .sml_loader {
     position: absolute;

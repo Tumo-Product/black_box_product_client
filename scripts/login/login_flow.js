@@ -31,11 +31,11 @@ login_flow = {
         query = {
             _username : dat.email,
             _password : sha256(dat.pass)
-        }
+        };
         LoginProcessing(query);
     },
 
     SetErrorTextState   :   (state) => {
         login_flow.error_element.style.display = state ? "block" : "none";
     }
-}
+};

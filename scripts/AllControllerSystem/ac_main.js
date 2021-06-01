@@ -13,7 +13,7 @@ const ac_main = {
             ac_main.mdl_index = -1;
         }
         else {
-            ac_sidebar.showSideBar(ac_main.module_list[index].name);
+            ac_sidebar.showSideBar(ac_main.module_list[index].name.toUpperCase());
             ac_main.mdl_index = index;
             ac_sidebar.configSideBar(ac_main.module_list[index]);
 

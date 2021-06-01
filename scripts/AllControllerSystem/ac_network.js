@@ -1,6 +1,11 @@
 const ac_network = {
-    load_modules : async () => {
+    load_modules :  async () => {
         return dummyJson;   //TODO: Load from Server on next iteration
+    },
+
+    request_data :  async (url) => {
+        let resp = await axios.get(config.main_url + url, {params: { token : acc.token}});
+        return resp.data.data;
     }
 };
 
@@ -11,7 +16,7 @@ const ac_network = {
 let dummyJson = {
     "modulesArr": [
         {
-            "name": "Calculator",
+            "name": "calculator",
             "img": "images/calculator.png",
             "searchBar": true,
             "addButton": true,
