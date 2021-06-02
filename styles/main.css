@@ -6,15 +6,15 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
     overflow: auto;
 }
 
 #settings {
     position: fixed;
-    margin-left: 70px;
+    margin-left: 80px;
     height: 100%;
-    width: 0%;
+    width: 0;
     background-color: rgb(30, 30, 30);
     transition: 0.2s;
 }
@@ -33,7 +33,7 @@ img {
     margin-bottom: 5px;
     margin-top: 5px;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 25%;
     width: 100%;
 }
 

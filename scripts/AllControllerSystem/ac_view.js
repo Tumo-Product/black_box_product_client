@@ -14,7 +14,7 @@ const ac_view = {
 
     drawModule          : (module, index) => {
         $(function() {
-            $("nav").append(`<img onclick="ac_main.on_moduleSelect(${index})" src="${module}">`);
+            $("nav").append(`<img class="side_img" onclick="ac_main.on_moduleSelect(${index})" src="${module}">`);
         });
     },
 

@@ -6,6 +6,23 @@
     overflow-wrap: break-word;
 }
 
+.bar_names:hover {
+    background-color: #667073;
+    cursor: pointer;
+}
+
+.side_img{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 25%;
+    width: 100%;
+}
+
+.side_img:hover {
+    filter: drop-shadow(2px 4px 6px black);
+}
+
 #searchParent{
     display: none;
     overflow: auto;
