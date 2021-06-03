@@ -17,10 +17,19 @@
     cursor: pointer;
     border-radius: 25%;
     width: 100%;
+    animation: normal 0.2s;
+    animation-name: outHoverBtn;
+    animation-direction: normal;
+    animation-timing-function: ease;
 }
 
 .side_img:hover {
     filter: drop-shadow(2px 4px 6px black);
+    border-radius: 15%;
+    animation: normal 0.2s;
+    animation-name: hoverBtn;
+    animation-direction: normal;
+    animation-timing-function: ease;
 }
 
 #searchParent{
@@ -29,4 +38,22 @@
     height: -moz-calc(100% - 90px);
     height: -webkit-calc(100% - 90px);
     height: calc(100% - 90px);
+}
+
+@keyframes hoverBtn {
+    0% {
+        border-radius: 25%;
+    }
+    100% {
+        border-radius: 15%;
+    }
+}
+
+@keyframes outHoverBtn {
+    0% {
+        border-radius: 15%;
+    }
+    100% {
+        border-radius: 25%;
+    }
 }

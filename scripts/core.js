@@ -4,12 +4,17 @@ $(function () {
     OnStartup();
 });
 
-let OnStartup = () => {
-    OpenLoginScreen(false);
+let OnStartup = async () => {
+    await page_manager.activateLoading();
+    await acc.check_access();
+    if(!acc.loggedin){
+        OpenLoginScreen(false);
+    } else {
+        await LoadController();
+    }
 };
 
 let OpenLoginScreen = async (error) => {
-    await page_manager.activateLoading();
     await page_manager.openView("login");
     await script_loader.loadScriptList("login");
     login_flow.OnStartup();
@@ -32,8 +37,13 @@ let LoginProcessing = async (query) => {
         acc.username    = query._username;
         acc.uuid        = resp.uuid;
         acc.token       = resp.token;
-        await page_manager.openView("all_controller");
-        await script_loader.loadScriptList("all_controller");
-        await page_manager.disableLoading();
+        acc.store_data();
+        await LoadController();
     }
 };
+
+let LoadController = async () => {
+    await page_manager.openView("all_controller");
+    await script_loader.loadScriptList("all_controller");
+    await page_manager.disableLoading();
+}
