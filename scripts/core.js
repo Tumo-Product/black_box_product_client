@@ -28,8 +28,7 @@ let LoginProcessing = async (query) => {
     await script_loader.unloadScripts();
     await page_manager.clearPage();
     await page_manager.activateLoading();
-    let resp    = await axios.post(config.main_url + "ac_users/login", query);
-    resp        = resp.data.data;
+    let resp    = await network.post_unsecure("ac_users/login", query);
     if(!resp){      //Undefined or null for data
         await page_manager.clearPage();
         OpenLoginScreen(true);

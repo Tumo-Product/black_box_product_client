@@ -26,9 +26,7 @@ const page_manager = {
         let data;
         if(page_manager._module_cache.loading_module.html === ""){
             data = await module_loader.loadZorgList("loading");
-            for(let i = 0; i < data.length; i++){
-                page_manager._module_cache.loading_module.html += data[i].data;
-            }
+            page_manager._module_cache.loading_module.html += data.login_md.data;
         }
         document.body.innerHTML += page_manager._module_cache.loading_module.html;
     },

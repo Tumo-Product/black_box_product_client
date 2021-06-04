@@ -2,14 +2,14 @@
 // .zorg files, are handling small module htmls, that must be attached to page, and removed on end 
 
 const module_loader = {
-    loadedModules      : [],
+    loadedModules      : {},
 
     loadZorgList       : async (name)   => {
-        module_loader.loadedModules = [];
+        module_loader.loadedModules = {};
         let array   = module_zorg[name + "_module"];
         for(let i = 0; i < array.length; i++) {
-            module_loader.loadedModules[i]      = module_loader.getModuleModel(array[i]);
-            module_loader.loadedModules[i].data = await module_loader.getModule(array[i].src);
+            module_loader.loadedModules[array[i].name]      =       module_loader.getModuleModel(array[i]);
+            module_loader.loadedModules[array[i].name].data = await module_loader.getModule(array[i].src);
         }
         return module_loader.loadedModules;
     },

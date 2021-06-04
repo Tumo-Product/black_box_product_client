@@ -9,6 +9,7 @@ const ac_main = {
 
     on_moduleSelect : async (index) => {
         if (ac_main.mdl_index === index) {
+            ac_details.hide_container();
             ac_sidebar.hideSideBar();
             ac_main.mdl_index = -1;
         }

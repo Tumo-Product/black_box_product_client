@@ -11,6 +11,10 @@ const view_scripts  = {
             src     : "scripts/AllControllerSystem/ac_sidebar.js"
         },
         {
+            name    : "ac_details",
+            src     : "scripts/AllControllerSystem/ac_details.js"
+        },
+        {
             name    : "ac_network",
             src     : "scripts/AllControllerSystem/ac_network.js"
         },

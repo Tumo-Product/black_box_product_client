@@ -4,8 +4,7 @@ const ac_network = {
     },
 
     request_data :  async (url) => {
-        let resp = await axios.get(config.main_url + url, {params: { token : acc.token}});
-        return resp.data.data;
+        return await network.get_w_token(url);;
     }
 };
 

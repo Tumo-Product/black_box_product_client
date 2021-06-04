@@ -51,9 +51,12 @@ const sideBar_Handlers  = {
             let temp;
             for(let i = 0; i < sideBar_Handlers.calculator_handler.a_c_list.length; i++){
                 temp = sideBar_Handlers.calculator_handler.a_c_list[i];
-                html += `<div id="${i}" class="bar_names"> <h3>${temp.name}</h3> </div>`;
+                html += `<div id="${i}" class="bar_names" onclick="sideBar_Handlers.calculator_handler.onElementClick(${i})"> <h3>${temp.name}</h3> </div>`;
             }
             $("#searchParent").html(html);
-        }
+        },
+        onElementClick  : (id)  => {
+            dt_Handlers.calculator_handler.onSelect(sideBar_Handlers.calculator_handler.a_c_list[id]);
+        },
     }
 };
