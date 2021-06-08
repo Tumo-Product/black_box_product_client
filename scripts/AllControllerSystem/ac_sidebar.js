@@ -40,8 +40,8 @@ const sideBar_Handlers  = {
             if (sideBar_Handlers.calculator_handler.defaultHtml !== ""){
                 $("#searchParent").html(sideBar_Handlers.calculator_handler.defaultHtml);
             }
-            sideBar_Handlers.calculator_handler.c_list      = await ac_network.request_data("quiz/list");
-            sideBar_Handlers.calculator_handler.a_c_list    = await ac_network.request_data("quiz/list");
+            sideBar_Handlers.calculator_handler.c_list      = await ac_network.request_data("calc/list");
+            sideBar_Handlers.calculator_handler.a_c_list    = await ac_network.request_data("calc/list");
         },
         draw        : () => {
             if(sideBar_Handlers.calculator_handler.defaultHtml === ""){

@@ -19,7 +19,7 @@ let dummyJson = {
             "img": "images/calculator.png",
             "searchBar": true,
             "addButton": true,
-            "getRequest": "/quiz/list"
+            "getRequest": "/calc/list"
         }
     ]
 };
