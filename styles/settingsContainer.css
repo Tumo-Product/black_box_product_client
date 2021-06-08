@@ -1,3 +1,9 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
 #item_container{
     position: absolute;
     left: 330px;
@@ -5,4 +11,39 @@
     right: 0;
     top: 0;
     display: none;
+    margin-left: 2%;
+}
+
+/* #item_container buttom{
+    display: block;
+    background-color: white;
+    border-radius: 3px;
+} */
+
+#item_container input{
+    background-color: #3E4649;
+    padding:0;
+}
+
+#item_container textarea{
+    background-color: grey;
+    display: block;
+    margin: 10px 0 10px 0;
+}
+
+#item_container p{
+    font-size: 14px;
+    color:white;
+}
+
+#question{
+    font-size:medium; 
+}
+
+#name{
+    font-size: large;
+}
+
+#name_area{
+    max-height: 3vh;
 }
