@@ -28,7 +28,6 @@ const dt_Handlers = {
             ac_details.start_loading();
             // let html = dt_Handlers.calculator_handler.generate_details(obj);
             temp_obj = obj;
-
             let html = await dt_Handlers.calculator_handler.generate_details(temp_obj);
             ac_details.clean_details();
             $("#item_container").html(html);
@@ -38,29 +37,20 @@ const dt_Handlers = {
             // };
         }, 
 
-        // add_question : (html) => {
-        //     let container = document.getElementById("item_container");
-        //     let save = document.getElementById("save");
-        //     let cancel = document.getElementById("cancel");
-        //     console.log(save);
-        // },
 
         generate_details : (obj) => {
             let html = "";
-            html += `<h3> Name  : <textarea rows="4" cols="50" id="name_area"> ${obj.name} </textarea></h3>`;
-            html += `<h5> Intro : </h5> <textarea rows="4" cols="50"> ${obj.description} </textarea>  <br>`;
+            html += `<div id="head_container"> <h3 id="name"> Name :</h3><input type="text" id="name_area" value="${obj.name}"> <div id="head_buttons"><button class="head_button">Url</button> <button class="head_button">Cancel</button> <button class="head_button">Save</button></div></div>`;
+            html += `<div id="description_block"> <h3 id="description"> Intro :</h3><textarea rows="4" cols="50">${obj.description}</textarea> </div><br>`;
             for(let i = 0; i < obj.questions.length; i++){
-                html += `<textarea rows="4" cols="50"> ${obj.questions[i].text} </textarea> `;
-                for(let j = 0; j < obj.questions[i].answers.length; j++){
-                    html += `<textarea rows="4" cols="50"> ${obj.questions[i].answers[j].text} </textarea>`;
-                    html += `<p> Points : <input type="text" class="points" value="${obj.questions[i].answers[j].points}"> </p>`;
-                }
-                html += `<br>`
+                // html += `<div id="content"> <textarea rows="4" cols="50"> ${obj.questions[i].text} </textarea> `;
+                // for(let j = 0; j < obj.questions[i].answers.length; j++){
+                //     html += `<textarea rows="4" cols="50"> ${obj.questions[i].answers[j].text} </textarea>`;
+                //     html += `<p> Points : <input type="text" class="points" value="${obj.questions[i].answers[j].points}"> </p>`;
+                // }
+                // html += `<br>`
             }
-            html += `<h5> Final : ${obj.answer} </h5>`;
-            // html += '<button id="add_question">Add question</button>';
-            // html += '<button id="cansel">Cancel</button>';
-            // html += '<button id="save">Save</button>';
+            // html += `<h5> Final : ${obj.answer} </h5> </div>`;
             return html;
         }
     }
