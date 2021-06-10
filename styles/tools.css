@@ -22,10 +22,8 @@ input {
     width: 65%;
     height: 2.5rem;
     padding-left: 10px;
-    min-width: 50px;
     border: none;
     outline: none;
-    min-width: 200px;
     color: white;
 }
 

@@ -8,21 +8,21 @@
     display: none;  
 }
 
-#item_container textarea{
+.question{
     width: 699px;
-    height: 84px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    border-radius: 15px;
+    height: 338px;
+    background: #21A96D 0% 0% no-repeat padding-box;
+    border-radius: 17px;
     opacity: 1;
-    text-align: left;
-    letter-spacing: 0px;
+    padding: 0 10px 0 15px;
+    margin-left: 180px;
     padding: 20px 10px 10px 15px;
-    color: #5D6277;
-    opacity: 1;
-    margin-left: 10px;
+    font-size:medium; 
+    margin-top: 20px;
 }
 
-#head_container, #description_block, #content{
+
+#head_container, #description_block{
     opacity: 1;
     padding: 5px;
     padding-left: 70px;
@@ -38,6 +38,12 @@
 
 }
 
+#description_block{ 
+    display: flex;
+    justify-content: end;
+    padding-top: 40px;
+}
+
 #name_area{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 15px;
@@ -49,7 +55,11 @@
     letter-spacing: 0px;
     color: #5D6277;
     opacity: 1;
+    padding-right: 10px;
+    padding-left: 15px;
 }
+
+
 
 .head_button {
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -65,11 +75,10 @@
 #item_container p{
     font-size: 14px;
     color:white;
+    padding: 7px;
 }
 
-#question{
-    font-size:medium; 
-}
+
 
 #name, #description{
     color:white;
@@ -83,4 +92,54 @@
 
 #head_buttons{
     margin-left: 100px;
+    min-width: 250px;
+}
+.question{
+    color:white;
+}
+
+.question_name{
+    color: white;
+    width: 645px;
+    margin-top: 20px;
+    letter-spacing: 0px;
+    padding: 14px 10px 10px 15px;
+}
+
+
+#description_area{
+    margin-left: 10px;
+    width: 699px;
+    height: 84px;
+    padding: 20px 10px 10px 15px;
+}
+
+.answer_text{
+    margin-left: 10px;
+    width: 438px;
+    letter-spacing: 0px;
+    padding: 14px 10px 10px 15px;
+}
+
+.points{
+    width: 66px;
+    height: 44px;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
+#description_area, .question_name, .answer_text, .points{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    opacity: 1; 
+    text-align: left;
+    letter-spacing: 0px;
+    color: #5D6277;
+
+}
+
+.answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

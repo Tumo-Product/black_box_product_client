@@ -37,18 +37,54 @@ const dt_Handlers = {
             // };
         }, 
 
+        create_header : (name) => {
+            let header = 
+                `<div id="head_container"> 
+                    <h3 id="name"> Name :</h3>
+                    <input type="text" id="name_area" value="${name}"> 
+
+                    <div id="head_buttons">
+                        <button class="head_button">Url</button> 
+                        <button class="head_button">Cancel</button> 
+                        <button class="head_button">Save</button>
+                    </div>
+                </div>`;
+
+            return header;
+        },
+        
+        create_description_block : (description) => {
+            let description_block = 
+                `<div id="description_block"> 
+                    <h3 id="description"> Intro :</h3>
+                    <textarea rows="4" cols="50" id="description_area">${description}</textarea> 
+                </div> `;
+            
+                return description_block;
+        },
+
+        add_question : (question_number, question_text) => {
+            let question = `<div class="question" > <h3 >Question ${question_number}</h3> <textarea rows="1" cols="50" class="question_name"> ${question_text}</textarea> <br>`; 
+            return question;
+        },
+
+        add_answer_and_point : (text, points) => {
+            let answer = `<div class="answer"><textarea rows="1" cols="50" class="answer_text"> ${text} </textarea>`;
+            let point = `<p> Points : </p><input type="text" class="points" value="${points}"> </div> `;
+            return answer + point;
+        },
 
         generate_details : (obj) => {
             let html = "";
-            html += `<div id="head_container"> <h3 id="name"> Name :</h3><input type="text" id="name_area" value="${obj.name}"> <div id="head_buttons"><button class="head_button">Url</button> <button class="head_button">Cancel</button> <button class="head_button">Save</button></div></div>`;
-            html += `<div id="description_block"> <h3 id="description"> Intro :</h3><textarea rows="4" cols="50">${obj.description}</textarea> </div><br>`;
-            for(let i = 0; i < obj.questions.length; i++){
-                // html += `<div id="content"> <textarea rows="4" cols="50"> ${obj.questions[i].text} </textarea> `;
-                // for(let j = 0; j < obj.questions[i].answers.length; j++){
-                //     html += `<textarea rows="4" cols="50"> ${obj.questions[i].answers[j].text} </textarea>`;
-                //     html += `<p> Points : <input type="text" class="points" value="${obj.questions[i].answers[j].points}"> </p>`;
-                // }
-                // html += `<br>`
+            html += dt_Handlers.calculator_handler.create_header(obj.name);
+            html += dt_Handlers.calculator_handler.create_description_block(obj.description);
+            html += `<div id="content">`;
+            for(let i = 0; i < 1/*obj.questions.length*/; i++){
+                html += dt_Handlers.calculator_handler.add_question(i + 1, obj.questions[i].text);
+                for(let j = 0; j < 1/*obj.questions[i].answers.length*/; j++){
+                    html += dt_Handlers.calculator_handler.add_answer_and_point(obj.questions[i].answers[j].text, obj.questions[i].answers[j].points);
+                }
+                html += `<br></div>`;
             }
             // html += `<h5> Final : ${obj.answer} </h5> </div>`;
             return html;
