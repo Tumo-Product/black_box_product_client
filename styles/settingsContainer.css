@@ -8,6 +8,14 @@
     display: none;  
 }
 
+.question_block:first-child{
+    margin-top: 20px;
+}
+
+.question_block{
+    margin-top: 40px;
+}
+
 .question{
     width: 699px;
     height: 338px;
@@ -16,11 +24,34 @@
     opacity: 1;
     padding: 0 10px 0 15px;
     margin-left: 180px;
-    padding: 20px 10px 10px 15px;
+    padding: 20px 10px 68px 15px;
     font-size:medium; 
     margin-top: 20px;
+    height: auto;
 }
 
+.question_header{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.load_icon{
+    width: 66px;
+    height: 42px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    opacity: 1;
+    margin-left: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.load_image{
+    width: 50%;
+    height: 56%;
+}
 
 #head_container, #description_block{
     opacity: 1;
@@ -58,7 +89,6 @@
     padding-right: 10px;
     padding-left: 15px;
 }
-
 
 
 .head_button {
@@ -102,10 +132,25 @@
     color: white;
     width: 645px;
     margin-top: 20px;
+    margin-left: 2%;
     letter-spacing: 0px;
     padding: 14px 10px 10px 15px;
+    min-height: 84px;
+    height: auto;
 }
 
+.question_block_icon{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: 118px;
+}
+
+.question_block{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
 
 #description_area{
     margin-left: 10px;
@@ -116,7 +161,7 @@
 
 .answer_text{
     margin-left: 10px;
-    width: 438px;
+    width: 435px;
     letter-spacing: 0px;
     padding: 14px 10px 10px 15px;
 }
@@ -138,8 +183,37 @@
 
 }
 
+
 .answer{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left:3%;
+    margin-top: 10px;
+}
+
+.right_icon{
+    margin: 0 30px 0 11px;
+}
+
+.add_answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.add_answer_button{
+    width: 42px;
+    height: 26px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_answer_image{
+    height: 56%;
 }

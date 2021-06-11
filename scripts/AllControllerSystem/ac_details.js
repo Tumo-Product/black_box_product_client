@@ -22,6 +22,7 @@ const ac_details = {
 const dt_Handlers = {
     calculator_handler  : {
         temp_obj    : {},
+        
         onSelect    : async (obj) => {
             ac_details.show_container();
             await ac_details.load_details();
@@ -64,14 +65,28 @@ const dt_Handlers = {
         },
 
         add_question : (question_number, question_text) => {
-            let question = `<div class="question" > <h3 >Question ${question_number}</h3> <textarea rows="1" cols="50" class="question_name"> ${question_text}</textarea> <br>`; 
+            let question = `
+            <div class="question_block"> 
+                <div class="question_block_icon"> 
+                    <img src="../../images/=.svg"> </div> 
+                <div class="question" > 
+
+                <div class="question_header"> 
+                    <h3 >Question ${question_number}</h3> 
+                    <div class="load_icon"> 
+                        <img class="load_image" src="../../images/arrow.svg"> 
+                    </div> 
+                </div>
+                <textarea rows="1" cols="50" class="question_name"> ${question_text}</textarea> <br>`; 
             return question;
         },
 
         add_answer_and_point : (text, points) => {
-            let answer = `<div class="answer"><textarea rows="1" cols="50" class="answer_text"> ${text} </textarea>`;
-            let point = `<p> Points : </p><input type="text" class="points" value="${points}"> </div> `;
-            return answer + point;
+            let drag_item = `<div class="answer"> <div> <img src="../../images/=.svg"> </div>`;
+            let answer = `<textarea rows="1" cols="50" class="answer_text"> ${text} </textarea>`;
+            let point = `<p> Points : </p><input type="text" class="points" value="${points}"> <div class="right_icon"> <img src="../../images/x.svg"></div> </div>`;
+
+            return drag_item + answer + point;
         },
 
         generate_details : (obj) => {
@@ -79,12 +94,13 @@ const dt_Handlers = {
             html += dt_Handlers.calculator_handler.create_header(obj.name);
             html += dt_Handlers.calculator_handler.create_description_block(obj.description);
             html += `<div id="content">`;
-            for(let i = 0; i < 1/*obj.questions.length*/; i++){
+            for(let i = 0; i < 2/*obj.questions.length*/; i++){
                 html += dt_Handlers.calculator_handler.add_question(i + 1, obj.questions[i].text);
-                for(let j = 0; j < 1/*obj.questions[i].answers.length*/; j++){
+                for(let j = 0; j < obj.questions[i].answers.length; j++){
                     html += dt_Handlers.calculator_handler.add_answer_and_point(obj.questions[i].answers[j].text, obj.questions[i].answers[j].points);
                 }
-                html += `<br></div>`;
+                html += `<div class="add_answer"><div class="add_answer_button"> <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
+                html += `</div></div>`;
             }
             // html += `<h5> Final : ${obj.answer} </h5> </div>`;
             return html;
