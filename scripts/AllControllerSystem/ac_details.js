@@ -1,4 +1,4 @@
-const ac_details = {
+    const ac_details = {
     modules         : null,
     load_details    : async () => {
         if(!ac_details.modules){
@@ -27,16 +27,51 @@ const dt_Handlers = {
             ac_details.show_container();
             await ac_details.load_details();
             ac_details.start_loading();
-            // let html = dt_Handlers.calculator_handler.generate_details(obj);
             temp_obj = obj;
             let html = await dt_Handlers.calculator_handler.generate_details(temp_obj);
             ac_details.clean_details();
             $("#item_container").html(html);
-            // let add_button = document.getElementById("add_question");
-            // add_button.onclick = function (event){
-            //     dt_Handlers.calculator_handler.add_question(html);
-            // };
+            dt_Handlers.calculator_handler.check_events();
         }, 
+
+        check_events : () => {
+            dt_Handlers.calculator_handler.answer_event();
+            dt_Handlers.calculator_handler.question_event();
+        },
+
+        question_event : () => {
+            let add_question_button = document.getElementById("add_question_button");
+            let question_types = document.getElementById("question_types");
+            add_question_button.addEventListener('click', event => {
+                question_types.style.display = "inline-block";
+                let types = document.getElementsByClassName("question_type");
+                types[0].addEventListener('click', event => {
+                    let questions_block = document.getElementById("content");
+                    let questions_len = document.getElementsByClassName("question_block").length;
+                    questions_block.innerHTML += dt_Handlers.calculator_handler.add_question(questions_len + 1, '') + `<div class="add_answer"><div class="add_answer_button"> <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
+                    dt_Handlers.calculator_handler.answer_event();
+                });
+                // types[1].addEventListener('click', dt_Handlers.calculator_handler.add_pic_text_question(questions_block), false);
+                // types[2].addEventListener('click', dt_Handlers.calculator_handler.add_picture_question(questions_block), false);
+            })
+            
+        },
+
+        answer_event : () => {
+            let add_answer_buttons = document.getElementsByClassName("add_answer_button");
+            let answers_blocks = document.getElementsByClassName("answers_block");
+            for (let i = 0; i < add_answer_buttons.length; i++) {
+                add_answer_buttons[i].addEventListener('click',  event => {
+                    answers_blocks[i].innerHTML += dt_Handlers.calculator_handler.add_answer_and_point('','');   
+                })
+            }
+        },
+        
+        // add_text_question : (question_block) => {
+        //     let questions_len = document.getElementsByClassName("question_block").length;
+        //     console.log(questions_len);
+        //     question_block.innerHTML += dt_Handlers.calculator_handler.add_question(questions_len + 1, '');
+        // },
 
         create_header : (name) => {
             let header = 
@@ -77,7 +112,8 @@ const dt_Handlers = {
                         <img class="load_image" src="../../images/arrow.svg"> 
                     </div> 
                 </div>
-                <textarea rows="1" cols="50" class="question_name"> ${question_text}</textarea> <br>`; 
+                <textarea rows="1" cols="50" class="question_name"> ${question_text}</textarea> <br>
+                <div class="answers_block">`; 
             return question;
         },
 
@@ -99,9 +135,17 @@ const dt_Handlers = {
                 for(let j = 0; j < obj.questions[i].answers.length; j++){
                     html += dt_Handlers.calculator_handler.add_answer_and_point(obj.questions[i].answers[j].text, obj.questions[i].answers[j].points);
                 }
+                html += `</div>`;
                 html += `<div class="add_answer"><div class="add_answer_button"> <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
                 html += `</div></div>`;
             }
+            
+            html += `</div> <div id="add_question"><div id="add_question_button"> <img id="add_question_image" src="../../images/+.svg"> </div>`;
+            html += `<div id="question_types" style="display:none">
+                        <button class="question_type"> Text </button> 
+                        <button class="question_type"> Pic&Text </button> 
+                        <button class="question_type"> Pic </button>
+                     </div>`;
             // html += `<h5> Final : ${obj.answer} </h5> </div>`;
             return html;
         }
