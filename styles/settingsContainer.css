@@ -242,3 +242,48 @@
     color: #5D6277;
     margin-left: 15px;
 }
+
+.delete{
+    height: 14px;
+    width: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 7px;
+    
+} 
+
+.load_picture{
+    width: 66px;
+    height: 42px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    opacity: 1;
+    /* margin-left: 75%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pic_answer{
+    width: 150px;
+    height: 250px;
+    display: inline-block;
+    margin: 10px 0 0 13px;
+}
+
+.image_block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 130px;
+    height: 180px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    opacity: 1;
+}
+
