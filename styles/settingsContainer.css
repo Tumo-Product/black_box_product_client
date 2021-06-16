@@ -106,6 +106,7 @@
     font-size: 14px;
     color:white;
     padding: 7px;
+    width: 55px;
 }
 
 
@@ -161,7 +162,7 @@
 
 .answer_text{
     margin-left: 10px;
-    width: 435px;
+    width: 453px;
     letter-spacing: 0px;
     padding: 14px 10px 10px 15px;
 }
@@ -194,6 +195,19 @@
 
 .right_icon{
     margin: 0 30px 0 11px;
+}
+
+.add_pic_answer{
+    display: inline-block;
+}
+
+.answers_block{
+    display: flex;
+    flex-direction: column;
+}
+
+.add_pic_answer{
+    margin-left:15px;
 }
 
 .add_answer{
@@ -262,17 +276,17 @@
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 15px;
     opacity: 1;
-    /* margin-left: 75%; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .pic_answer{
-    width: 150px;
-    height: 250px;
+    width: 162px;
+    height: 270px;
     display: inline-block;
     margin: 10px 0 0 13px;
+    position: relative;
 }
 
 .image_block{
@@ -285,5 +299,30 @@
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 15px;
     opacity: 1;
+    flex-direction: column;
+    position: relative;
 }
 
+.image_load_block{
+    width: 103px;
+    height: 139px;
+    background: #9DC3D1 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    opacity: 1;
+    position: absolute;
+    top: 13px;
+}
+
+.reload_picture{
+    position: absolute;
+    bottom: -4px;
+}
+
+.reload_image{
+    width: 12px;
+}
+
+.pic_points{
+    display: flex;
+    margin-top:7px; 
+}

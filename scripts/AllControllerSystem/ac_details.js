@@ -22,7 +22,10 @@
 const dt_Handlers = {
     calculator_handler  : {
         temp_obj    : {},
+
         answer_button_index : 1,
+
+        question_id : 0,
 
         onSelect    : async (obj) => {
             ac_details.show_container();
@@ -48,21 +51,29 @@ const dt_Handlers = {
         },
 
         answer_event : (type, i) => {
-            console.log(i);
-            let add_answer_buttons = document.getElementsByClassName("add_answer_button");
             let answers_blocks = document.getElementsByClassName("answers_block");
-            let question_block = document.getElementsByClassName("question_block");
-            answers_blocks[i].innerHTML += dt_Handlers.calculator_handler.add_answer_and_point('','', type);   
+            answers_blocks[i].innerHTML += dt_Handlers.calculator_handler.add_answer_and_point('','', type, answers_blocks[i].children.length++);   
         },
         
         add_type_question : (type) => {
             dt_Handlers.calculator_handler.answer_button_index++;
             let question_types = document.getElementById("question_types");
-            let answer_button = `</div ><div class="add_answer"><div class="add_answer_button" onclick="dt_Handlers.calculator_handler.answer_event(${type}, ${dt_Handlers.calculator_handler.answer_button_index})"> <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
+            let questions_len = document.getElementsByClassName("question_block").length;
+            let flex_dir = "column";
+            let class_name;
+            if (type == 0)
+                class_name = 'add_answer';
+            else
+            {
+                flex_dir = "row";
+                class_name = 'add_pic_answer';
+            }
+                
+            let answer_button = `</div ><div class="${class_name}"><div class="add_answer_button" onclick="dt_Handlers.calculator_handler.answer_event(${type}, ${dt_Handlers.calculator_handler.answer_button_index})"> <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
+
             question_types.style.display = "none";
             let questions_block = document.getElementById("content");
-            let questions_len = document.getElementsByClassName("question_block").length;
-            questions_block.innerHTML += dt_Handlers.calculator_handler.add_question(questions_len + 1, '') + answer_button;
+            questions_block.innerHTML += dt_Handlers.calculator_handler.add_question(questions_len + 1, '',  flex_dir) + answer_button;
 
         },
 
@@ -92,9 +103,9 @@ const dt_Handlers = {
                 return description_block;
         },
 
-        add_question : (question_number, question_text) => {
+        add_question : (question_number, question_text, flex_dir) => {
             let question = `    
-            <div class="question_block"> 
+            <div class="question_block" id="${dt_Handlers.calculator_handler.question_id++}"> 
                 <div class="question_block_icon"> 
                     <img src="../../images/=.svg"> </div> 
                 <div class="question" > 
@@ -106,24 +117,24 @@ const dt_Handlers = {
                     </div> 
                 </div>
                 <textarea rows="1" cols="50" class="question_name"> ${question_text}</textarea> <br>
-                <div class="answers_block">`; 
+                <div class="answers_block" style="flex-direction:${flex_dir}">`; 
             return question;
         },
 
-        add_answer_and_point : (text, points, type) => {
+        add_answer_and_point : (text, points, type, id) => {
             let answer;
             let final_block;
             let point = `<p> Points : </p><input type="text" class="points" value="${points}"> `;
             if (type == 0){
-                let drag_item = `<div class="answer"> <div> <img src="../../images/=.svg"> </div>`;
+                let drag_item = `<div class="answer" id="${id}"> <div> <img src="../../images/=.svg"> </div>`;
                 answer = `<textarea rows="1" cols="50" class="answer_text"> ${text} </textarea>`;
                 final_block =  drag_item + answer + point + `<div class="right_icon"> <img src="../../images/x.svg"></div> </div>`;
             }
             else if (type == 2){
                 answer = `
-                <div class="pic_answer"> 
+                <div class="pic_answer" id="${id}"> 
                     <div class="image_block">  
-                        <div class="load_picture"> 
+                        <div class="load_picture" onclick="dt_Handlers.calculator_handler.redraw_block(${id}, ${dt_Handlers.calculator_handler.answer_button_index})"> 
                             <img class="load_image" src="../../images/arrow.svg"> 
                         </div> 
                     </div>
@@ -134,19 +145,37 @@ const dt_Handlers = {
             return final_block;
         },
 
+        redraw_block : (a_id, q_id) => {
+            let answers_blocks = document.getElementsByClassName("answers_block");
+            answers_blocks[q_id].children[a_id].innerHTML = `
+                                                                <div class="delete"> 
+                                                                    <img src="../../images/x.svg">
+                                                                </div>
+                                                                <div class="image_block">  
+                                                                    <div class="image_load_block"></div>
+                                                                    <div class="reload_picture" onclick="dt_Handlers.calculator_handler.reload_image(${a_id}, ${dt_Handlers.calculator_handler.answer_button_index})"> 
+                                                                        <img class="reload_image" src="../../images/arrow.svg"> 
+                                                                    </div> 
+                                                                </div>
+                                                                <div class="pic_points"> <p> Points : </p><input type="text" class="points" value=""> </div>
+                                                            `; 
+        },
+
         generate_details : (obj) => {
             let html = "";
-            let an_i = 0;
+            let qn_id = 0;
+            let an_id = 0;
             html += dt_Handlers.calculator_handler.create_header(obj.name);
             html += dt_Handlers.calculator_handler.create_description_block(obj.description);
             html += `<div id="content">`;
             for(let i = 0; i < 2/*obj.questions.length*/; i++){
                 html += dt_Handlers.calculator_handler.add_question(i + 1, obj.questions[i].text, 'text');
                 for(let j = 0; j < obj.questions[i].answers.length; j++){
-                    html += dt_Handlers.calculator_handler.add_answer_and_point(obj.questions[i].answers[j].text, obj.questions[i].answers[j].points, 0);
+                    html += dt_Handlers.calculator_handler.add_answer_and_point(obj.questions[i].answers[j].text, obj.questions[i].answers[j].points, 0, an_id++);
                 }
+                an_id = 0;
                 html += `</div>`;
-                html += `<div class="add_answer"><div class="add_answer_button" onclick="dt_Handlers.calculator_handler.answer_event(0, ${an_i++})">  <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
+                html += `<div class="add_answer"><div class="add_answer_button" onclick="dt_Handlers.calculator_handler.answer_event(0, ${qn_id++})">  <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
                 html += `</div></div>`;
             }
             
