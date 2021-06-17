@@ -41,11 +41,11 @@ const dt_Handlers = {
             dt_Handlers.calculator_handler.check_events();
         }, 
 
-        check_events : () => {
+        check_events : () => { 
             dt_Handlers.calculator_handler.question_event();
         },
 
-        question_event : () => {
+        question_event : () => { 
             let add_question_button = document.getElementById("add_question_button");
             let question_types = document.getElementById("question_types");
             add_question_button.addEventListener('click', event => {
@@ -120,21 +120,35 @@ const dt_Handlers = {
 
         add_question : (question_number, question_text, flex_dir) => {
             let question = `    
-            <div class="question_block" id="question_${dt_Handlers.calculator_handler.question_id++}"> 
+            <div class="question_block" id="question_${dt_Handlers.calculator_handler.question_id}"> 
                 <div class="question_block_icon"> 
                     <img src="../../images/=.svg"> </div> 
                 <div class="question" > 
 
                 <div class="question_header"> 
                     <h3 >Question ${question_number}</h3> 
-                    <div class="load_icon"> 
-                        <img class="load_image" src="../../images/arrow.svg"> 
+                    <div class="load_icon" id="question_image_${dt_Handlers.calculator_handler.question_id}"> 
+                        <img class="load_image" src="../../images/arrow.svg" onclick="dt_Handlers.calculator_handler.open_load_window(${dt_Handlers.calculator_handler.question_id})"> 
                     </div> 
                 </div>
                 <textarea rows="1" cols="50" class="question_name"> ${question_text}</textarea> <br>
                 <div class="answers_block" style="flex-direction:${flex_dir}">
                 `; 
+            dt_Handlers.calculator_handler.question_id++;
             return question;
+        },
+
+        open_load_window : (id) =>{
+            let load_button = document.getElementById(`question_image_${id}`);
+            let question_block = document.getElementById(`question_${id}`);
+            load_button.style.display = 'none'; 
+            question_block.innerHTML += `
+            <div class="load_window"> 
+                <div class="right_icon window_delete"> <img src="../../images/x.svg"></div>  
+                <div class="load_picture" > 
+                    <img class="load_image quest_image" src="../../images/arrow.svg"> 
+                </div> 
+            </div>`;
         },
 
         add_answer_and_point : (text, points, type, id, i) => {
@@ -142,13 +156,13 @@ const dt_Handlers = {
             let final_block;
             let point = `<p> Points : </p><input type="text" class="points" value="${points}"> `;
             if (type == 0){
-                let drag_item = `<div class="answer" id="${id}"> <div> <img src="../../images/=.svg"> </div>`;
+                let drag_item = `<div class="answer" id="answer_${i}_${id}"> <div> <img src="../../images/=.svg"> </div>`;
                 answer = `<textarea rows="1" cols="50" class="answer_text"> ${text} </textarea>`;
-                final_block =  drag_item + answer + point + `<div class="right_icon"> <img src="../../images/x.svg"></div> </div> `;
+                final_block =  drag_item + answer + point + `<div class="right_icon" onclick="dt_Handlers.calculator_handler.delete_answer('answer_${i}_${id}')"> <img src="../../images/x.svg"></div> </div> `;
             }
             else {
                 answer = `
-                <div class="pic_answer" id="${id}"> 
+                <div class="pic_answer" id="answer_${i}_${id}"> 
                     <div class="image_block">  
                         <div class="load_picture" onclick="dt_Handlers.calculator_handler.redraw_block(${id}, ${dt_Handlers.calculator_handler.answer_button_index}, ${type})"> 
                             <img class="load_image" src="../../images/arrow.svg"> 
@@ -165,6 +179,11 @@ const dt_Handlers = {
             }
             
             return final_block;
+        },
+
+        delete_answer : (id) => {
+            let answer = document.getElementById(id);
+            answer.remove();
         },
 
         redraw_block : (a_id, q_id, type) => {
@@ -192,9 +211,6 @@ const dt_Handlers = {
         },
 
         reload_image : async (a_id) => {
-            // console.log("MTA");
-            // let get_url =  document.location.href;
-            // var url = new URL(get_url);
             var id = `pic_input_${dt_Handlers.calculator_handler.answer_button_index}_${a_id}`;
             let info = await dt_Handlers.calculator_handler.input_to_base(id);
             let ans_image = document.getElementById(`pic_answer_${dt_Handlers.calculator_handler.answer_button_index}_${a_id}`);

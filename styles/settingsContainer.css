@@ -285,6 +285,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 
 .pic_answer{
@@ -363,4 +366,25 @@ div.drag-sort-active {
 
 .pic_text{
     width: 130px;
+}
+
+
+.load_window {
+    width: 237px;
+    height: 125px;
+    background: #667073 0% 0% no-repeat padding-box;
+    border-radius: 17px;
+    opacity: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 173px;
+    right: 39px;
+    margin: 20px 0 0 0;
+}
+
+.window_delete{
+    position: absolute;
+    top:5px;
+    right: -25px;
 }
