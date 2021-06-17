@@ -24,10 +24,15 @@
     opacity: 1;
     padding: 0 10px 0 15px;
     margin-left: 180px;
-    padding: 20px 10px 68px 15px;
+    padding: 20px 10px 30px 15px;
     font-size:medium; 
     margin-top: 20px;
     height: auto;
+}
+
+.pic_button{
+    margin-left: 14px;
+    margin-bottom: 93px;
 }
 
 .question_header{
@@ -204,6 +209,7 @@
 .answers_block{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .add_pic_answer{
@@ -285,7 +291,7 @@
     width: 162px;
     height: 270px;
     display: inline-block;
-    margin: 10px 0 0 13px;
+    margin: 10px 0 0 12px;
     position: relative;
 }
 
@@ -325,4 +331,36 @@
 .pic_points{
     display: flex;
     margin-top:7px; 
+}
+
+.input_image{
+    position: absolute;
+    top: 5px;
+    left: 0;
+    background: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    font-size:0;
+}
+
+.answer_image{
+    height: 100%;
+    border-radius: 15px;
+    margin-top: 0;
+}
+
+div.drag-sort-active {
+    background: transparent;
+    color: transparent;
+    border: 1px solid #4ca1af;
+}
+
+.pic_ans_inp {
+    margin-top: 7px;
+}
+
+.pic_text{
+    width: 130px;
 }
