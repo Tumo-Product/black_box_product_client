@@ -27,8 +27,11 @@ const view_scripts  = {
             src     : "scripts/AllControllerSystem/ac_main.js"
         }
     ],
-    quiz_flow               : [
-        
+    calc_scripts            : [
+        {
+            name    : "ac_details_calcdetails",
+            src     : "scripts/AllControllerSystem/SeparateDetails/calc_details.js"
+        }
     ],
     loading_scripts         : [
 

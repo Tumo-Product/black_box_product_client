@@ -1,4 +1,4 @@
-    const ac_details = {
+const ac_details = {
     modules         : null,
     load_details    : async () => {
         if(!ac_details.modules){
@@ -34,13 +34,16 @@ const dt_Handlers = {
             ac_details.show_container();
             await ac_details.load_details();
             ac_details.start_loading();
+            await script_loader.loadScriptList("calc");
             temp_obj = obj;
-            let html = await dt_Handlers.calculator_handler.generate_details(temp_obj);
+            let html = await calculator_handler.generate_details(temp_obj);
             ac_details.clean_details();
             $("#item_container").html(html);
-            dt_Handlers.calculator_handler.check_events();
+            //dt_Handlers.calculator_handler.check_events();
         }, 
-
+    }
+}
+/*
         check_events : () => { 
             dt_Handlers.calculator_handler.question_event();
         },
@@ -234,33 +237,6 @@ const dt_Handlers = {
             })
         },
 
-        generate_details : (obj) => {
-            let html = "";
-            let qn_id = 0;
-            let an_id = 0;
-            html += dt_Handlers.calculator_handler.create_header(obj.name);
-            html += dt_Handlers.calculator_handler.create_description_block(obj.description);
-            html += `<div id="content">`;
-            for(let i = 0; i < 2/*obj.questions.length*/; i++){
-                html += dt_Handlers.calculator_handler.add_question(i + 1, obj.questions[i].text, 'text');
-                for(let j = 0; j < obj.questions[i].answers.length; j++){
-                    html += dt_Handlers.calculator_handler.add_answer_and_point(obj.questions[i].answers[j].text, obj.questions[i].answers[j].points, 0, an_id++);
-                }
-                an_id = 0;
-                html += `</div>`;
-                html += `<div class="add_answer"><div class="add_answer_button" onclick="dt_Handlers.calculator_handler.answer_event(0, ${qn_id++})">  <img class="add_answer_image" src="../../images/+.svg"> </div></div>`;
-                html += `</div> <div class="right_icon"> <img src="../../images/x.svg"></div> </div>`;
-            }
-            
-            html += `</div> <div id="add_question"><div id="add_question_button"> <img id="add_question_image" src="../../images/+.svg"> </div>`;
-            html += `<div id="question_types" style="display:none">
-                        <button class="question_type" onclick="dt_Handlers.calculator_handler.add_type_question(0)"> Text </button> 
-                        <button class="question_type" onclick="dt_Handlers.calculator_handler.add_type_question(1)"> Pic&Text </button> 
-                        <button class="question_type" onclick="dt_Handlers.calculator_handler.add_type_question(2)"> Pic </button>
-                     </div>`;
-            // html += `<h5> Final : ${obj.answer} </h5> </div>`;
-            return html;
-        }
     }
 }
 
@@ -300,4 +276,4 @@ const dt_Handlers = {
 //     item.target.classList.remove('drag-sort-active');
 // }
 
-// (()=> {enableDragSort('answers_block')})();
+// (()=> {enableDragSort('answers_block')})();*/
