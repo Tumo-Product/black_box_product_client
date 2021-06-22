@@ -5,6 +5,9 @@ const ac_details = {
             ac_details.modules = await module_loader.loadZorgList("details_mini");
         }
     },
+    load_handlers   : async (name) => {
+        await script_loader.loadScriptList(name);
+    },
     start_loading   : () => {
         $("#item_container").html(ac_details.modules.star_loading_md.data);
     },
@@ -26,26 +29,20 @@ const dt_Handlers = {
             ac_details.show_container();
             await ac_details.load_details();
             ac_details.start_loading();
+            await ac_details.load_handlers("calculator");
             // let html = dt_Handlers.calculator_handler.generate_details(obj);
             temp_obj = obj;
 
             let html = await dt_Handlers.calculator_handler.generate_details(temp_obj);
             ac_details.clean_details();
             $("#item_container").html(html);
-            // let add_button = document.getElementById("add_question");
-            // add_button.onclick = function (event){
-            //     dt_Handlers.calculator_handler.add_question(html);
-            // };
+
         }, 
 
-        // add_question : (html) => {
-        //     let container = document.getElementById("item_container");
-        //     let save = document.getElementById("save");
-        //     let cancel = document.getElementById("cancel");
-        //     console.log(save);
-        // },
-
-        generate_details : (obj) => {
+        generate_details : async (obj) => {
+            let data = await module_loader.loadZorgList("calc_modules");
+            console.log(data);
+            return data.main_skelet.data;
             let html = "";
             html += `<h3> Name  : <textarea rows="4" cols="50" id="name_area"> ${obj.name} </textarea></h3>`;
             html += `<h5> Intro : </h5> <textarea rows="4" cols="50"> ${obj.description} </textarea>  <br>`;
@@ -58,9 +55,6 @@ const dt_Handlers = {
                 html += `<br>`
             }
             html += `<h5> Final : ${obj.answer} </h5>`;
-            // html += '<button id="add_question">Add question</button>';
-            // html += '<button id="cansel">Cancel</button>';
-            // html += '<button id="save">Save</button>';
             return html;
         }
     }

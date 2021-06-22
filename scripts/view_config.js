@@ -27,6 +27,12 @@ const view_scripts  = {
             src     : "scripts/AllControllerSystem/ac_main.js"
         }
     ],
+    calculator_scripts      : [
+        {
+            name    : "calc_pagehandler",
+            src     : "scripts/AllControllerSystem/DetailsViews/calculator_view.js"
+        }
+    ],
     quiz_flow               : [
         
     ],
