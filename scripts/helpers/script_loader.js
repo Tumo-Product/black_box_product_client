@@ -5,11 +5,24 @@ const script_loader = {
 
     loadScriptList  : async (name)      => {
         let array   = view_scripts[name + "_scripts"];
+        if(script_loader.checkScriptLoad(array)) { return; }
         for(let i = 0; i < array.length; i++) {
             script_loader.loadedScripts[i]          = script_loader.getScriptModel(array[i]);
             script_loader.loadedScripts[i].element  = await script_loader.createScript(array[i].src);
             array[i].loaded = true;
         }
+    },
+
+    checkScriptLoad : (array)           => {
+        let contains = false;
+        for(let i = 0; i < array.length; i++){
+            for(let j = 0; j < script_loader.loadedScripts.length; j++){
+                if(array[i].name === script_loader.loadedScripts[j].name){
+                    return true;
+                }
+            }
+        }
+        return contains;
     },
 
     unloadScripts   : ()                => {

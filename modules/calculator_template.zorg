@@ -1,4 +1,9 @@
-<div id="top_panel"><input type="text" id="name_input" value="Name"/> </div>
+<div id="top_panel">
+    <input type="text" id="name_input" value="Name"/> 
+    <button>URL</button>
+    <button>Cancel</button>
+    <button>Save</button>
+</div>
 <div id="scroll_content">
     <h5>Intro Text</h5><textarea id="intro_area" >Dummy Ashot</textarea>
     <div id="questions">

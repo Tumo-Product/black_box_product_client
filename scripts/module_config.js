@@ -11,6 +11,18 @@ const module_zorg   = {
         {
             name    : "main_skelet",
             src     : "modules/calculator_template.zorg"
+        },
+        {
+            name    : "question_template",
+            src     : "modules/calculator_question.zorg"
+        },
+        {
+            name    : "answer_template",
+            src     : "modules/calculator_answer.zorg"
+        },
+        {
+            name    : "q_answer_template",
+            src     : "modules/calculator_q_answer.zorg"
         }
     ]
 };

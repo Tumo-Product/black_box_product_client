@@ -1,0 +1,5 @@
+<div id="q_answer_container_^{q_id}_^{id}">
+    <input type="text" id="question_^{q_id}_ans_^{id}" value="^{answer_value}"/>
+    <input type="number" id="points_^{q_id}_^{id}" value="^{point_value}"/>
+    <button id="remove_ans_^{q_id}_^{id}">X</button> 
+</div>
