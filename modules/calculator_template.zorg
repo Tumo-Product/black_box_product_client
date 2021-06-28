@@ -1,11 +1,15 @@
 <div id="top_panel">
+    <p id="name_text">Name </p>
     <input type="text" id="name_input" value="Name"/> 
-    <button>URL</button>
-    <button>Cancel</button>
-    <button>Save</button>
+    <button id="btn_url">URL</button>
+    <button id="btn_cnc">Cancel</button>
+    <button id="btn_sav">Save</button>
 </div>
 <div id="scroll_content">
-    <h5>Intro Text</h5><textarea id="intro_area" >Dummy Ashot</textarea>
+    <div id="intro_container">
+        <p id="intro_text">Intro </p>
+        <textarea id="intro_area" >Dummy Ashot</textarea>
+    </div>
     <div id="questions">
 
     </div>

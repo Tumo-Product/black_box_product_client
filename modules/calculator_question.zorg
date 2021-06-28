@@ -1,9 +1,12 @@
-<div class="question_container" id="^{id}">
-    <h4         id="question_^{id}">Question ^{id}</h4>
-    <button     id="remove_quest_^{id}">X</button> 
-    <textarea   id="question_text_^{id}" >^{question_text}</textarea>
-    <div id="container_answers_^{id}">
+<div class="question_body" id="question_body_^{id}">
+    <div class="question_upload_container" id="image_upload_panel_^{id}"></div>
+    <div class="question_container" id="^{id}">
+        <h4         id="question_^{id}"         class="question_name"       >Question ^{id}</h4>
+        <button     id="remove_quest_^{id}"     class="remove_quest_button" >+</button> 
+        <textarea   id="question_text_^{id}"    class="question_text"       >^{question_text}</textarea>
+        <div id="container_answers_^{id}">
 
 
+        </div>
     </div>
 </div>

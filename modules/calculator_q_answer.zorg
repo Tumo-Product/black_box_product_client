@@ -1,5 +1,10 @@
-<div id="q_answer_container_^{q_id}_^{id}">
-    <input type="text" id="question_^{q_id}_ans_^{id}" value="^{answer_value}"/>
-    <input type="number" id="points_^{q_id}_^{id}" value="^{point_value}"/>
-    <button id="remove_ans_^{q_id}_^{id}">X</button> 
+<div id="q_answer_container_^{q_id}_^{id}" class="every_answer_container">
+    <div class="nav_arrows_quest">
+        <button                 class="q_answer_up"     >▲</button> 
+        <button                 class="q_answer_down"   >▼</button> 
+    </div>
+    <input type="text"      class="q_answer_input" id="question_^{q_id}_ans_^{id}" value="^{answer_value}"/>
+    <p class="points_label" >Points :</p>
+    <input type="numeric"    class="q_answer_points_input" id="points_^{q_id}_^{id}" value="^{point_value}"/>
+    <button                 class="q_answer_remove" id="remove_ans_^{q_id}_^{id}">+</button> 
 </div>
