@@ -16,6 +16,6 @@
         <div id="container_answers_^{id}">
 
         </div>
-        <button id="add_answer_button_^{id}"    class="add_answer_button">+</button>
+        <button id="add_answer_button_^{id}"    class="add_answer_button" onclick="calc_handlers.onAddAnswer(^{id})">+</button>
     </div>
 </div>

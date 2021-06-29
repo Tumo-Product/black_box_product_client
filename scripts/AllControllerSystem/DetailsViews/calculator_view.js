@@ -1,3 +1,15 @@
+const calc_handlers = {
+    current_dat         : {},
+    initialize          : (dat) => {
+        calc_handlers.current_dat = dat;
+    },
+
+    onAddAnswer         : (id) => {
+        
+    }
+}
+
+//---------------------------------vvvvvvvv--------------Front End Visuals--------------vvvvvvvv---------------------------------------
 const calc_sys = {
     target_set          : {},
     handle_set_object   : async (data) => {
@@ -8,6 +20,7 @@ const calc_sys = {
         await calc_sys.create_add_question();
         await calc_sys.create_answer();
         await calc_sys.fill_question_answers();
+        calc_handlers.initialize(calc_sys.target_set);
     },
 
     create_add_question     : async() => {

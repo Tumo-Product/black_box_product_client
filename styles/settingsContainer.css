@@ -117,7 +117,7 @@ textarea{
     position: relative;
     left: 150px;
     top: 0px;
-    height: 84px;
+    height: 150px;
     padding: 15px 15px 15px 15px !important;
     background: #ffffff 0% 0% no-repeat padding-box  !important;
     border-radius: 15px;
@@ -212,6 +212,17 @@ textarea{
     border-radius: 15px;
     font-size: 22px !important;
     color: #5D6277 !important;
+}
+
+.answer_final_upload_container{
+    width: 237px !important;
+    height: 125px;
+    position: relative;
+    left: 890px;
+    margin: 0 !important;
+    border-radius: 15px;
+    background: #667073 0% 0% no-repeat padding-box;
+    top: -332px;
 }
 
 #add_question_button{
