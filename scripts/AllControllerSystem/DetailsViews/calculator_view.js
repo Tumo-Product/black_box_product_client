@@ -5,8 +5,15 @@ const calc_sys = {
         await calc_sys.assign_name();
         await calc_sys.assign_intro();
         await calc_sys.create_questions();
+        await calc_sys.create_add_question();
         await calc_sys.create_answer();
         await calc_sys.fill_question_answers();
+    },
+
+    create_add_question     : async() => {
+        let add_quest_template  = (await module_loader.loadZorgList("calc_modules")).q_add_button;
+        add_quest_template      = add_quest_template.data;
+        document.getElementById("questions").innerHTML += add_quest_template;
     },
 
     fill_question_answers   : async() => {

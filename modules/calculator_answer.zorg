@@ -1,4 +1,10 @@
 <div class="answer_container" id="answer_container">
-    <h4>Answer</h4>
+    <p id="f_answer_label">Answer</p>
     <textarea   id="answer_value">^{answer_text}</textarea>
 </div>
+
+<!--
+    intro_container
+    intro_text
+    intro_area
+-->

@@ -23,6 +23,10 @@ const module_zorg   = {
         {
             name    : "q_answer_template",
             src     : "modules/calculator_q_answer.zorg"
+        },
+        {
+            name    : "q_add_button",
+            src     : "modules/calculator_add_question.zorg"
         }
     ]
 };
