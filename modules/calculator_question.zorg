@@ -6,16 +6,16 @@
         </button>
     </div>
     <div class="nav_arrows_quest_main">
-        <button                 class="q_answer_up arrows"     >▲</button> 
-        <button                 class="q_answer_down arrows"   >▼</button> 
+        <button                 class="q_answer_up arrows"     onclick="calc_handlers.onReplaceQuestions('up'   ,^{id})">▲</button> 
+        <button                 class="q_answer_down arrows"   onclick="calc_handlers.onReplaceQuestions('down' ,^{id})">▼</button> 
     </div>
     <div class="question_container" id="^{id}">
         <h4         id="question_^{id}"         class="question_name"       >Question ^{id}</h4>
-        <button     id="remove_quest_^{id}"     class="remove_quest_button" >+</button> 
+        <button     id="remove_quest_^{id}"     class="remove_quest_button" onclick="calc_handlers.onRemoveQuestion(^{id})">+</button> 
         <textarea   id="question_text_^{id}"    class="question_text"       >^{question_text}</textarea>
-        <div id="container_answers_^{id}">
+        <div        id="container_answers_^{id}">
 
         </div>
-        <button id="add_answer_button_^{id}"    class="add_answer_button" onclick="calc_handlers.onAddAnswer(^{id})">+</button>
+        <button id="add_answer_button_^{id}"    class="add_answer_button"   onclick="calc_handlers.onAddAnswer(^{id})">+</button>
     </div>
 </div>

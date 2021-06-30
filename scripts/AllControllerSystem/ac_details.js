@@ -33,14 +33,18 @@ const dt_Handlers = {
             await   ac_details.load_details();
                     ac_details.start_loading();
             await   ac_details.load_handlers("calculator");
-            
-            temp_obj = obj;
+            temp_obj = JSON.parse(JSON.stringify(obj));                         // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
             let html = await dt_Handlers.calculator_handler.get_page_template();
             $("#item_container").html(html);
             ac_details.start_loading();
             await   calc_sys.handle_set_object(temp_obj);
             ac_details.stop_loading();
-        }, 
+        },
+        
+        clear_container     :   async () => {
+            let html = await dt_Handlers.calculator_handler.get_page_template();
+            $("#item_container").html(html);
+        },
 
         get_page_template   :   async () => {
             let data = await module_loader.loadZorgList("calc_modules");
