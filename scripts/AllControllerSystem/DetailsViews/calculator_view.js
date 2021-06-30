@@ -1,10 +1,55 @@
 const calc_handlers = {
-    current_dat         : {},
-    initialize          : (dat) => {
+    current_dat             : {},
+    initialize              : (dat) => {
         calc_handlers.current_dat = dat;
     },
 
-    onReplaceQuestions  : async(type, q_id) => {
+    onRemoveQuestionImage   : async(q_id) => {
+        calc_handlers.current_dat.questions[q_id].image = undefined;
+        calc_handlers.updateData();
+        let scrValue = calc_sys.get_scroll();
+        await dt_Handlers.calculator_handler.clear_container();
+        await calc_sys.handle_set_object(calc_handlers.current_dat);
+        calc_sys.scroll_to_pos(scrValue);
+    },
+
+    onUploadPressed         : async(q_id) => {
+        await document.getElementById("img_upload_question_"+q_id).click();
+    },
+
+    onFinalUploadPressed    : async() => {
+        await document.getElementById("img_upload_answer").click();
+    },
+
+    onFinalImageUpload      : async() => {
+        let input   = document.getElementById("img_upload_answer");
+        let file    = input.files[0];
+        if(file === undefined) { alert("Upload an SVG!"); return; }
+        let fr      = new FileReader();
+        let basedat = await (new Promise((resolve)=>{
+            fr.readAsDataURL(file);
+            fr.onloadend = () => {
+                resolve(fr.result);
+            }
+        }));
+        document.getElementById("upload_answer_image").src = basedat;
+    },
+
+    onImageUpload           : async(q_id) => {
+        let input   = document.getElementById("img_upload_question_"+q_id);
+        let file    = input.files[0];
+        if(file === undefined) { alert("Upload an SVG!"); return; }
+        let fr      = new FileReader();
+        let basedat = await (new Promise((resolve)=>{
+            fr.readAsDataURL(file);
+            fr.onloadend = () => {
+                resolve(fr.result);
+            }
+        }));
+        document.getElementById("upload_image_"+q_id).src = basedat;
+    },
+
+    onReplaceQuestions      : async(type, q_id) => {
         let index   = q_id;
         let index2  = type === "up" ? index - 1 : index + 1;
         if(index2 < 0 || index2 >= calc_handlers.current_dat.questions.length){
@@ -21,7 +66,7 @@ const calc_handlers = {
         calc_sys.scroll_to_pos(scrValue);
     },
 
-    onReplaceAnswers    : async(type, q_id, a_id) => {
+    onReplaceAnswers        : async(type, q_id, a_id) => {
         let index   = a_id;
         let index2  = type === "up" ? index - 1 : index + 1;
         if(index2 < 0 || index2 >= calc_handlers.current_dat.questions[q_id].answers.length){
@@ -35,7 +80,7 @@ const calc_handlers = {
         await calc_sys.update_question_answers_one(q_id);
     },
 
-    onAddQuestion       : async() => {
+    onAddQuestion           : async() => {
         question_template = { text : "", answers : [] }
         calc_handlers.updateData();
         calc_handlers.current_dat.questions.push(question_template);
@@ -46,7 +91,7 @@ const calc_handlers = {
         calc_sys.scroll_to_pos(scrValue);
     },
 
-    onRemoveQuestion    : async(q_id) => {
+    onRemoveQuestion        : async(q_id) => {
         let scrValue = calc_sys.get_scroll();
         calc_handlers.updateData();
         calc_handlers.current_dat.questions.splice(q_id, 1);
@@ -56,14 +101,14 @@ const calc_handlers = {
         calc_sys.scroll_to_pos(scrValue);
     },
 
-    onRemoveAnswer      : async(q_id, a_id) => {
+    onRemoveAnswer          : async(q_id, a_id) => {
         calc_handlers.updateData();
         calc_handlers.current_dat.questions[q_id].answers.splice(a_id, 1);
         calc_sys.target_set = calc_handlers.current_dat;
         await calc_sys.update_question_answers_one(q_id);
     },
 
-    onAddAnswer         : async (id) => {
+    onAddAnswer             : async (id) => {
         calc_handlers.updateData();
         answer_template = { text : "", points : 0 }
         calc_handlers.current_dat.questions[id].answers.push(answer_template);
@@ -71,7 +116,7 @@ const calc_handlers = {
         await calc_sys.update_question_answers_one(id);
     },
 
-    updateData          : () => {           //Whole Data collection method //TODO: Image collection
+    updateData              : () => {           //Whole Data collection method //TODO: Image collection
         calc_handlers.current_dat.name                                                = document.getElementById("name_input").value;
         calc_handlers.current_dat.answer                                              = document.getElementById("answer_value").value;
         calc_handlers.current_dat.description                                         = document.getElementById("intro_area").value;
@@ -81,7 +126,10 @@ const calc_handlers = {
                 calc_handlers.current_dat.questions[q_index].answers[a_index].text    = document.getElementById("question_" + q_index + "_ans_"  +a_index).value;
                 calc_handlers.current_dat.questions[q_index].answers[a_index].points  = document.getElementById("points_"   + q_index +   "_"    +a_index).value;
             }
+            calc_handlers.current_dat.questions[q_index].image                        = document.getElementById("upload_image_" + q_index).src;
+            //TODO: Fix svg-datatype
         }
+        calc_handlers.answer_image = document.getElementById("upload_answer_image").src;
     }
 }
 
@@ -96,6 +144,8 @@ const calc_sys = {
         await calc_sys.create_add_question();
         await calc_sys.create_answer();
         await calc_sys.fill_question_answers();
+        await calc_sys.assign_images();
+        await calc_sys.assign_final_image();
         calc_handlers.initialize(calc_sys.target_set);
     },
 
@@ -103,6 +153,23 @@ const calc_sys = {
         let add_quest_template  = (await module_loader.loadZorgList("calc_modules")).q_add_button;
         add_quest_template      = add_quest_template.data;
         document.getElementById("questions").innerHTML += add_quest_template;
+    },
+
+    assign_final_image          : async() => {
+        let tempImage = calc_sys.target_set.answer_image;
+        if(tempImage !== undefined){
+            document.getElementById("upload_answer_image").src = "data:image/svg+xml;base64," + tempImage;
+        }
+    },
+
+    assign_images               : async() => {
+        let tempImage;
+        for(let q_index = 0; q_index < calc_sys.target_set.questions.length; q_index++){
+            tempImage = calc_sys.target_set.questions[q_index].image;
+            if(tempImage !== undefined){
+                document.getElementById("upload_image_"+q_index).src = "data:image/svg+xml;base64,"+ calc_sys.target_set.questions[q_index].image;
+            }
+        }
     },
 
     fill_question_answers       : async() => {

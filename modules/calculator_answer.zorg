@@ -3,7 +3,9 @@
     <textarea   id="answer_value">^{answer_text}</textarea>
     <div class="answer_final_upload_container" id="answer_final_upload_panel">
         <button id="remove_as_image"  class="remove_q_image_button">+</button> 
-        <button class="upload_button" id="as_upload_button">
+        <img src="images/svg93_119.png" id="upload_answer_image" class="upload_answer_image"/>
+        <input type="file" accept=".svg" id="img_upload_answer" style="display:none" onchange="calc_handlers.onFinalImageUpload()"/>
+        <button class="upload_button" id="as_upload_button" onclick="calc_handlers.onFinalUploadPressed()">
             <p class="upload_arrow">↑</p>
         </button>
     </div>

@@ -117,9 +117,9 @@ textarea{
     position: relative;
     left: 150px;
     top: 0px;
-    height: 150px;
+    height: 270px;
     padding: 15px 15px 15px 15px !important;
-    background: #ffffff 0% 0% no-repeat padding-box  !important;
+    background: #ffffff 0% 0% no-repeat padding-box !important;
     border-radius: 15px;
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-size: 18px;
@@ -216,13 +216,13 @@ textarea{
 
 .answer_final_upload_container{
     width: 237px !important;
-    height: 125px;
+    height: 300px;
     position: relative;
     left: 890px;
     margin: 0 !important;
     border-radius: 15px;
     background: #667073 0% 0% no-repeat padding-box;
-    top: -332px;
+    top: -451px;
 }
 
 #add_question_button{
@@ -294,6 +294,24 @@ textarea{
     font-size: 22px;
     transform: matrix(1, 1, -1, 1, 0, 0);
     background: none;
+}
+
+.upload_image{
+    position: absolute;
+    left: 0px;
+    transform: translate(0, 10px);
+}
+
+.upload_answer_image{
+    max-height: 300px;
+    width: auto;
+    position: absolute;
+    left: 1.5px;
+    transform: translate(0, -5px);
+}
+
+#as_upload_button{
+    top: 260px;
 }
 
 #item_container{
