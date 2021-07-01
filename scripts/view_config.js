@@ -25,6 +25,10 @@ const view_scripts  = {
         {
             name    : "ac_main",
             src     : "scripts/AllControllerSystem/ac_main.js"
+        },
+        {
+            name    : "ac_loading",
+            src     : "scripts/AllControllerSystem/ac_loading.js"
         }
     ],
     calculator_scripts      : [

@@ -158,16 +158,24 @@ const calc_sys = {
     assign_final_image          : async() => {
         let tempImage = calc_sys.target_set.answer_image;
         if(tempImage !== undefined){
-            document.getElementById("upload_answer_image").src = "data:image/svg+xml;base64," + tempImage;
+            if(tempImage.includes("data:image")){
+                document.getElementById("upload_answer_image").src =                                    tempImage;
+            } else {
+                document.getElementById("upload_answer_image").src = "data:image/svg+xml;base64,"   +   tempImage;
+            }
         }
     },
 
-    assign_images               : async() => {
+    assign_images               : async() => {    
         let tempImage;
         for(let q_index = 0; q_index < calc_sys.target_set.questions.length; q_index++){
             tempImage = calc_sys.target_set.questions[q_index].image;
             if(tempImage !== undefined){
-                document.getElementById("upload_image_"+q_index).src = "data:image/svg+xml;base64,"+ calc_sys.target_set.questions[q_index].image;
+                if(calc_sys.target_set.questions[q_index].image.includes("data:image")){
+                    document.getElementById("upload_image_"+q_index).src =                                  calc_sys.target_set.questions[q_index].image;
+                } else {
+                    document.getElementById("upload_image_"+q_index).src = "data:image/svg+xml;base64,"  +  calc_sys.target_set.questions[q_index].image;
+                }
             }
         }
     },

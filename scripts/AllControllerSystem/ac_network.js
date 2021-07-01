@@ -3,8 +3,12 @@ const ac_network = {
         return dummyJson;   //TODO: Load from Server on next iteration
     },
 
+    post_request :  async (url, data) => {
+        return await network.post_w_token(url, data);
+    },
+
     request_data :  async (url) => {
-        return await network.get_w_token(url);;
+        return await network.get_w_token(url);
     }
 };
 
