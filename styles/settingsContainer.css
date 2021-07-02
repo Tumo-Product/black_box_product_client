@@ -72,6 +72,19 @@ textarea{
     font-size: 18px;
 }
 
+#btn_rem{
+    top: 20px;
+    position: absolute;
+    width: 66px;
+    height: 42px;
+    right: 250px;
+    background: #e28181 0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    color: #ffffff;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 18px;
+}
+
 #intro_container{
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-size: 18px;

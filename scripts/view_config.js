@@ -35,6 +35,10 @@ const view_scripts  = {
         {
             name    : "calc_pagehandler",
             src     : "scripts/AllControllerSystem/DetailsViews/calculator_view.js"
+        },
+        {
+            name    : "calc_systematic",
+            src     : "scripts/AllControllerSystem/DetailsViews/calculator_systematic.js"
         }
     ],
     quiz_flow               : [

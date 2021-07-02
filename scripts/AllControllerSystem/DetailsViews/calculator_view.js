@@ -5,8 +5,8 @@ const calc_handlers = {
     },
 
     onRemoveQuestionImage   : async(q_id) => {
-        calc_handlers.current_dat.questions[q_id].image = undefined;
         calc_handlers.updateData();
+        calc_handlers.current_dat.questions[q_id].image = undefined;
         let scrValue = calc_sys.get_scroll();
         await dt_Handlers.calculator_handler.clear_container();
         await calc_sys.handle_set_object(calc_handlers.current_dat);
@@ -127,15 +127,29 @@ const calc_handlers = {
                 calc_handlers.current_dat.questions[q_index].answers[a_index].points  = document.getElementById("points_"   + q_index +   "_"    +a_index).value;
             }
             calc_handlers.current_dat.questions[q_index].image                        = document.getElementById("upload_image_" + q_index).src;
-            //TODO: Fix svg-datatype
+            if(!calc_handlers.current_dat.questions[q_index].image.includes("data:image/svg+xml;base64,")){
+                calc_handlers.current_dat.questions[q_index].image                    = undefined;   
+            }
         }
-        calc_handlers.answer_image = document.getElementById("upload_answer_image").src;
+        calc_handlers.current_dat.answer_image = document.getElementById("upload_answer_image").src;
     }
 }
 
 //---------------------------------vvvvvvvv--------------Front End Visuals--------------vvvvvvvv---------------------------------------
 const calc_sys = {
     target_set              : {},
+    def_set_values          : {},
+
+    set_default_set         : (obj) => {
+        calc_sys.def_set_values = JSON.parse(JSON.stringify(obj));                       // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+    },
+
+    reset_to_default        : async () => {
+        calc_sys.target_set = JSON.parse(JSON.stringify(calc_sys.def_set_values));
+        await dt_Handlers.calculator_handler.clear_container();
+        await calc_sys.handle_set_object(calc_sys.target_set);
+    },
+
     handle_set_object       : async (data) => {
         calc_sys.target_set = data;
         await calc_sys.assign_name();
@@ -170,6 +184,7 @@ const calc_sys = {
         let tempImage;
         for(let q_index = 0; q_index < calc_sys.target_set.questions.length; q_index++){
             tempImage = calc_sys.target_set.questions[q_index].image;
+            console.log(typeof(tempImage));
             if(tempImage !== undefined){
                 if(calc_sys.target_set.questions[q_index].image.includes("data:image")){
                     document.getElementById("upload_image_"+q_index).src =                                  calc_sys.target_set.questions[q_index].image;

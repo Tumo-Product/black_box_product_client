@@ -37,6 +37,7 @@ const dt_Handlers = {
             let html = await dt_Handlers.calculator_handler.get_page_template();
             $("#item_container").html(html);
             ac_details.start_loading();
+            await   calc_sys.set_default_set(temp_obj);
             await   calc_sys.handle_set_object(temp_obj);
             ac_details.stop_loading();
         },
