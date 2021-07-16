@@ -184,7 +184,6 @@ const calc_sys = {
         let tempImage;
         for(let q_index = 0; q_index < calc_sys.target_set.questions.length; q_index++){
             tempImage = calc_sys.target_set.questions[q_index].image;
-            console.log(typeof(tempImage));
             if(tempImage !== undefined){
                 if(calc_sys.target_set.questions[q_index].image.includes("data:image")){
                     document.getElementById("upload_image_"+q_index).src =                                  calc_sys.target_set.questions[q_index].image;

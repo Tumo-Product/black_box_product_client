@@ -37,16 +37,51 @@ const ac_sidebar        = {
 };
 
 const sideBar_Handlers  = {
-    calculator_handler : {
+    defaultHtml : "",
+    gallery_handler     : {
         c_list      : null,
         a_c_list    : null,
-        defaultHtml : "",
         load        : async () => {
-            if (sideBar_Handlers.calculator_handler.defaultHtml !== ""){
-                $("#searchParent").html(sideBar_Handlers.calculator_handler.defaultHtml);
+            if(sideBar_Handlers.defaultHtml !== ""){
+                $("#searchParent").html(sideBar_Handlers.defaultHtml);
+            }
+            sideBar_Handlers.gallery_handler.c_list         = await ac_network.request_data("gallery/list");
+            sideBar_Handlers.gallery_handler.a_c_list       = JSON.parse(JSON.stringify(sideBar_Handlers.gallery_handler.c_list));      //Dublicating
+        },
+        onAddButton : async () => {
+            let name = prompt("Name of new Gallery Set", "name");
+            if(name != null){
+                ac_loading.openLoading();
+                let data = await ac_network.post_request("gallery/create", {_name : name });
+                await ac_sidebar.configSideBar(ac_sidebar.activeModule);
+                ac_loading.closeLoading();
+            }
+        },
+        draw        : () => {
+            if(sideBar_Handlers.defaultHtml === ""){
+                sideBar_Handlers.defaultHtml =  $("#searchParent").html();
+            }
+            let html = "";
+            let temp;
+            for(let i = 0; i < sideBar_Handlers.gallery_handler.a_c_list.length; i++){
+                temp = sideBar_Handlers.gallery_handler.a_c_list[i];
+                html += `<div id="${i}" class="bar_names" onclick="sideBar_Handlers.gallery_handler.onElementClick(${i})"> <h3>${temp.name}</h3> </div>`;
+            }
+            $("#searchParent").html(html);
+        },
+        onElementClick  : (id)  => {
+            dt_Handlers.gallery_handler.onSelect(sideBar_Handlers.gallery_handler.a_c_list[id]);
+        },
+    },
+    calculator_handler  : {
+        c_list      : null,
+        a_c_list    : null,
+        load        : async () => {
+            if (sideBar_Handlers.defaultHtml !== ""){
+                $("#searchParent").html(sideBar_Handlers.defaultHtml);
             }
             sideBar_Handlers.calculator_handler.c_list      = await ac_network.request_data("calc/list");
-            sideBar_Handlers.calculator_handler.a_c_list    = await ac_network.request_data("calc/list");
+            sideBar_Handlers.calculator_handler.a_c_list    = JSON.parse(JSON.stringify(sideBar_Handlers.calculator_handler.c_list));   //Dublicating
         },
         onAddButton : async () => {
             let name = prompt("Name of new Calculator Set", "name");
@@ -58,8 +93,8 @@ const sideBar_Handlers  = {
             }
         },
         draw        : () => {
-            if(sideBar_Handlers.calculator_handler.defaultHtml === ""){
-                sideBar_Handlers.calculator_handler.defaultHtml =  $("#searchParent").html();
+            if(sideBar_Handlers.defaultHtml === ""){
+                sideBar_Handlers.defaultHtml =  $("#searchParent").html();
             }
             let html = "";
             let temp;

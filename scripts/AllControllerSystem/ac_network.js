@@ -19,11 +19,18 @@ const ac_network = {
 let dummyJson = {
     "modulesArr": [
         {
-            "name": "calculator",
-            "img": "images/calculator.png",
-            "searchBar": true,
-            "addButton": true,
-            "getRequest": "/calc/list"
+            "name"          : "calculator",
+            "img"           : "images/calculator.png",
+            "searchBar"     : true,
+            "addButton"     : true,
+            "getRequest"    : "/calc/list"
+        },
+        {
+            "name"          : "gallery",
+            "img"           : "images/gallery.png",
+            "searchBar"     : true,
+            "addButton"     : true,
+            "getRequest"    : "/gallery/list"
         }
     ]
 };

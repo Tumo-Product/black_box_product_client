@@ -7,26 +7,32 @@ const module_zorg   = {
         name        : "star_loading_md",
         src         : "modules/star_loading.zorg"
     }],
+    gallery_modules_module  :   [
+        {
+            name    : "main_skelet",
+            src     : "modules/gallery/gallery_template.zorg"
+        }
+    ],
     calc_modules_module     :   [
         {
             name    : "main_skelet",
-            src     : "modules/calculator_template.zorg"
+            src     : "modules/calc/calculator_template.zorg"
         },
         {
             name    : "question_template",
-            src     : "modules/calculator_question.zorg"
+            src     : "modules/calc/calculator_question.zorg"
         },
         {
             name    : "answer_template",
-            src     : "modules/calculator_answer.zorg"
+            src     : "modules/calc/calculator_answer.zorg"
         },
         {
             name    : "q_answer_template",
-            src     : "modules/calculator_q_answer.zorg"
+            src     : "modules/calc/calculator_q_answer.zorg"
         },
         {
             name    : "q_add_button",
-            src     : "modules/calculator_add_question.zorg"
+            src     : "modules/calc/calculator_add_question.zorg"
         }
     ]
 };

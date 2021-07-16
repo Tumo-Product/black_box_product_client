@@ -41,6 +41,9 @@ const view_scripts  = {
             src     : "scripts/AllControllerSystem/DetailsViews/calculator_systematic.js"
         }
     ],
+    gallery_scripts         : [
+        
+    ],
     quiz_flow               : [
         
     ],
