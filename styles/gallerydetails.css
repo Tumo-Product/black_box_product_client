@@ -1,0 +1,16 @@
+
+#elements {
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 13px;
+}
+
+.element_body {
+    width: 699px !important;
+    padding : 15px 15px 15px 15px !important;
+    margin: 0 !important;
+    border-radius: 15px;
+    background: #21A96D 0% 0% no-repeat padding-box;
+    margin-bottom: 15px !important;
+}

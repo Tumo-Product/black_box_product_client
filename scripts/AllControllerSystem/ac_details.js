@@ -37,9 +37,8 @@ const dt_Handlers = {
             let html = await dt_Handlers.gallery_handler.get_page_template();
             $("#item_container").html(html);
             ac_details.start_loading();
-
-
-            
+            await gallery_sys.set_default_set(temp_obj);
+            await gallery_sys.handle_set_object(temp_obj);
             ac_details.stop_loading();
         },
 
@@ -50,9 +49,10 @@ const dt_Handlers = {
 
         get_page_template   :   async () => {
             let data = await module_loader.loadZorgList("gallery_modules");
-            return data.main_skelet.data;       //Hard coded, due dt_Handlers.gallery_handler is specific for calculator tool
+            return data.main_skelet.data;                                       //Hard coded, due dt_Handlers.gallery_handler is specific for calculator tool
         }
     },
+    
     calculator_handler  : {
         temp_obj            : {},
         onSelect            : async (obj) => {
@@ -76,7 +76,7 @@ const dt_Handlers = {
 
         get_page_template   :   async () => {
             let data = await module_loader.loadZorgList("calc_modules");
-            return data.main_skelet.data;       //Hard coded, due dt_Handlers.calculator_handel is specific for calculator tool
+            return data.main_skelet.data;                                       //Hard coded, due dt_Handlers.calculator_handel is specific for calculator tool
         }
     }
 }

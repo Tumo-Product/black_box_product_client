@@ -42,7 +42,14 @@ const view_scripts  = {
         }
     ],
     gallery_scripts         : [
-        
+        {
+            name    : "gallery_pagehandler",
+            src     : "scripts/AllControllerSystem/DetailsViews/gallery_view.js"
+        },
+        {
+            name    : "gallery_systematic",
+            src     : "scripts/AllControllerSystem/DetailsViews/gallery_systematic.js"
+        }
     ],
     quiz_flow               : [
         

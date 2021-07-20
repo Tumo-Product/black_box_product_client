@@ -1,0 +1,9 @@
+<div class="element_body" id="element_body_^{id}">
+    <div class="nav_arrows_quest_main">
+        <button                 class="q_answer_up arrows"     onclick="">▲</button> 
+        <button                 class="q_answer_down arrows"   onclick="">▼</button> 
+    </div>
+    <div class="element_container" id="^{id}">
+        
+    </div>
+</div>

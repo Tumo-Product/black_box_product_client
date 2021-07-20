@@ -11,6 +11,10 @@ const module_zorg   = {
         {
             name    : "main_skelet",
             src     : "modules/gallery/gallery_template.zorg"
+        },
+        {
+            name    : "element_template",
+            src     : "modules/gallery/gallery_element.zorg"
         }
     ],
     calc_modules_module     :   [
