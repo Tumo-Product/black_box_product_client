@@ -3,7 +3,19 @@
         <button                 class="q_answer_up arrows"     onclick="">▲</button> 
         <button                 class="q_answer_down arrows"   onclick="">▼</button> 
     </div>
-    <div class="element_container" id="^{id}">
-        
+    <div class="element_container" id="element_container_^{id}">
+        <h4                     class="dublex_name"       >Image Set ^{id}</h4>
+
+        <div class="image_container" id="image_container_^{id}_top">       
+            <button class="gallery_upload_button" id="gallery_upload_button_^{id}_top" onclick="">
+                <p class="upload_arrow">↑</p>
+            </button>
+        </div>
+        <br>
+        <div class="image_container" id="image_container_^{id}_under">     
+            <button class="gallery_upload_button" id="gallery_upload_button_^{id}_under" onclick="">
+                <p class="upload_arrow">↑</p>
+            </button>
+        </div>
     </div>
 </div>

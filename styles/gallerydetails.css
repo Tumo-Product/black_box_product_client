@@ -7,10 +7,41 @@
 }
 
 .element_body {
+    margin: 0 !important;
+    margin-left: 150px !important;
+    padding-top: 20px;
+}
+
+.element_container {
     width: 699px !important;
     padding : 15px 15px 15px 15px !important;
     margin: 0 !important;
     border-radius: 15px;
     background: #21A96D 0% 0% no-repeat padding-box;
     margin-bottom: 15px !important;
+}
+
+.image_container {
+    border-style: solid;
+    border-color: white;
+    border-radius: 15px;
+    width: 100%;
+    height: 300px;
+}
+
+.gallery_upload_button{
+    width: 46px !important;
+    height: 30px;
+    background: #ffffff;
+    border-radius: 15px;
+    position: relative;
+    left: 92%;
+    top: 87%;
+}
+
+.dublex_name{
+    font-size: 22px;
+    color: #ffffff;
+    /* position: absolute; */
+    transform: translate(0, -8px);
 }
