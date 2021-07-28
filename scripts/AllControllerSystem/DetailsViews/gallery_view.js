@@ -1,4 +1,32 @@
+const gallery_handlers = {
+    current_dat : {},
 
+    initialize      : (dat) => {
+        gallery_handlers.current_dat = dat;
+    },
+
+    onImgUpload     : async (id, pos) => {
+        let input   = document.getElementById(`input_${id}_${pos}`);
+        let file    = input.files[0];
+
+        if(file === undefined) { alert("Upload an SVG!"); return; }
+
+        let fr      = new FileReader();
+        let basedat = await (new Promise((resolve)=>{
+            fr.readAsDataURL(file);
+            fr.onloadend = () => {
+                resolve(fr.result);
+            }
+        }));
+
+        console.log(basedat);
+        document.getElementById(`upload_image_${id}_${pos}`).src = basedat;
+    },
+
+    onUploadPressed : async (id, pos) => {
+        await document.getElementById(`input_${id}_${pos}`).click();
+    }
+}
 
 //---------------------------------vvvvvvvv--------------Front End Visuals--------------vvvvvvvv---------------------------------------
 
@@ -7,7 +35,7 @@ const gallery_sys = {
     def_set_values          : {},
 
     set_default_set         : (obj) => {
-        gallery_sys.def_set_values = JSON.parse(JSON.stringify(obj));                       // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+        gallery_sys.def_set_values = JSON.parse(JSON.stringify(obj));                   // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that\
     },
 
     reset_to_default        : async () => {
@@ -20,27 +48,24 @@ const gallery_sys = {
         gallery_sys.target_set = data;
         await gallery_sys.assign_name();
         await gallery_sys.create_elements();
-       // calc_sys.target_set = data;
-       // await calc_sys.assign_name();
-       // await calc_sys.assign_intro();
-       // await calc_sys.create_questions();
-       // await calc_sys.create_add_question();
-       // await calc_sys.create_answer();
-       // await calc_sys.fill_question_answers();
-       // await calc_sys.assign_images();
-       // await calc_sys.assign_final_image();
-       // calc_handlers.initialize(calc_sys.target_set);
     },
 
     create_elements             : async () => {
         let element_template    = (await module_loader.loadZorgList("gallery_modules")).element_template;
-        element_template        = element_template.data;
+        let length              = gallery_sys.target_set.images.length;
+        let default_images      = gallery_sys.def_set_values.images;
         let temp_instance       = "";
-        for(let i_index = 0; i_index < gallery_sys.target_set.images.length; i_index++){
+        element_template        = element_template.data;
+
+        for(let i = 0; i < length; i++){
             temp_instance       = element_template;
-            temp_instance       = temp_instance.replaceAll("^{id}"              , i_index);
-            //TODO: image on place
-            document.getElementById("elements").innerHTML   += temp_instance;
+            temp_instance       = temp_instance.replaceAll("^{id}", i);
+            temp_instance       = temp_instance.replaceAll("^{sid}", i + 1);            // sid = set id.
+            temp_instance       = temp_instance.replaceAll("^{top_img}",    `data:image/png;base64, ${default_images[i].img1}`);
+            temp_instance       = temp_instance.replaceAll("^{under_img}",  `data:image/png;base64, ${default_images[i].img2}`);
+
+            document.getElementById("elements").innerHTML += temp_instance;
+            
         }
     },
 

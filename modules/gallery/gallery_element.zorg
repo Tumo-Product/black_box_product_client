@@ -1,19 +1,25 @@
 <div class="element_body" id="element_body_^{id}">
+
     <div class="nav_arrows_quest_main">
         <button                 class="q_answer_up arrows"     onclick="">▲</button> 
         <button                 class="q_answer_down arrows"   onclick="">▼</button> 
     </div>
     <div class="element_container" id="element_container_^{id}">
-        <h4                     class="dublex_name"       >Image Set ^{id}</h4>
+        <button id="remove_q_image_^{id}"  class="remove_q_image_button" onclick="calc_handlers.onRemoveQuestionImage(^{id})">+</button> 
+        <h4                     class="dublex_name"       >Image Set ^{sid}</h4>
 
-        <div class="image_container" id="image_container_^{id}_top">       
-            <button class="gallery_upload_button" id="gallery_upload_button_^{id}_top" onclick="">
+        <div class="image_container" id="image_container_^{id}_top">
+            <input type="file" accept=".png" id="input_^{id}_top" style="display:none" onchange="gallery_handlers.onImgUpload(^{id}, 'top')"/>
+            <img src="^{top_img}" class="gallery_image" id="upload_image_^{id}_top">
+            <button class="gallery_upload_button" id="gallery_upload_button_^{id}_top" onclick="gallery_handlers.onUploadPressed(^{id}, 'top')">
                 <p class="upload_arrow">↑</p>
             </button>
         </div>
         <br>
         <div class="image_container" id="image_container_^{id}_under">     
-            <button class="gallery_upload_button" id="gallery_upload_button_^{id}_under" onclick="">
+            <input type="file" accept=".png" id="input_^{id}_under" style="display:none" onchange="gallery_handlers.onImgUpload(^{id}, 'under')"/>
+            <img src="^{under_img}" class="gallery_image" id="upload_image_^{id}_under">
+            <button class="gallery_upload_button" id="gallery_upload_button_^{id}_under" onclick="gallery_handlers.onUploadPressed(^{id}, 'under')">
                 <p class="upload_arrow">↑</p>
             </button>
         </div>
