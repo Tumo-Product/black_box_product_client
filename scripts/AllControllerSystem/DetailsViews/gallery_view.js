@@ -1,11 +1,11 @@
 const gallery_handlers = {
     current_dat : {},
 
-    initialize      : (dat) => {
+    initialize          : (dat) => {
         gallery_handlers.current_dat = dat;
     },
 
-    onImgUpload     : async (id, pos) => {
+    onImgUpload         : async (id, pos) => {
         let input   = document.getElementById(`input_${id}_${pos}`);
         let file    = input.files[0];
 
@@ -19,12 +19,26 @@ const gallery_handlers = {
             }
         }));
 
-        console.log(basedat);
         document.getElementById(`upload_image_${id}_${pos}`).src = basedat;
     },
 
-    onUploadPressed : async (id, pos) => {
+    onUploadPressed     : async (id, pos) => {
         await document.getElementById(`input_${id}_${pos}`).click();
+    },
+
+    onRemoveImageSet    : (id) => {
+        gallery_handlers.updateData();
+        gallery_handlers.images.splice(id, 1);
+        gallery_handlers.target_set = gallery_handlers.current_dat;
+    },
+
+    updateData          : () => {
+        gallery_handlers.current_dat.name = document.getElementById("name_input").value;
+
+        for(let i = 0; i < gallery_handlers.current_data.images.length; i++) {
+            gallery_handlers.current_data.images[i].img1 = document.getElementById(`upload_image_${i}_top`  ).src;
+            gallery_handlers.current_data.images[i].img2 = document.getElementById(`upload_image_${i}_under`).src;
+        }
     }
 }
 
@@ -48,12 +62,13 @@ const gallery_sys = {
         gallery_sys.target_set = data;
         await gallery_sys.assign_name();
         await gallery_sys.create_elements();
+        gallery_handlers.initialize(gallery_sys.target_set);
     },
 
     create_elements             : async () => {
         let element_template    = (await module_loader.loadZorgList("gallery_modules")).element_template;
         let length              = gallery_sys.target_set.images.length;
-        let default_images      = gallery_sys.def_set_values.images;
+        let default_images      = gallery_sys.target_set.images;
         let temp_instance       = "";
         element_template        = element_template.data;
 

@@ -1,10 +1,10 @@
 <div id="top_panel">
     <p id="name_text">Name </p>
     <input type="text" id="name_input" value="Name"/>
-    <button id="btn_rem"    onclick="">      Delete  </button> 
-    <button id="btn_url"    onclick="">           URL     </button>
-    <button id="btn_cnc"    onclick="">    Cancel  </button>
-    <button id="btn_sav"    onclick="">      Save    </button>
+    <button id="btn_rem"    onclick="gallery_sys_data.onDeleteSet()">      Delete  </button> 
+    <button id="btn_url"    onclick="gallery_sys_data.getURL()">           URL     </button>
+    <button id="btn_cnc"    onclick="gallery_sys_data.onCancelEdits()">    Cancel  </button>
+    <button id="btn_sav"    onclick="gallery_sys_data.onSaveEdits()">      Save    </button>
 </div>
 <div id="scroll_content">
     

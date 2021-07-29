@@ -5,7 +5,7 @@
         <button                 class="q_answer_down arrows"   onclick="">▼</button> 
     </div>
     <div class="element_container" id="element_container_^{id}">
-        <button id="remove_q_image_^{id}"  class="remove_q_image_button" onclick="calc_handlers.onRemoveQuestionImage(^{id})">+</button> 
+        <button id="remove_q_image_^{id}"  class="remove_q_image_button" onclick="gallery_handlers.onRemoveImageSet(^{id})">+</button> 
         <h4                     class="dublex_name"       >Image Set ^{sid}</h4>
 
         <div class="image_container" id="image_container_^{id}_top">

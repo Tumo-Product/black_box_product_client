@@ -128,7 +128,7 @@ const calc_handlers = {
             }
             calc_handlers.current_dat.questions[q_index].image                        = document.getElementById("upload_image_" + q_index).src;
             if(!calc_handlers.current_dat.questions[q_index].image.includes("data:image/svg+xml;base64,")){
-                calc_handlers.current_dat.questions[q_index].image                    = undefined;   
+                calc_handlers.current_dat.questions[q_index].image                    = undefined;
             }
         }
         calc_handlers.current_dat.answer_image = document.getElementById("upload_answer_image").src;

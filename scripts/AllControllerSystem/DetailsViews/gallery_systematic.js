@@ -10,8 +10,8 @@ const gallery_sys_data = {
 
         let data = {
             _key    : secretKey,
-            _uuid    : gallery_handlers.current_dat.uid,
-            _iuid    : gallery_handlers.current_dat.iuid
+            _uuid   : gallery_handlers.current_dat.uid,
+            _iuid   : gallery_handlers.current_dat.iuid
         }
 
         ac_loading.openLoading();
@@ -34,23 +34,20 @@ const gallery_sys_data = {
     },
 
     onSaveEdits     : async () => {
-        ac_loading.openLoading();
+        // ac_loading.openLoading();
         let req = {
             _uid    : "",
             _set    : {}
         }
 
+        console.log(gallery_handlers.current_dat);
         await gallery_handlers.updateData();
-        //req._set = calc_handlers.current_dat;
-        req._set.answer         = calc_handlers.current_dat.answer;
-        req._set.answer_image   = calc_handlers.current_dat.answer_image;
-        req._set.description    = calc_handlers.current_dat.description;
-        req._set.name           = calc_handlers.current_dat.name;
-        req._set.questions      = calc_handlers.current_dat.questions;
-        req._set.uid            = calc_handlers.current_dat.uid;
-        req._uid = calc_handlers.current_dat.uid;
-        // let resp = await ac_network.post_request("gallery/addimage", req);
-        await ac_sidebar.configSideBar(ac_sidebar.activeModule);
-        ac_loading.closeLoading();
+        
+        req._set.name   = gallery_handlers.current_dat.name;
+        req._set.images = gallery_handlers.current_dat.images;
+
+        // let resp = await ac_network.post_request("gallery/updateimage", req);
+        // await ac_sidebar.configSideBar(ac_sidebar.activeModule);
+        // ac_loading.closeLoading();
     }
 }
