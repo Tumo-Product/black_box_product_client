@@ -1,8 +1,8 @@
 <div class="element_body" id="element_body_^{id}">
 
     <div class="nav_arrows_quest_main">
-        <button                 class="q_answer_up arrows"     onclick="">▲</button> 
-        <button                 class="q_answer_down arrows"   onclick="">▼</button> 
+        <button                 class="q_answer_up arrows"   onclick="gallery_handlers.onReplaceQuestions('up',   ^{id})">▲</button>
+        <button                 class="q_answer_down arrows" onclick="gallery_handlers.onReplaceQuestions('down', ^{id})">▼</button>
     </div>
     <div class="element_container" id="element_container_^{id}">
         <button id="remove_q_image_^{id}"  class="remove_q_image_button" onclick="gallery_handlers.onRemoveImageSet(^{id})">+</button> 

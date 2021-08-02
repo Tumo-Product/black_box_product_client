@@ -26,15 +26,40 @@ const gallery_handlers = {
         await document.getElementById(`input_${id}_${pos}`).click();
     },
 
+    onReplaceQuestions  : async(dir, id) => {
+        ac_loading.openLoading();
+        let index    = id;
+        let newIndex = dir === "up" ? index - 1 : index + 1;
+
+        if(newIndex < 0 || newIndex >= gallery_handlers.current_dat.images.length){
+            return;
+        }
+        gallery_handlers.updateData();
+
+        let scrValue = gallery_sys.get_scroll();
+        let tempDat  = gallery_handlers.current_dat.images[index];
+        gallery_handlers.current_dat.images[index]    = gallery_handlers.current_dat.images[newIndex];
+        gallery_handlers.current_dat.images[newIndex] = tempDat;
+
+        gallery_sys.target_set = gallery_handlers.current_dat;
+        
+        await dt_Handlers.gallery_handler.clear_container();
+        await gallery_sys.create_elements();
+
+        gallery_sys.scroll_to_pos(scrValue);
+
+        ac_loading.closeLoading();
+    },
+
     onRemoveImageSet    : async (id) => {
         ac_loading.openLoading();
 
         gallery_handlers.updateData();
         let scrValue = gallery_sys.get_scroll();
-        
+
         await dt_Handlers.gallery_handler.clear_container();
         gallery_handlers.current_dat.images.splice(id, 1);
-        gallery_handlers.target_set = gallery_handlers.current_dat;
+        gallery_sys.target_set = gallery_handlers.current_dat;
         
         await gallery_sys.create_elements();
         
@@ -50,7 +75,7 @@ const gallery_handlers = {
         await dt_Handlers.gallery_handler.clear_container();
 
         gallery_handlers.current_dat.images.push( {iuid: undefined, img1: defaultImage, img2: defaultImage} );
-        gallery_handlers.target_set = gallery_handlers.current_dat;
+        gallery_sys.target_set = gallery_handlers.current_dat;
         await gallery_sys.create_elements();
 
         gallery_sys.scroll_to_bottom();
