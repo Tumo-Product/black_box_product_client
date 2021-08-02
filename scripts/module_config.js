@@ -15,7 +15,11 @@ const module_zorg   = {
         {
             name    : "element_template",
             src     : "modules/gallery/gallery_element.zorg"
-        }
+        },
+        {
+            name    : "add_button",
+            src     : "modules/gallery/add_image_set_button.zorg"
+        },
     ],
     calc_modules_module     :   [
         {

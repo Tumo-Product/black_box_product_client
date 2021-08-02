@@ -26,18 +26,44 @@ const gallery_handlers = {
         await document.getElementById(`input_${id}_${pos}`).click();
     },
 
-    onRemoveImageSet    : (id) => {
+    onRemoveImageSet    : async (id) => {
+        ac_loading.openLoading();
+
         gallery_handlers.updateData();
-        gallery_handlers.images.splice(id, 1);
+        let scrValue = gallery_sys.get_scroll();
+        
+        await dt_Handlers.gallery_handler.clear_container();
+        gallery_handlers.current_dat.images.splice(id, 1);
         gallery_handlers.target_set = gallery_handlers.current_dat;
+        
+        await gallery_sys.create_elements();
+        
+        gallery_sys.scroll_to_pos(scrValue);
+        ac_loading.closeLoading();
+    },
+
+    onAddImageSet       : async () => {
+        ac_loading.openLoading();
+        let defaultImage = document.location.href + "images/gallery_resolution.png";
+
+        gallery_handlers.updateData();
+        await dt_Handlers.gallery_handler.clear_container();
+
+        gallery_handlers.current_dat.images.push( {iuid: undefined, img1: defaultImage, img2: defaultImage} );
+        gallery_handlers.target_set = gallery_handlers.current_dat;
+        await gallery_sys.create_elements();
+
+        gallery_sys.scroll_to_bottom();
+
+        ac_loading.closeLoading();
     },
 
     updateData          : () => {
         gallery_handlers.current_dat.name = document.getElementById("name_input").value;
 
-        for(let i = 0; i < gallery_handlers.current_data.images.length; i++) {
-            gallery_handlers.current_data.images[i].img1 = document.getElementById(`upload_image_${i}_top`  ).src;
-            gallery_handlers.current_data.images[i].img2 = document.getElementById(`upload_image_${i}_under`).src;
+        for(let i = 0; i < gallery_handlers.current_dat.images.length; i++) {
+            gallery_handlers.current_dat.images[i].img1 = document.getElementById(`upload_image_${i}_top`  ).src;
+            gallery_handlers.current_dat.images[i].img2 = document.getElementById(`upload_image_${i}_under`).src;
         }
     }
 }
@@ -62,26 +88,35 @@ const gallery_sys = {
         gallery_sys.target_set = data;
         await gallery_sys.assign_name();
         await gallery_sys.create_elements();
-        gallery_handlers.initialize(gallery_sys.target_set);
+        gallery_handlers.initialize(data);
     },
 
     create_elements             : async () => {
-        let element_template    = (await module_loader.loadZorgList("gallery_modules")).element_template;
+        let gallery_modules     = await module_loader.loadZorgList("gallery_modules");
+        let add_button          = gallery_modules.add_button;
+        let element_template    = gallery_modules.element_template;
         let length              = gallery_sys.target_set.images.length;
         let default_images      = gallery_sys.target_set.images;
         let temp_instance       = "";
         element_template        = element_template.data;
 
         for(let i = 0; i < length; i++){
+            let img1 = default_images[i].img1, img2 = default_images[i].img2;
+            if (!img1.includes("data:image/png;base64, ") && !img1.includes(document.location.href)) { // check for default image and non base64 image.
+                img1 = "data:image/png;base64, " + img1;
+                img2 = "data:image/png;base64, " + img2;
+            }
+            
             temp_instance       = element_template;
             temp_instance       = temp_instance.replaceAll("^{id}", i);
             temp_instance       = temp_instance.replaceAll("^{sid}", i + 1);            // sid = set id.
-            temp_instance       = temp_instance.replaceAll("^{top_img}",    `data:image/png;base64, ${default_images[i].img1}`);
-            temp_instance       = temp_instance.replaceAll("^{under_img}",  `data:image/png;base64, ${default_images[i].img2}`);
+            temp_instance       = temp_instance.replaceAll("^{top_img}",    img1);
+            temp_instance       = temp_instance.replaceAll("^{under_img}",  img2);
 
             document.getElementById("elements").innerHTML += temp_instance;
-            
         }
+
+        document.getElementById("scroll_content").innerHTML += add_button.data;
     },
 
     assign_name                 : async () => {

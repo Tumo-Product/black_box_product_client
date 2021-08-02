@@ -22,8 +22,8 @@ const gallery_sys_data = {
     },
 
     getURL          : () => {
-        let id  = calc_handlers.current_dat.uid;
-        let url = calc_sys_data.frontURL + `"${id}"`;
+        let id  = gallery_handlers.current_dat.uuid;
+        let url = gallery_sys_data.frontURL + `${id}`;
         prompt("vvvvvvvvvvvvvvvvvv-Grab your URL-vvvvvvvvvvvvvvvvvv", url);
     },
 
@@ -34,20 +34,35 @@ const gallery_sys_data = {
     },
 
     onSaveEdits     : async () => {
-        // ac_loading.openLoading();
-        let req = {
-            _uid    : "",
-            _set    : {}
-        }
-
-        console.log(gallery_handlers.current_dat);
+        ac_loading.openLoading();
+        
         await gallery_handlers.updateData();
         
-        req._set.name   = gallery_handlers.current_dat.name;
-        req._set.images = gallery_handlers.current_dat.images;
+        let defaultImages   = gallery_sys.def_set_values;
+        let images          = gallery_handlers.current_dat.images;
 
-        // let resp = await ac_network.post_request("gallery/updateimage", req);
-        // await ac_sidebar.configSideBar(ac_sidebar.activeModule);
-        // ac_loading.closeLoading();
+        for (let i = 0; i < images.length; i++) {
+            if (images[i].img1  != defaultImages[i].img2) {
+                let req = {};
+                req._uuid        = gallery_handlers.current_dat.uuid;       
+                req._set._uuid   = gallery_handlers.current_dat.uuid;
+                req._set._iuid   = images[i].iuid;
+                req._set._img1   = images[i].img1;
+                req._set._img2   = images[i].img2;
+
+                let resp = await ac_network.post_request("gallery/updateimage", req);
+            }  else if (defaultImages[i] == undefined) {
+                let req = {};
+                req._uuid        = gallery_handlers.current_dat.uuid;       
+                req._set._uuid   = gallery_handlers.current_dat.uuid;
+                req._set._img1   = images[i].img1;
+                req._set._img2   = images[i].img2;
+
+                let resp = await ac_network.post_request("gallery/addimage",    req);
+            }
+        }
+
+        await ac_sidebar.configSideBar(ac_sidebar.activeModule);
+        ac_loading.closeLoading();
     }
 }
