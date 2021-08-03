@@ -1,0 +1,11 @@
+.poster {
+    width:  657px !important;
+    height: 433px !important;
+
+    position: relative;
+    padding: 15px 15px 15px 15px !important;
+    margin: 0 !important;
+    border-radius: 15px;
+    background: #21A96D 0% 0% no-repeat padding-box;
+    margin-bottom: 15px !important;
+}

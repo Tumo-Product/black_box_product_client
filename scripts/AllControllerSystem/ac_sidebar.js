@@ -7,8 +7,11 @@ const ac_sidebar        = {
         else                            ac_view.hideElement("addButton");
         ac_view.showElement("searchParent");
         if (module.getRequest !== undefined) {
-            await sideBar_Handlers[module.name + "_handler"].load();
+            await sideBar_Handlers[module.name + "_handler"].load(module.getRequest);
+        } else if (module.postRequest !== undefined) {
+            await sideBar_Handlers[module.name + "_handler"].load(module.postRequest, true);
         }
+
         sideBar_Handlers[module.name + "_handler"].draw();
         ac_sidebar.activeModule = module;
     },
@@ -38,14 +41,51 @@ const ac_sidebar        = {
 
 const sideBar_Handlers  = {
     defaultHtml : "",
-    gallery_handler     : {
+    poster_handler      : {
         c_list      : null,
         a_c_list    : null,
-        load        : async () => {
+        load        : async (request, post) => {
             if(sideBar_Handlers.defaultHtml !== ""){
                 $("#searchParent").html(sideBar_Handlers.defaultHtml);
             }
-            sideBar_Handlers.gallery_handler.c_list         = await ac_network.request_data("gallery/list");
+
+            sideBar_Handlers.poster_handler.c_list      = await ac_network.post_request(request, {});
+            sideBar_Handlers.poster_handler.a_c_list    = JSON.parse(JSON.stringify(sideBar_Handlers.poster_handler.c_list.data));  // Duplicating
+        },
+        onAddButton : async () => {
+            let name = prompt("Name of new Poster Set", "name");
+            if(name != null){
+                ac_loading.openLoading();
+                let data = await ac_network.post_request("interactive_poster/create", {_name : name });
+                await ac_sidebar.configSideBar(ac_sidebar.activeModule);
+                ac_loading.closeLoading();
+            }
+        },
+        draw        : () => {
+            if(sideBar_Handlers.defaultHtml === ""){
+                sideBar_Handlers.defaultHtml =  $("#searchParent").html();
+            }
+            let html = "";
+            let temp;
+
+            for(let i = 0; i < sideBar_Handlers.poster_handler.a_c_list.length; i++){
+                temp = sideBar_Handlers.poster_handler.a_c_list[i];
+                html += `<div id="${i}" class="bar_names" onclick="sideBar_Handlers.poster_handler.onElementClick(${i})"> <h3>${temp.name}</h3> </div>`;
+            }
+            $("#searchParent").html(html);
+        },
+        onElementClick  : (id)  => {
+            dt_Handlers.poster_handler.onSelect(sideBar_Handlers.poster_handler.a_c_list[id]);
+        },
+    },
+    gallery_handler     : {
+        c_list      : null,
+        a_c_list    : null,
+        load        : async (request) => {
+            if(sideBar_Handlers.defaultHtml !== ""){
+                $("#searchParent").html(sideBar_Handlers.defaultHtml);
+            }
+            sideBar_Handlers.gallery_handler.c_list         = await ac_network.request_data(request);
             sideBar_Handlers.gallery_handler.a_c_list       = JSON.parse(JSON.stringify(sideBar_Handlers.gallery_handler.c_list));      //Dublicating
         },
         onAddButton : async () => {
@@ -76,11 +116,11 @@ const sideBar_Handlers  = {
     calculator_handler  : {
         c_list      : null,
         a_c_list    : null,
-        load        : async () => {
+        load        : async (request) => {
             if (sideBar_Handlers.defaultHtml !== ""){
                 $("#searchParent").html(sideBar_Handlers.defaultHtml);
             }
-            sideBar_Handlers.calculator_handler.c_list      = await ac_network.request_data("calc/list");
+            sideBar_Handlers.calculator_handler.c_list      = await ac_network.request_data(request);
             sideBar_Handlers.calculator_handler.a_c_list    = JSON.parse(JSON.stringify(sideBar_Handlers.calculator_handler.c_list));   //Dublicating
         },
         onAddButton : async () => {

@@ -1,5 +1,5 @@
 const module_zorg   = {
-    loading_module          :   [{
+    loading_module          : [{
         name        : "login_md",
         src         : "modules/loading.zorg"
     }],
@@ -7,7 +7,17 @@ const module_zorg   = {
         name        : "star_loading_md",
         src         : "modules/star_loading.zorg"
     }],
-    gallery_modules_module  :   [
+    poster_modules_module   : [
+        {
+            name    : "main_skelet",
+            src     : "modules/poster/template.zorg"
+        },
+        {
+            name    : "element_template",
+            src     : "modules/poster/element.zorg"
+        }
+    ],
+    gallery_modules_module  : [
         {
             name    : "main_skelet",
             src     : "modules/gallery/gallery_template.zorg"
@@ -21,7 +31,7 @@ const module_zorg   = {
             src     : "modules/gallery/add_image_set_button.zorg"
         },
     ],
-    calc_modules_module     :   [
+    calc_modules_module     : [
         {
             name    : "main_skelet",
             src     : "modules/calc/calculator_template.zorg"

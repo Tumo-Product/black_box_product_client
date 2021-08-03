@@ -51,11 +51,15 @@ const view_scripts  = {
             src     : "scripts/AllControllerSystem/DetailsViews/gallery_systematic.js"
         }
     ],
-    quiz_flow               : [
-        
-    ],
-    loading_scripts         : [
-
+    poster_scripts          : [
+        {
+            name    : "poster_pagehandler",
+            src     : "scripts/AllControllerSystem/DetailsViews/poster_view.js"
+        },
+        {
+            name    : "poster_systematic",
+            src     : "scripts/AllControllerSystem/DetailsViews/poster_systematic.js"
+        }
     ]
 };
 

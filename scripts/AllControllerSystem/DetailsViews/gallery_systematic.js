@@ -38,12 +38,28 @@ const gallery_sys_data = {
         
         await gallery_handlers.updateData();
         
-        let defaultImages   = gallery_sys.def_set_values;
+        let defaultImages   = gallery_sys.def_set_values.images;
         let images          = gallery_handlers.current_dat.images;
 
         for (let i = 0; i < images.length; i++) {
-            if (images[i].img1  != defaultImages[i].img2) {
-                let req = {};
+            if (defaultImages[i] == undefined) {
+                let req = {
+                    _uid    : "",
+                    _set    : {}
+                }
+                
+                req._uuid        = gallery_handlers.current_dat.uuid;       
+                req._set._uuid   = gallery_handlers.current_dat.uuid;
+                req._set._img1   = images[i].img1;
+                req._set._img2   = images[i].img2;
+
+                let resp = await ac_network.post_request("gallery/addimage",    req);
+            }  else if (images[i].img1  != defaultImages[i].img1) {
+                let req = {
+                    _uid    : "",
+                    _set    : {}
+                }
+                
                 req._uuid        = gallery_handlers.current_dat.uuid;       
                 req._set._uuid   = gallery_handlers.current_dat.uuid;
                 req._set._iuid   = images[i].iuid;
@@ -51,14 +67,6 @@ const gallery_sys_data = {
                 req._set._img2   = images[i].img2;
 
                 let resp = await ac_network.post_request("gallery/updateimage", req);
-            }  else if (defaultImages[i] == undefined) {
-                let req = {};
-                req._uuid        = gallery_handlers.current_dat.uuid;       
-                req._set._uuid   = gallery_handlers.current_dat.uuid;
-                req._set._img1   = images[i].img1;
-                req._set._img2   = images[i].img2;
-
-                let resp = await ac_network.post_request("gallery/addimage",    req);
             }
         }
 

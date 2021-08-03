@@ -23,14 +23,21 @@ let dummyJson = {
             "img"           : "images/calculator.png",
             "searchBar"     : true,
             "addButton"     : true,
-            "getRequest"    : "/calc/list"
+            "getRequest"    : "calc/list"
         },
         {
             "name"          : "gallery",
             "img"           : "images/gallery.png",
             "searchBar"     : true,
             "addButton"     : true,
-            "getRequest"    : "/gallery/list"
-        }
+            "getRequest"    : "gallery/list"
+        },
+        {
+            "name"          : "poster",
+            "img"           : "images/gallery.png",
+            "searchBar"     : true,
+            "addButton"     : true,
+            "postRequest"   : "interactive_poster/list"
+        },
     ]
 };
