@@ -13,8 +13,12 @@ const module_zorg   = {
             src     : "modules/poster/template.zorg"
         },
         {
-            name    : "element_template",
-            src     : "modules/poster/element.zorg"
+            name    : "icon_template",
+            src     : "modules/poster/icon.zorg"
+        },
+        {
+            name    : "add_icon_button",
+            src     : "modules/poster/add_icon_button.zorg"
         }
     ],
     gallery_modules_module  : [
