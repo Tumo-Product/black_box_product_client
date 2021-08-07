@@ -19,7 +19,11 @@ const module_zorg   = {
         {
             name    : "add_icon_button",
             src     : "modules/poster/add_icon_button.zorg"
-        }
+        },
+        {
+            name    : "position_picker",
+            src     : "modules/poster/position_picker.zorg"
+        },
     ],
     gallery_modules_module  : [
         {

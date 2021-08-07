@@ -43,8 +43,7 @@ const dt_Handlers = {
         },
 
         clear_container     :   async () => {
-            let html = await dt_Handlers.poster_handler.get_page_template();
-            $("#item_container").html(html);
+            $(".icons").empty();
         },
 
         get_page_template   :   async () => {

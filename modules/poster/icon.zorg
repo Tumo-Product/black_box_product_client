@@ -1,7 +1,7 @@
 <div id="icon_^{id}" class="icon">
-    <button id="remove_icon_^{id}" class="remove_q_image_button" onclick="poster_sys.removeIcon(^{id})">+</button> 
+    <button id="remove_icon_^{id}" class="remove_q_image_button" onclick="poster_handlers.removeIcon(^{id})">+</button> 
+    <input type="text" id="icon_name_^{id}" class="name_input" value="Name"/>
 
-    <input type="text" class="name_input" value="Name" />
     <div class="images">
         <div class="fullImg imgContainer">
             <p>Full Image</p>
@@ -27,5 +27,14 @@
             </button>
             <input type="file" accept=".png" id="icon_upload_input_^{id}" style="display:none" onchange="poster_handlers.onUpload(^{id}, this.id, 'icon')"/>
         </div>
+    </div>
+
+    <div class="images">
+        <input type="number" id="icon_x_^{id}" class="q_answer_points_input" value="0" onchange=""/>
+        <input type="number" id="icon_y_^{id}" class="q_answer_points_input" value="0" onchange=""/>
+        <button id="change_pos_btn_^{id}" onclick="poster_handlers.changePosition(^{id})">
+            <p>CHANGE POSITION</p>
+        </button>
+        <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Leave at -1 if this is a wrong object</p
     </div>
 </div>

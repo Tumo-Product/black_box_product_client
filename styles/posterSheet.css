@@ -1,5 +1,6 @@
 #add_icon_btn {
     margin-left: 400px;
+    margin-top: 15px;
 }
 
 .poster {
@@ -18,7 +19,7 @@
     margin: 0 !important;
 }
 
-.poster button {
+.poster .gallery_upload_button {
     left: 90%;
 }
 
@@ -101,4 +102,33 @@
 h1 {
     margin-bottom: 15px;
     color: white;
+}
+
+/* TRANSITIONS, ANIMATIONS, popups */
+
+#positionPicker {
+    position: fixed !important;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    margin-top: -216px !important;
+    margin-left: -329px !important;
+    background-color: rgb(208 179 76);
+}
+
+#positionPicker div {
+    width : 657px;
+    height: 433px;
+    position: relative;
+}
+
+#picker {
+    top : 0;
+    left: 0;
+    position: absolute !important;
+    width:  10px !important;
+    height: 10px !important;
+    background-color: rgb(187, 78, 78);
+    border-radius: 100%;
+    border: rgb(131, 12, 12) 1px solid;
 }

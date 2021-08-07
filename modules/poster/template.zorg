@@ -8,6 +8,10 @@
 </div>
 <div id="scroll_content">
     <div class="element_body">
+        <input style="width: 657px" type="text" id="intro" class="name_input" value="Intro" />
+    </div>
+
+    <div class="element_body">
         <div class="poster" id="poster">
             <h4 class="dublex_name">Poster</h4>
             <img src="^{pssrc}">
@@ -27,6 +31,10 @@
             </button>
             <input type="file" accept=".png" id="bgEndInput" style="display:none" onchange="poster_handlers.onUpload(0, this.id, 'background_end')"/>
         </div>
+    </div>
+
+    <div class="element_body">
+        <input style="width: 657px" type="text" id="outcome" class="name_input" value="Outcome Text"/>
     </div>
 
     <div class="element_body">
