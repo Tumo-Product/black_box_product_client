@@ -30,16 +30,6 @@ const poster_handlers = {
         }
     },
 
-    addIcon         : async () => {
-        let newIcon = poster_sys.iconTemplate;
-        newIcon     = newIcon.replaceAll("^{id}", $(".icon").length);
-        $(".icons").append(newIcon);
-        $("#add_icon_btn").remove();
-        $(".icons").append(poster_sys.add_btn);
-
-        poster_sys.scroll_to_bottom(true);
-    },
-
     removeIcon     : async (id) => {
         ac_loading.openLoading();
 
@@ -57,7 +47,8 @@ const poster_handlers = {
     },
 
     changePosition  : async (id) => {
-        posPicker = await poster_sys.popupPoster();
+        poster_handlers.updateData();
+        posPicker = await poster_sys.popupPoster($(`#icon_x_${id}`).val(), $(`#icon_y_${id}`).val());
         
         posPicker.find("img").click(function(e) {
             let offset = $(this).offset();
@@ -81,6 +72,8 @@ const poster_handlers = {
         dat.background_end  = $("#background_end img").attr("src");
 
         for (let i = 0; i < $(".icon").length; i++) {
+            if (dat.icons[i] == undefined) dat.icons[i] = {};
+
             dat.icons[i].name = $("#icon_name_" + i).val();
 
             let iconSrc     = $("#icon_img_" + i).attr("src");
@@ -90,9 +83,9 @@ const poster_handlers = {
             dat.icons[i].icon = iconSrc;
             dat.icons[i].full = fullSrc;
             dat.icons[i].obj  = objSrc;
-
-
         }
+
+        poster_sys.target_set = dat;
     }
 }
 
@@ -119,11 +112,14 @@ const poster_sys = {
         poster_handlers.initialize(data);
     },
 
-    popupPoster            : async (data) => {
-        let modules = await module_loader.loadZorgList("poster_modules");
-        let positionPicker = modules.position_picker.data;
+    popupPoster            : async (x, y) => {
+        let modules         = await module_loader.loadZorgList("poster_modules");
+        let positionPicker  = modules.position_picker.data;
+        positionPicker      = positionPicker.replaceAll("^{poster}", poster_sys.target_set.background);
         $("#scroll_content").prepend(positionPicker);
-        let posPicker = $("#positionPicker");
+        let posPicker       = $("#positionPicker");
+
+        $("#picker").css("left", x + "px").css("top", y + "px");
 
         return posPicker;
     },
@@ -149,22 +145,39 @@ const poster_sys = {
         let modules             = await module_loader.loadZorgList("poster_modules");
         poster_sys.add_btn      = modules.add_icon_button.data;
         poster_sys.iconTemplate = modules.icon_template.data;
-        let icon                = poster_sys.iconTemplate;
 
-        if (icons.length == 0)
-        {
-            icon = icon.replaceAll("^{id}", 0);
-            $(".icons").append(icon);
-        }
-        else
-        {
-            for (let i = 0; i < icons.length; i++) {
-                icon = icon.replaceAll("^{id}", i);
-                $(".icons").append(icon);
+        for (let i = 0; i < icons.length; i++) {
+            let icon            = poster_sys.iconTemplate;
+
+            icon = icon.replaceAll("^{id}",   i);
+            icon = icon.replaceAll("^{name}", icons[i].name);
+
+            if (icons[i].stick != undefined) {
+                icon = icon.replaceAll("^{xval}", icons[i].stick.x)
+                icon = icon.replaceAll("^{yval}", icons[i].stick.y);
+            } else {
+                icon = icon.replaceAll("^{xval}", -1);
+                icon = icon.replaceAll("^{yval}", -1);
             }
+            
+            $(".icons").append(icon);
         }
 
         $(".icons").append(poster_sys.add_btn);
+    },
+
+    addIcon         : async () => {
+        let newIcon = poster_sys.iconTemplate;
+        newIcon     = newIcon.replaceAll("^{id}", $(".icon").length);
+        newIcon     = newIcon.replaceAll("^{name}", "Name");
+        newIcon     = newIcon.replaceAll("^{xval}", -1);
+        newIcon     = newIcon.replaceAll("^{yval}", -1);
+
+        $(".icons").append(newIcon);
+        $("#add_icon_btn").remove();
+        $(".icons").append(poster_sys.add_btn);
+
+        poster_sys.scroll_to_bottom(true);
     },
 
     assign_name             : async () => {

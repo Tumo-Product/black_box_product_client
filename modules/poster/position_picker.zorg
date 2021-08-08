@@ -3,7 +3,7 @@
 
     <h4 class="dublex_name">Poster</h4>
     <div>
-        <img src="http://127.0.0.1:5500/images/poster_resolution.png">
+        <img src="^{poster}">
         <div id="picker"></div>
     </div>
 </div>

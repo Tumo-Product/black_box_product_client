@@ -1,6 +1,6 @@
 <div id="icon_^{id}" class="icon">
     <button id="remove_icon_^{id}" class="remove_q_image_button" onclick="poster_handlers.removeIcon(^{id})">+</button> 
-    <input type="text" id="icon_name_^{id}" class="name_input" value="Name"/>
+    <input type="text" id="icon_name_^{id}" class="name_input" value="^{name}"/>
 
     <div class="images">
         <div class="fullImg imgContainer">
@@ -25,16 +25,16 @@
             <button class="gallery_upload_button" id="icon_upload_btn^{id}" onclick="poster_handlers.onUploadPressed('icon_upload_input_^{id}')">
                 <p class="upload_arrow">↑</p>
             </button>
-            <input type="file" accept=".png" id="icon_upload_input_^{id}" style="display:none" onchange="poster_handlers.onUpload(^{id}, this.id, 'icon')"/>
+            <input type="file" accept=".svg" id="icon_upload_input_^{id}" style="display:none" onchange="poster_handlers.onUpload(^{id}, this.id, 'icon')"/>
         </div>
     </div>
 
     <div class="images">
-        <input type="number" id="icon_x_^{id}" class="q_answer_points_input" value="0" onchange=""/>
-        <input type="number" id="icon_y_^{id}" class="q_answer_points_input" value="0" onchange=""/>
+        <input type="number" id="icon_x_^{id}" class="q_answer_points_input" value="^{xval}" onchange=""/>
+        <input type="number" id="icon_y_^{id}" class="q_answer_points_input" value="^{yval}" onchange=""/>
         <button id="change_pos_btn_^{id}" onclick="poster_handlers.changePosition(^{id})">
             <p>CHANGE POSITION</p>
         </button>
-        <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Leave at -1 if this is a wrong object</p
+        <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Leave at -1 if this is a wrong object)</p
     </div>
 </div>
