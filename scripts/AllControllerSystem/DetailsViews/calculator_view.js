@@ -127,7 +127,7 @@ const calc_handlers = {
                 calc_handlers.current_dat.questions[q_index].answers[a_index].points  = document.getElementById("points_"   + q_index +   "_"    +a_index).value;
             }
             calc_handlers.current_dat.questions[q_index].image                        = document.getElementById("upload_image_" + q_index).src;
-            if(!calc_handlers.current_dat.questions[q_index].image.includes("data:image/svg+xml;base64,")){
+            if(!calc_handlers.current_dat.questions[q_index].image.includes("data:image/png;base64,")){
                 calc_handlers.current_dat.questions[q_index].image                    = undefined;
             }
         }
