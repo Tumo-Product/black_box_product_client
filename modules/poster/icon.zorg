@@ -32,9 +32,9 @@
     <div class="images">
         <input type="number" id="icon_x_^{id}" class="q_answer_points_input" value="^{xval}" onchange=""/>
         <input type="number" id="icon_y_^{id}" class="q_answer_points_input" value="^{yval}" onchange=""/>
-        <button id="change_pos_btn_^{id}" onclick="poster_handlers.changePosition(^{id})">
-            <p>CHANGE POSITION</p>
+        <button class="change_pos_button" id="change_pos_btn_^{id}" onclick="poster_handlers.changePosition(^{id})">
+            <p>Change Position</p>
         </button>
-        <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Leave at -1 if this is a wrong object)</p
+        <p>(Leave at -1 if this is a wrong object)</p
     </div>
 </div>

@@ -127,7 +127,7 @@ const gallery_sys = {
 
         for(let i = 0; i < length; i++){
             let img1 = default_images[i].img1, img2 = default_images[i].img2;
-            if (!img1.includes("data:image/png;base64, ") && !img1.includes(document.location.href)) { // check for default image and non base64 image.
+            if (!img1.includes("base64") && !img1.includes(document.location.href)) { // check for default image and non base64 image.
                 img1 = "data:image/png;base64, " + img1;
                 img2 = "data:image/png;base64, " + img2;
             }

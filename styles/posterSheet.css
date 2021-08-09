@@ -3,6 +3,17 @@
     margin-top: 15px;
 }
 
+.change_pos_button {
+    background: white;
+    border-radius: 30px;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.change_pos_button p {
+    color: #5D6277 !important;
+}
+
 .poster {
     width:  657px !important;
 
@@ -10,7 +21,7 @@
     padding: 15px 15px 15px 15px !important;
     margin: 0 !important;
     border-radius: 15px;
-    background: #21A96D 0% 0% no-repeat padding-box;
+    background: #21A96D;
     margin-bottom: 15px !important;
 }
 
@@ -30,8 +41,7 @@
 }
 
 .icons {
-    background-color: #21A96D;
-    background: #21A96D 0% 0% no-repeat padding-box;
+    background: #21A96D;
     padding: 15px 15px 15px 15px !important;
     margin-bottom: 15px !important;
     border-radius: 15px;
