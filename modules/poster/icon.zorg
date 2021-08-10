@@ -5,7 +5,7 @@
     <div class="images">
         <div class="fullImg imgContainer">
             <p>Full Image</p>
-            <img id="full_img_^{id}" src="">
+            <img id="full_img_^{id}" src="^{fullImg}">
             <button class="gallery_upload_button" id="full_upload_btn_^{id}" onclick="poster_handlers.onUploadPressed('full_upload_input_^{id}')">
                 <p class="upload_arrow">↑</p>
             </button>
@@ -13,7 +13,7 @@
         </div>
         <div class="objImg imgContainer">
             <p>Object Image</p>
-            <img id="obj_img_^{id}" src="">
+            <img id="obj_img_^{id}" src="^{objImg}">
             <button class="gallery_upload_button" id="obj_upload_btn_^{id}" onclick="poster_handlers.onUploadPressed('obj_upload_input_^{id}')">
                 <p class="upload_arrow">↑</p>
             </button>
@@ -21,7 +21,7 @@
         </div>
         <div class="iconImg imgContainer">
             <p>Icon Image</p>
-            <img id="icon_img_^{id}" src="">
+            <img id="icon_img_^{id}" src="^{iconImg}">
             <button class="gallery_upload_button" id="icon_upload_btn^{id}" onclick="poster_handlers.onUploadPressed('icon_upload_input_^{id}')">
                 <p class="upload_arrow">↑</p>
             </button>
@@ -30,8 +30,8 @@
     </div>
 
     <div class="images">
-        <input type="number" id="icon_x_^{id}" class="q_answer_points_input" value="^{xval}" onchange=""/>
-        <input type="number" id="icon_y_^{id}" class="q_answer_points_input" value="^{yval}" onchange=""/>
+        <input max="657" type="number" id="icon_x_^{id}" class="q_answer_points_input" value="^{xval}" onchange=""/>
+        <input max="433" type="number" id="icon_y_^{id}" class="q_answer_points_input" value="^{yval}" onchange=""/>
         <button class="change_pos_button" id="change_pos_btn_^{id}" onclick="poster_handlers.changePosition(^{id})">
             <p>Change Position</p>
         </button>

@@ -34,7 +34,7 @@ let dummyJson = {
         },
         {
             "name"          : "poster",
-            "img"           : "images/gallery.png",
+            "img"           : "images/poster.png",
             "searchBar"     : true,
             "addButton"     : true,
             "postRequest"   : "interactive_poster/list"

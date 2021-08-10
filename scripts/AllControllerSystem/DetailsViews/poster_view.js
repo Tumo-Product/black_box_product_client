@@ -76,9 +76,16 @@ const poster_handlers = {
 
             dat.icons[i].name = $("#icon_name_" + i).val();
 
-            let iconSrc     = $("#icon_img_" + i).attr("src");
-            let fullSrc     = $("#full_img_" + i).attr("src");
-            let objSrc      = $("#obj_img_"  + i).attr("src");
+            let iconSrc = $("#icon_img_" + i).attr("src");
+            let fullSrc = $("#full_img_" + i).attr("src");
+            let objSrc  = $("#obj_img_"  + i).attr("src");
+            
+            let xVal    = parseInt($("#icon_x_" + i).val());
+            let yVal    = parseInt($("#icon_y_" + i).val());
+
+            if (xVal < 0 || yVal < 0 || fullSrc === poster_sys.def_images.full) {
+
+            }
 
             dat.icons[i].icon = iconSrc;
             dat.icons[i].full = fullSrc;
@@ -94,25 +101,31 @@ const poster_sys = {
     def_set_values  : {},
     iconTemplate    : "",
     add_btn         : "",
+    def_images          : {
+        full : window.location.href + "images/icon_img.png",
+        obj  : window.location.href + "images/icon_img.png",
+        icon : window.location.href + "images/icon_img.png"
+    },
 
     set_default_set         : (obj) => {
         poster_sys.def_set_values = JSON.parse(JSON.stringify(obj));                   // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
     },
 
-    reset_to_default        : async () => {
+    reset_to_default    : async () => {
         poster_sys.target_set = JSON.parse(JSON.stringify(poster_sys.def_set_values));
         await dt_Handlers.gallery_handler.clear_container();
         await poster_sys.handle_set_object(poster_sys.target_set);
     },
 
-    handle_set_object       : async (data) => {
+    handle_set_object   : async (data) => {
         poster_sys.target_set = data;
         await poster_sys.assign_name();
+        await poster_sys.setupBackgrounds();
         await poster_sys.addIcons();
         poster_handlers.initialize(data);
     },
 
-    popupPoster            : async (x, y) => {
+    popupPoster         : async (x, y) => {
         let modules         = await module_loader.loadZorgList("poster_modules");
         let positionPicker  = modules.position_picker.data;
         positionPicker      = positionPicker.replaceAll("^{poster}", poster_sys.target_set.background);
@@ -124,23 +137,11 @@ const poster_sys = {
         return posPicker;
     },
 
-    removePosPicker         : () => {
+    removePosPicker     : () => {
         $("#positionPicker").remove();
     },
 
-    addIcons               : async () => {
-        if (poster_sys.target_set.background != "") {
-            $("#poster img").attr("src", poster_sys.target_set.background);
-        } else {
-            $("#poster img").attr("src", document.location.href + "images/poster_resolution.png");
-        }
-
-        if (poster_sys.target_set.background_end != "") {
-            $("#background_end img").attr("src", poster_sys.target_set.background_end);
-        } else {
-            $("#background_end img").attr("src", document.location.href + "images/poster_resolution.png");
-        }
-
+    addIcons            : async () => {
         let icons               = poster_sys.target_set.icons;
         let modules             = await module_loader.loadZorgList("poster_modules");
         poster_sys.add_btn      = modules.add_icon_button.data;
@@ -159,6 +160,22 @@ const poster_sys = {
                 icon = icon.replaceAll("^{xval}", -1);
                 icon = icon.replaceAll("^{yval}", -1);
             }
+
+            if (icons[i].full === undefined) {
+                icon = icon.replaceAll("^{fullImg}", poster_sys.def_images.full);
+            } else {
+                icon = icon.replaceAll("^{fullImg}", icons[i].full);
+            }
+            if (icons[i].obj  === undefined || icons[i].obj  == "") {
+                icon = icon.replaceAll("^{objImg}",  poster_sys.def_images.obj);
+            } else {
+                icon = icon.replaceAll("^{objImg}", icons[i].obj);
+            }
+            if (icons[i].icon === undefined || icons[i].icon == "") {
+                icon = icon.replaceAll("^{iconImg}", poster_sys.def_images.icon);
+            } else {
+                icon = icon.replaceAll("^{iconImg}", icons[i].icon);
+            }
             
             $(".icons").append(icon);
         }
@@ -166,12 +183,16 @@ const poster_sys = {
         $(".icons").append(poster_sys.add_btn);
     },
 
-    addIcon         : async () => {
+    addIcon             : async () => {
         let newIcon = poster_sys.iconTemplate;
         newIcon     = newIcon.replaceAll("^{id}", $(".icon").length);
         newIcon     = newIcon.replaceAll("^{name}", "Name");
         newIcon     = newIcon.replaceAll("^{xval}", -1);
         newIcon     = newIcon.replaceAll("^{yval}", -1);
+
+        newIcon     = newIcon.replaceAll("^{fullImg}", poster_sys.def_images.full);
+        newIcon     = newIcon.replaceAll("^{objImg}",  poster_sys.def_images.obj);
+        newIcon     = newIcon.replaceAll("^{iconImg}", poster_sys.def_images.icon);
 
         $(".icons").append(newIcon);
         $("#add_icon_btn").remove();
@@ -180,20 +201,34 @@ const poster_sys = {
         poster_sys.scroll_to_bottom(true);
     },
 
-    assign_name             : async () => {
+    setupBackgrounds    : async() => {
+        if (poster_sys.target_set.background != "") {
+            $("#poster img").attr("src", poster_sys.target_set.background);
+        } else {
+            $("#poster img").attr("src", document.location.href + "images/poster_resolution.png");
+        }
+
+        if (poster_sys.target_set.background_end != "") {
+            $("#background_end img").attr("src", poster_sys.target_set.background_end);
+        } else {
+            $("#background_end img").attr("src", document.location.href + "images/poster_resolution.png");
+        }
+    },
+
+    assign_name         : async () => {
         document.getElementById("name_input").value = poster_sys.target_set.name;
     },
 
-    get_scroll              : () => {
+    get_scroll          : () => {
         return document.getElementById("scroll_content").scrollTop + 450;
     },
 
-    scroll_to_pos           : (height, smooth) => {
+    scroll_to_pos       : (height) => {
         let div         = document.getElementById("scroll_content");
         div.scrollTop   = height;
     },
 
-    scroll_to_bottom        : async (smooth) => {
+    scroll_to_bottom    : async (smooth) => {
         let div         = document.getElementById("scroll_content");
 
         if (smooth === true) {

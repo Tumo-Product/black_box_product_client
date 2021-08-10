@@ -44,7 +44,7 @@ const sideBar_Handlers  = {
     poster_handler      : {
         c_list      : null,
         a_c_list    : null,
-        load        : async (request, post) => {
+        load        : async (request) => {
             if(sideBar_Handlers.defaultHtml !== ""){
                 $("#searchParent").html(sideBar_Handlers.defaultHtml);
             }

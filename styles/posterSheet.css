@@ -79,6 +79,10 @@
     margin-bottom: 2px;
 }
 
+.imgContainer img {
+    border: 2px solid white;
+}
+
 .icons .remove_q_image_button {
     top: -33px
 }
