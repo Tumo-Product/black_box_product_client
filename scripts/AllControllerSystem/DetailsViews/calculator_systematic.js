@@ -43,6 +43,7 @@ const calc_sys_data = {
         req._set.name           = calc_handlers.current_dat.name;
         req._set.questions      = calc_handlers.current_dat.questions;
         req._set.uid            = calc_handlers.current_dat.uid;
+        
         req._uid = calc_handlers.current_dat.uid;
         let resp = await ac_network.post_request("calc/updateset", req);
         await ac_sidebar.configSideBar(ac_sidebar.activeModule);

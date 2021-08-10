@@ -178,7 +178,7 @@ textarea{
     margin-left: 150px !important;
 }
 
-.question_container{
+.question_container {
     width: 699px !important;
     padding : 15px 15px 15px 15px !important;
     margin: 0 !important;
@@ -216,6 +216,7 @@ textarea{
     transform: matrix(-0.71, 0.71, -0.71, -0.71, 0, 13);
     font-size: 30px;
     right: 0px;
+    top: 2px;
 }
 
 .add_answer_button{

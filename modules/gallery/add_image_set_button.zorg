@@ -1,0 +1,1 @@
+<button id="add_gallery_set" class="add_answer_button" onclick="gallery_handlers.onAddImageSet()">+</button>

@@ -1,0 +1,40 @@
+<div id="icon_^{id}" class="icon">
+    <button id="remove_icon_^{id}" class="remove_q_image_button" onclick="poster_handlers.removeIcon(^{id})">+</button> 
+    <input type="text" id="icon_name_^{id}" class="name_input" value="^{name}"/>
+
+    <div class="images">
+        <div class="fullImg imgContainer">
+            <p>Full Image</p>
+            <img id="full_img_^{id}" src="">
+            <button class="gallery_upload_button" id="full_upload_btn_^{id}" onclick="poster_handlers.onUploadPressed('full_upload_input_^{id}')">
+                <p class="upload_arrow">↑</p>
+            </button>
+            <input type="file" accept=".png" id="full_upload_input_^{id}" style="display:none" onchange="poster_handlers.onUpload(^{id}, this.id, 'full')"/>
+        </div>
+        <div class="objImg imgContainer">
+            <p>Object Image</p>
+            <img id="obj_img_^{id}" src="">
+            <button class="gallery_upload_button" id="obj_upload_btn_^{id}" onclick="poster_handlers.onUploadPressed('obj_upload_input_^{id}')">
+                <p class="upload_arrow">↑</p>
+            </button>
+            <input type="file" accept=".png" id="obj_upload_input_^{id}" style="display:none" onchange="poster_handlers.onUpload(^{id}, this.id, 'obj')"/>
+        </div>
+        <div class="iconImg imgContainer">
+            <p>Icon Image</p>
+            <img id="icon_img_^{id}" src="">
+            <button class="gallery_upload_button" id="icon_upload_btn^{id}" onclick="poster_handlers.onUploadPressed('icon_upload_input_^{id}')">
+                <p class="upload_arrow">↑</p>
+            </button>
+            <input type="file" accept=".svg" id="icon_upload_input_^{id}" style="display:none" onchange="poster_handlers.onUpload(^{id}, this.id, 'icon')"/>
+        </div>
+    </div>
+
+    <div class="images">
+        <input type="number" id="icon_x_^{id}" class="q_answer_points_input" value="^{xval}" onchange=""/>
+        <input type="number" id="icon_y_^{id}" class="q_answer_points_input" value="^{yval}" onchange=""/>
+        <button class="change_pos_button" id="change_pos_btn_^{id}" onclick="poster_handlers.changePosition(^{id})">
+            <p>Change Position</p>
+        </button>
+        <p>(Leave at -1 if this is a wrong object)</p
+    </div>
+</div>

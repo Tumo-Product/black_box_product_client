@@ -1,0 +1,47 @@
+<div id="top_panel">
+    <p id="name_text">Name </p>
+    <input type="text" id="name_input" value="Name"/>
+    <button id="btn_rem" onclick="poster_sys_data.onDeleteSet()">      Delete  </button>
+    <button id="btn_url" onclick="poster_sys_data.getURL()">           URL     </button>
+    <button id="btn_cnc" onclick="poster_sys_data.onCancelEdits()">    Cancel  </button>
+    <button id="btn_sav" onclick="poster_sys_data.onSaveEdits()">      Save    </button>
+</div>
+<div id="scroll_content">
+    <div class="element_body">
+        <input style="width: 657px" type="text" id="intro" class="name_input" value="Intro" />
+    </div>
+
+    <div class="element_body">
+        <div class="poster" id="poster">
+            <h4 class="dublex_name">Poster</h4>
+            <img src="^{pssrc}">
+            <button class="gallery_upload_button" onclick="poster_handlers.onUploadPressed('posterInput')">
+                <p class="upload_arrow">↑</p>
+            </button>
+            <input type="file" accept=".png" id="posterInput" style="display:none" onchange="poster_handlers.onUpload(0, this.id, 'poster')"/>
+        </div>
+    </div>
+
+    <div class="element_body">
+        <div class="poster" id="background_end">
+            <h4 class="dublex_name">End Background</h4>
+            <img src="^{besrc}">
+            <button class="gallery_upload_button" onclick="poster_handlers.onUploadPressed('bgEndInput')">
+                <p class="upload_arrow">↑</p>
+            </button>
+            <input type="file" accept=".png" id="bgEndInput" style="display:none" onchange="poster_handlers.onUpload(0, this.id, 'background_end')"/>
+        </div>
+    </div>
+
+    <div class="element_body">
+        <input style="width: 657px" type="text" id="outcome" class="name_input" value="Outcome Text"/>
+    </div>
+
+    <div class="element_body">
+        <h1>Icons</h1>
+    </div>
+
+    <div class="element_body icons">
+        
+    </div>
+</div>

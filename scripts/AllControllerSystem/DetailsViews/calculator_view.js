@@ -127,8 +127,8 @@ const calc_handlers = {
                 calc_handlers.current_dat.questions[q_index].answers[a_index].points  = document.getElementById("points_"   + q_index +   "_"    +a_index).value;
             }
             calc_handlers.current_dat.questions[q_index].image                        = document.getElementById("upload_image_" + q_index).src;
-            if(!calc_handlers.current_dat.questions[q_index].image.includes("data:image/svg+xml;base64,")){
-                calc_handlers.current_dat.questions[q_index].image                    = undefined;   
+            if(!calc_handlers.current_dat.questions[q_index].image.includes("data:image/png;base64,")){
+                calc_handlers.current_dat.questions[q_index].image                    = undefined;
             }
         }
         calc_handlers.current_dat.answer_image = document.getElementById("upload_answer_image").src;
@@ -184,7 +184,6 @@ const calc_sys = {
         let tempImage;
         for(let q_index = 0; q_index < calc_sys.target_set.questions.length; q_index++){
             tempImage = calc_sys.target_set.questions[q_index].image;
-            console.log(typeof(tempImage));
             if(tempImage !== undefined){
                 if(calc_sys.target_set.questions[q_index].image.includes("data:image")){
                     document.getElementById("upload_image_"+q_index).src =                                  calc_sys.target_set.questions[q_index].image;

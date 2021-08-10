@@ -2,7 +2,7 @@
     <div class="question_upload_container" id="image_upload_panel_^{id}">
         <button id="remove_q_image_^{id}"  class="remove_q_image_button" onclick="calc_handlers.onRemoveQuestionImage(^{id})">+</button> 
         <img src="images/svg29_12.png" id="upload_image_^{id}" class="upload_image"/>
-        <input type="file" accept=".svg" id="img_upload_question_^{id}" style="display:none" onchange="calc_handlers.onImageUpload(^{id})"/> 
+        <input type="file" accept=".png" id="img_upload_question_^{id}" style="display:none" onchange="calc_handlers.onImageUpload(^{id})"/> 
         <button class="upload_button" id="upload_button_^{id}" onclick="calc_handlers.onUploadPressed(^{id})">
             <p class="upload_arrow">↑</p>
         </button>

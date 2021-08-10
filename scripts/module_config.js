@@ -1,5 +1,5 @@
 const module_zorg   = {
-    loading_module          :   [{
+    loading_module          : [{
         name        : "login_md",
         src         : "modules/loading.zorg"
     }],
@@ -7,26 +7,58 @@ const module_zorg   = {
         name        : "star_loading_md",
         src         : "modules/star_loading.zorg"
     }],
-    calc_modules_module     :   [
+    poster_modules_module   : [
         {
             name    : "main_skelet",
-            src     : "modules/calculator_template.zorg"
+            src     : "modules/poster/template.zorg"
+        },
+        {
+            name    : "icon_template",
+            src     : "modules/poster/icon.zorg"
+        },
+        {
+            name    : "add_icon_button",
+            src     : "modules/poster/add_icon_button.zorg"
+        },
+        {
+            name    : "position_picker",
+            src     : "modules/poster/position_picker.zorg"
+        },
+    ],
+    gallery_modules_module  : [
+        {
+            name    : "main_skelet",
+            src     : "modules/gallery/gallery_template.zorg"
+        },
+        {
+            name    : "element_template",
+            src     : "modules/gallery/gallery_element.zorg"
+        },
+        {
+            name    : "add_button",
+            src     : "modules/gallery/add_image_set_button.zorg"
+        },
+    ],
+    calc_modules_module     : [
+        {
+            name    : "main_skelet",
+            src     : "modules/calc/calculator_template.zorg"
         },
         {
             name    : "question_template",
-            src     : "modules/calculator_question.zorg"
+            src     : "modules/calc/calculator_question.zorg"
         },
         {
             name    : "answer_template",
-            src     : "modules/calculator_answer.zorg"
+            src     : "modules/calc/calculator_answer.zorg"
         },
         {
             name    : "q_answer_template",
-            src     : "modules/calculator_q_answer.zorg"
+            src     : "modules/calc/calculator_q_answer.zorg"
         },
         {
             name    : "q_add_button",
-            src     : "modules/calculator_add_question.zorg"
+            src     : "modules/calc/calculator_add_question.zorg"
         }
     ]
 };
