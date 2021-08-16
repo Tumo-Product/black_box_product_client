@@ -1,5 +1,10 @@
 #add_icon_btn {
-    margin-left: 400px;
+    margin-left: 50%;
+    margin-top: 15px;
+}
+
+#add_bg_btn {
+    margin-left: 343px;
     margin-top: 15px;
 }
 
@@ -53,9 +58,23 @@
     border-radius: 15px;
 }
 
-.icon {
+.icon, .bg {
     position: relative;
     margin-top: 30px;
+}
+
+.bg .remove_q_image_button {
+    top: -35px !important;
+}
+
+.bg img, .poster img {
+    width:  657px !important;
+    height: 433px !important;
+    border: 2px solid white;
+}
+
+.bg textarea {
+    width: 630px !important;
 }
 
 .imgContainer {
@@ -116,6 +135,16 @@
 h1 {
     margin-bottom: 15px;
     color: white;
+}
+
+.poster_text {
+    padding: 15px 15px 15px 15px !important;
+    background: #ffffff 0% 0% no-repeat padding-box !important;
+    border-radius: 15px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 18px;
+    color: #5D6277;
+    height: 80px;
 }
 
 /* TRANSITIONS, ANIMATIONS, popups */

@@ -1,1 +1,1 @@
-<button id="add_icon_btn" class="add_answer_button" onclick="poster_sys.addIcon()">+</button>
+<button id="add_icon_btn" class="add_answer_button" onclick="poster_handlers.addIcon()">+</button>

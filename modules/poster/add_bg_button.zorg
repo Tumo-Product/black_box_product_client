@@ -1,0 +1,3 @@
+<div class="element_body">
+    <button id="add_bg_btn" class="add_answer_button" onclick="poster_handlers.addEndBg()">+</button>
+</div>

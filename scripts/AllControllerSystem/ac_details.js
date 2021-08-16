@@ -42,11 +42,15 @@ const dt_Handlers = {
             ac_details.stop_loading();
         },
 
-        clear_container     :   async () => {
+        clear_container     : async () => {
             $(".icons").empty();
         },
 
-        get_page_template   :   async () => {
+        clear_backgrounds   : async() => {
+            $("#end_backgrounds").empty();
+        },
+
+        get_page_template   : async () => {
             let data = await module_loader.loadZorgList("poster_modules");
             return data.main_skelet.data;                                       //Hard coded, due dt_Handlers.gallery_handler is specific for calculator tool
         }

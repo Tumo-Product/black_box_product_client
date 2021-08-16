@@ -23,20 +23,34 @@ const poster_handlers = {
             }
         }));
 
-        if (type == "poster" || type == "background_end") {
+        if (type == "poster" || type.includes("background_end")) {
             $(`#${type} img`).attr("src", basedat);
         } else {
             document.getElementById(`${type}_img_${i}`).src = basedat;
         }
     },
-
-    removeIcon     : async (id) => {
+    
+    addIcon         : async () => {
         ac_loading.openLoading();
 
-        dt_Handlers.poster_handler.clear_container();
+        poster_handlers.updateData();
 
+        dt_Handlers.poster_handler.clear_container();
+        poster_handlers.current_dat.icons.push({stick: undefined, full: undefined, obj: undefined, img: undefined});
+        poster_sys.target_set = poster_handlers.current_dat;
+        await poster_sys.addIcons();
+        
+        poster_sys.scroll_to_bottom(true);
+        ac_loading.closeLoading();
+    },
+
+    removeIcon      : async (id) => {
+        ac_loading.openLoading();
+
+        poster_handlers.updateData();
         let scrValue = poster_sys.get_scroll();
 
+        dt_Handlers.poster_handler.clear_container();
         poster_handlers.current_dat.icons.splice(id, 1);
         poster_sys.target_set = poster_handlers.current_dat;
         await poster_sys.addIcons();
@@ -46,7 +60,111 @@ const poster_handlers = {
         ac_loading.closeLoading();
     },
 
-    changePosition  : async (id) => {
+    addEndBg      : async () => {
+        ac_loading.openLoading();
+
+        poster_handlers.updateData();
+        let scrValue = poster_sys.get_scroll();
+
+        dt_Handlers.poster_handler.clear_backgrounds();
+        poster_handlers.current_dat.background_end += "%{div}";
+        poster_handlers.current_dat.outcome        += "%{div}";
+        poster_sys.target_set = poster_handlers.current_dat;
+        await poster_sys.setupBackgrounds();
+
+        poster_sys.scroll_to_pos(scrValue);
+
+        ac_loading.closeLoading();
+    },
+
+    removeEndBackground : async(id) => {
+        ac_loading.openLoading();
+
+        poster_handlers.updateData();
+        dt_Handlers.poster_handler.clear_backgrounds();
+
+        let bgArray     = poster_handlers.current_dat.background_end.split("%{div}");
+        let newString   = "";
+        bgArray.splice(id, 1);
+
+        for (let i = 0; i < bgArray.length; i++) {
+            if (i == bgArray.length - 1) newString += bgArray[i];
+            else                         newString += bgArray[i] + "%{div}";
+        }
+
+        poster_handlers.current_dat.background_end = newString;
+
+        newString = "";
+        let outcomeArray = poster_handlers.current_dat.outcome.split("%{div}");
+        outcomeArray.splice(id, 1);
+
+        for (let i = 0; i < outcomeArray.length; i++) {
+            if (i == outcomeArray.length - 1) newString += outcomeArray[i];
+            else                              newString += outcomeArray[i] + "%{div}";
+        }
+
+        poster_handlers.current_dat.outcome = newString;
+        poster_sys.target_set = poster_handlers.current_dat;
+
+        await poster_sys.setupBackgrounds();
+
+        ac_loading.closeLoading();
+    },
+
+    onReplaceBackgrounds    : async(dir, id) => {
+        ac_loading.openLoading();
+
+        poster_handlers.updateData();
+        await dt_Handlers.poster_handler.clear_backgrounds();
+        
+        let scrValue = poster_sys.get_scroll();
+        let backgrounds = poster_handlers.current_dat.background_end.split("%{div}");
+        let outcomes    = poster_handlers.current_dat.outcome.split("%{div}");
+
+        let index    = id;
+        let newIndex = dir === "up" ? index - 1 : index + 1;
+
+        if(newIndex < 0 || newIndex >= outcomes.length){
+            return;
+        }
+
+        let tempDat = outcomes[index];
+        outcomes[index]    = outcomes[newIndex];
+        outcomes[newIndex] = tempDat;
+
+        tempDat     = backgrounds[index];
+        backgrounds[index]    = backgrounds[newIndex];
+        backgrounds[newIndex] = tempDat;
+
+        let newString   = "";
+
+        for (let i = 0; i < backgrounds.length; i++) {
+            if (i == backgrounds.length - 1)
+                newString += backgrounds[i];
+            else
+                newString += backgrounds[i] + "%{div}";
+        }
+
+        poster_handlers.current_dat.background_end = newString;
+        newString = "";
+
+        for (let i = 0; i < outcomes.length; i++) {
+            if (i == outcomes.length - 1)
+                newString += outcomes[i];
+            else
+                newString += outcomes[i] + "%{div}";
+        }
+
+        poster_handlers.current_dat.outcome = newString;
+
+        poster_sys.target_set = poster_handlers.current_dat;
+        await poster_sys.setupBackgrounds();
+        poster_sys.scroll_to_pos(scrValue);
+
+        ac_loading.closeLoading();
+    },
+
+    changePosition   : async (id) => {
         poster_handlers.updateData();
         posPicker = await poster_sys.popupPoster($(`#icon_x_${id}`).val(), $(`#icon_y_${id}`).val());
         
@@ -62,14 +180,35 @@ const poster_handlers = {
         });
     },
 
-    updateData      : () => {
+    updateData      : async () => {
+        let msg     = "";
         let dat     = poster_handlers.current_dat;
         
         dat.intro   = document.getElementById("intro").value;
         dat.outcome = document.getElementById("outcome").value;
 
-        dat.background      = $("#poster img").attr("src");
-        dat.background_end  = $("#background_end img").attr("src");
+        dat.background = $("#poster img").attr("src");
+
+        let newString = "";
+
+        $(".bg img").each(function(i) {
+            if (i == $(".bg").length - 1)
+                newString += $(this).attr("src");
+            else
+                newString += $(this).attr("src") + "%{div}";
+        });
+
+        dat.background_end  = newString;
+        newString = "";
+
+        $(".bg textarea").each(function(i) {
+            if (i == $(".bg").length - 1)
+                newString += $(this).val();
+            else
+                newString += $(this).val() + "%{div}";
+        });
+
+        dat.outcome         = newString;
 
         for (let i = 0; i < $(".icon").length; i++) {
             if (dat.icons[i] == undefined) dat.icons[i] = {};
@@ -83,25 +222,31 @@ const poster_handlers = {
             let xVal    = parseInt($("#icon_x_" + i).val());
             let yVal    = parseInt($("#icon_y_" + i).val());
 
-            if (xVal < 0 || yVal < 0 || fullSrc === poster_sys.def_images.full) {
-
+            if (xVal < -1 || yVal < -1 || !iconSrc.includes("png")) {
+                dat.icons[i].stick = undefined;
+            } else {
+                dat.icons[i].stick = {x: xVal, y: yVal};
             }
 
-            dat.icons[i].icon = iconSrc;
-            dat.icons[i].full = fullSrc;
-            dat.icons[i].obj  = objSrc;
+            dat.icons[i].img    = iconSrc;
+            dat.icons[i].full   = fullSrc;
+            dat.icons[i].obj    = objSrc;
+
+            if (!objSrc.includes("png") || !iconSrc.includes("svg")) {
+                msg = "Not all icons and object images are uploaded";
+            }
         }
 
-        poster_sys.target_set = dat;
+        poster_sys.target_set   = dat;
+        return msg;
     }
 }
 
 const poster_sys = {
     target_set      : {},
     def_set_values  : {},
-    iconTemplate    : "",
-    add_btn         : "",
-    def_images          : {
+
+    def_images      : {
         full : window.location.href + "images/icon_img.png",
         obj  : window.location.href + "images/icon_img.png",
         icon : window.location.href + "images/icon_img.png"
@@ -113,7 +258,7 @@ const poster_sys = {
 
     reset_to_default    : async () => {
         poster_sys.target_set = JSON.parse(JSON.stringify(poster_sys.def_set_values));
-        await dt_Handlers.gallery_handler.clear_container();
+        await dt_Handlers.poster_handler.clear_backgrounds();
         await poster_sys.handle_set_object(poster_sys.target_set);
     },
 
@@ -142,19 +287,22 @@ const poster_sys = {
     },
 
     addIcons            : async () => {
-        let icons               = poster_sys.target_set.icons;
-        let modules             = await module_loader.loadZorgList("poster_modules");
-        poster_sys.add_btn      = modules.add_icon_button.data;
-        poster_sys.iconTemplate = modules.icon_template.data;
+        let icons        = poster_sys.target_set.icons;
+        let modules      = await module_loader.loadZorgList("poster_modules");
+        let add_btn      = modules.add_icon_button.data;
+        let iconTemplate = modules.icon_template.data;
 
         for (let i = 0; i < icons.length; i++) {
-            let icon            = poster_sys.iconTemplate;
+            let icon            = iconTemplate;
 
             icon = icon.replaceAll("^{id}",   i);
-            icon = icon.replaceAll("^{name}", icons[i].name);
+            if (icons[i].name  != undefined)
+                icon = icon.replaceAll("^{name}", icons[i].name);
+            else
+                icon = icon.replaceAll("^{name}", "Name");
 
             if (icons[i].stick != undefined) {
-                icon = icon.replaceAll("^{xval}", icons[i].stick.x)
+                icon = icon.replaceAll("^{xval}", icons[i].stick.x);
                 icon = icon.replaceAll("^{yval}", icons[i].stick.y);
             } else {
                 icon = icon.replaceAll("^{xval}", -1);
@@ -169,50 +317,54 @@ const poster_sys = {
             if (icons[i].obj  === undefined || icons[i].obj  == "") {
                 icon = icon.replaceAll("^{objImg}",  poster_sys.def_images.obj);
             } else {
-                icon = icon.replaceAll("^{objImg}", icons[i].obj);
+                icon = icon.replaceAll("^{objImg}",  icons[i].obj);
             }
-            if (icons[i].icon === undefined || icons[i].icon == "") {
+            if (icons[i].img === undefined || icons[i].img == "") {
+                console.log(icons);
                 icon = icon.replaceAll("^{iconImg}", poster_sys.def_images.icon);
             } else {
-                icon = icon.replaceAll("^{iconImg}", icons[i].icon);
+                icon = icon.replaceAll("^{iconImg}", icons[i].img);
             }
             
             $(".icons").append(icon);
         }
 
-        $(".icons").append(poster_sys.add_btn);
-    },
-
-    addIcon             : async () => {
-        let newIcon = poster_sys.iconTemplate;
-        newIcon     = newIcon.replaceAll("^{id}", $(".icon").length);
-        newIcon     = newIcon.replaceAll("^{name}", "Name");
-        newIcon     = newIcon.replaceAll("^{xval}", -1);
-        newIcon     = newIcon.replaceAll("^{yval}", -1);
-
-        newIcon     = newIcon.replaceAll("^{fullImg}", poster_sys.def_images.full);
-        newIcon     = newIcon.replaceAll("^{objImg}",  poster_sys.def_images.obj);
-        newIcon     = newIcon.replaceAll("^{iconImg}", poster_sys.def_images.icon);
-
-        $(".icons").append(newIcon);
-        $("#add_icon_btn").remove();
-        $(".icons").append(poster_sys.add_btn);
-
-        poster_sys.scroll_to_bottom(true);
+        $(".icons").append(add_btn);
     },
 
     setupBackgrounds    : async() => {
+        let modules     = await module_loader.loadZorgList("poster_modules");
+        let poster_res  = document.location.href + "images/poster_resolution.png";
+        let add_btn     = modules.add_bg_button.data;
+        let bgTemplate  = modules.background_end_template.data;
+
         if (poster_sys.target_set.background != "") {
             $("#poster img").attr("src", poster_sys.target_set.background);
         } else {
-            $("#poster img").attr("src", document.location.href + "images/poster_resolution.png");
+            $("#poster img").attr("src", poster_res);
         }
 
-        if (poster_sys.target_set.background_end != "") {
-            $("#background_end img").attr("src", poster_sys.target_set.background_end);
-        } else {
-            $("#background_end img").attr("src", document.location.href + "images/poster_resolution.png");
+        let backgrounds = poster_sys.target_set.background_end.split("%{div}");
+        let outcomes    = poster_sys.target_set.outcome.split("%{div}");
+
+        for (let i = 0; i < backgrounds.length; i++) {
+            let bg  = bgTemplate;
+
+            bg      = bg.replaceAll("^{id}", i);
+            $("#end_backgrounds").append(bg);
+
+            if (backgrounds[i] != "")
+                $(`#background_end_${i} img`).attr("src", backgrounds[i]);
+            else
+                $(`#background_end_${i} img`).attr("src", poster_res);
         }
+
+        for (let i = 0; i < outcomes.length; i++) {
+            if (outcomes[i] != "")
+                $(`#background_end_${i} textarea`).val(outcomes[i]);
+        }
+
+        $("#end_backgrounds").append(add_btn);
     },
 
     assign_name         : async () => {

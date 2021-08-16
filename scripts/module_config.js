@@ -21,9 +21,17 @@ const module_zorg   = {
             src     : "modules/poster/add_icon_button.zorg"
         },
         {
+            name    : "add_bg_button",
+            src     : "modules/poster/add_bg_button.zorg"
+        },
+        {
             name    : "position_picker",
             src     : "modules/poster/position_picker.zorg"
         },
+        {
+            name    : "background_end_template",
+            src     : "modules/poster/background_end_template.zorg"
+        }
     ],
     gallery_modules_module  : [
         {
