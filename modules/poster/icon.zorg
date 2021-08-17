@@ -1,6 +1,5 @@
 <div id="icon_^{id}" class="icon">
-    <button id="remove_icon_^{id}" class="remove_q_image_button" onclick="poster_handlers.removeIcon(^{id})">+</button> 
-    <input type="text" id="icon_name_^{id}" class="name_input" value="^{name}"/>
+    <button id="remove_icon_^{id}" class="remove_q_image_button" onclick="poster_handlers.removeIcon(^{id})">+</button>
 
     <div class="images">
         <div class="fullImg imgContainer">

@@ -31,7 +31,11 @@ const module_zorg   = {
         {
             name    : "background_end_template",
             src     : "modules/poster/background_end_template.zorg"
-        }
+        },
+        {
+            name    : "popup",
+            src     : "modules/poster/popup.zorg"
+        }  
     ],
     gallery_modules_module  : [
         {

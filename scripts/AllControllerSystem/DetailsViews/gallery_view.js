@@ -26,10 +26,14 @@ const gallery_handlers = {
         await document.getElementById(`input_${id}_${pos}`).click();
     },
 
-    onReplaceQuestions  : async(dir, id) => {
-        ac_loading.openLoading();
+    onReplaceImages  : async(dir, id) => {
         let index    = id;
         let newIndex = dir === "up" ? index - 1 : index + 1;
+
+        if (gallery_handlers.current_dat.images.length > 1) {
+            if(newIndex < 0 || newIndex >= gallery_handlers.current_dat.images.length) return;
+            else ac_loading.openLoading();
+        } else return;
 
         if(newIndex < 0 || newIndex >= gallery_handlers.current_dat.images.length){
             return;

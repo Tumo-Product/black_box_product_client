@@ -112,29 +112,28 @@ const poster_handlers = {
     },
 
     onReplaceBackgrounds    : async(dir, id) => {
-        ac_loading.openLoading();
-
         poster_handlers.updateData();
-        await dt_Handlers.poster_handler.clear_backgrounds();
-        
-        let scrValue = poster_sys.get_scroll();
+
         let backgrounds = poster_handlers.current_dat.background_end.split("%{div}");
         let outcomes    = poster_handlers.current_dat.outcome.split("%{div}");
+        let scrValue    = poster_sys.get_scroll();
+        let index       = id;
+        let newIndex    = dir === "up" ? index - 1 : index + 1;
 
-        let index    = id;
-        let newIndex = dir === "up" ? index - 1 : index + 1;
+        if (backgrounds.length > 1) {
+            if(newIndex < 0 || newIndex >= outcomes.length) return;
+            else ac_loading.openLoading();
+        } else return;
 
-        if(newIndex < 0 || newIndex >= outcomes.length){
-            return;
-        }
+        await dt_Handlers.poster_handler.clear_backgrounds();
 
-        let tempDat = outcomes[index];
-        outcomes[index]    = outcomes[newIndex];
-        outcomes[newIndex] = tempDat;
+        let tempDat         = outcomes[index];
+        outcomes[index]     = outcomes[newIndex];
+        outcomes[newIndex]  = tempDat;
 
-        tempDat     = backgrounds[index];
-        backgrounds[index]    = backgrounds[newIndex];
-        backgrounds[newIndex] = tempDat;
+        tempDat                 = backgrounds[index];
+        backgrounds[index]      = backgrounds[newIndex];
+        backgrounds[newIndex]   = tempDat;
 
         let newString   = "";
 
@@ -165,7 +164,15 @@ const poster_handlers = {
     },
 
     changePosition   : async (id) => {
-        poster_handlers.updateData();
+        let msg = await poster_handlers.updateData();
+
+        if (poster_handlers.current_dat.background == poster_sys.poster_res) {
+            ac_loading.openLoading();
+            await poster_sys.popup("Poster image not set");
+            ac_loading.closeLoading();
+            return;
+        }
+
         posPicker = await poster_sys.popupPoster($(`#icon_x_${id}`).val(), $(`#icon_y_${id}`).val());
         
         posPicker.find("img").click(function(e) {
@@ -173,7 +180,7 @@ const poster_handlers = {
             let x = e.pageX - offset.left;
             let y = e.pageY - offset.top;
 
-            $("#picker").css("left", x - 5).css("top", y - 5);
+            $("#picker").css("left", x - 8).css("top", y - 8);
 
             $(`#icon_x_${id}`).val(x);
             $(`#icon_y_${id}`).val(y);
@@ -185,13 +192,17 @@ const poster_handlers = {
         let dat     = poster_handlers.current_dat;
         
         dat.intro   = document.getElementById("intro").value;
-        dat.outcome = document.getElementById("outcome").value;
 
         dat.background = $("#poster img").attr("src");
+        if (dat.background == poster_sys.poster_res)
+            msg = "Not all backgrounds are set";
 
         let newString = "";
 
         $(".bg img").each(function(i) {
+            if ($(this).attr("src") == poster_sys.poster_res)
+                msg = "Not all backgrounds are set";
+
             if (i == $(".bg").length - 1)
                 newString += $(this).attr("src");
             else
@@ -209,11 +220,11 @@ const poster_handlers = {
         });
 
         dat.outcome         = newString;
-
+        
         for (let i = 0; i < $(".icon").length; i++) {
             if (dat.icons[i] == undefined) dat.icons[i] = {};
 
-            dat.icons[i].name = $("#icon_name_" + i).val();
+            dat.icons[i].name = i.toString();
 
             let iconSrc = $("#icon_img_" + i).attr("src");
             let fullSrc = $("#full_img_" + i).attr("src");
@@ -222,19 +233,34 @@ const poster_handlers = {
             let xVal    = parseInt($("#icon_x_" + i).val());
             let yVal    = parseInt($("#icon_y_" + i).val());
 
-            if (xVal < -1 || yVal < -1 || !iconSrc.includes("png")) {
+            if (xVal < 0 || yVal < 0 || !fullSrc.includes("png")) {
                 dat.icons[i].stick = undefined;
             } else {
                 dat.icons[i].stick = {x: xVal, y: yVal};
             }
 
+            if (fullSrc == poster_sys.def_images.full) {
+                dat.icons[i].full = undefined;
+            }
+            else {
+                dat.icons[i].full = fullSrc;
+            }
+
+            if (dat.icons[i].full === undefined || dat.icons[i].stick === undefined) {
+                dat.icons[i].stick  = undefined;
+                dat.icons[i].full   = undefined;
+            }
+
             dat.icons[i].img    = iconSrc;
-            dat.icons[i].full   = fullSrc;
             dat.icons[i].obj    = objSrc;
 
             if (!objSrc.includes("png") || !iconSrc.includes("svg")) {
                 msg = "Not all icons and object images are uploaded";
             }
+        }
+
+        if ($(".icon").length == 0) {
+            msg = "Poster needs at least one icon";
         }
 
         poster_sys.target_set   = dat;
@@ -245,6 +271,7 @@ const poster_handlers = {
 const poster_sys = {
     target_set      : {},
     def_set_values  : {},
+    poster_res      : document.location.href + "images/poster_resolution.png",
 
     def_images      : {
         full : window.location.href + "images/icon_img.png",
@@ -268,6 +295,19 @@ const poster_sys = {
         await poster_sys.setupBackgrounds();
         await poster_sys.addIcons();
         poster_handlers.initialize(data);
+    },
+
+    popup               : async (msg) => {
+        $(".sml_loader").hide();
+
+        let modules = await module_loader.loadZorgList("poster_modules");
+        let popup   = modules.popup.data;
+        popup       = popup.replaceAll("^{txt}", msg);
+        $("#popup_container").append(popup);
+
+        await timeout(3000);
+        $(".sml_loader").show();
+        $("#popup").remove();
     },
 
     popupPoster         : async (x, y) => {
@@ -320,7 +360,6 @@ const poster_sys = {
                 icon = icon.replaceAll("^{objImg}",  icons[i].obj);
             }
             if (icons[i].img === undefined || icons[i].img == "") {
-                console.log(icons);
                 icon = icon.replaceAll("^{iconImg}", poster_sys.def_images.icon);
             } else {
                 icon = icon.replaceAll("^{iconImg}", icons[i].img);
@@ -334,14 +373,13 @@ const poster_sys = {
 
     setupBackgrounds    : async() => {
         let modules     = await module_loader.loadZorgList("poster_modules");
-        let poster_res  = document.location.href + "images/poster_resolution.png";
         let add_btn     = modules.add_bg_button.data;
         let bgTemplate  = modules.background_end_template.data;
 
         if (poster_sys.target_set.background != "") {
             $("#poster img").attr("src", poster_sys.target_set.background);
         } else {
-            $("#poster img").attr("src", poster_res);
+            $("#poster img").attr("src", poster_sys.poster_res);
         }
 
         let backgrounds = poster_sys.target_set.background_end.split("%{div}");
@@ -356,7 +394,7 @@ const poster_sys = {
             if (backgrounds[i] != "")
                 $(`#background_end_${i} img`).attr("src", backgrounds[i]);
             else
-                $(`#background_end_${i} img`).attr("src", poster_res);
+                $(`#background_end_${i} img`).attr("src", poster_sys.poster_res);
         }
 
         for (let i = 0; i < outcomes.length; i++) {
@@ -391,4 +429,8 @@ const poster_sys = {
 
         div.scrollTop   = div.scrollHeight - div.clientHeight;
     }
+}
+
+const timeout = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

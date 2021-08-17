@@ -2,7 +2,7 @@ const network = {
     post_w_token    : async (rout, query) => {
         query._token = acc.token;
         let resp = await axios.post(config.main_url + rout, query);
-        if(resp.data.error) { location.reload(); }
+        // if(resp.data.error) { location.reload(); }
         resp = resp.data;
         return resp;
     },
