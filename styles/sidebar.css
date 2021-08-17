@@ -12,24 +12,17 @@
 }
 
 .side_img{
+    transition: 0.2s;
     margin-bottom: 5px;
     margin-top: 5px;
     cursor: pointer;
-    border-radius: 25%;
+    border-radius: 20%;
     width: 100%;
-    animation: normal 0.2s;
-    animation-name: outHoverBtn;
-    animation-direction: normal;
-    animation-timing-function: ease;
 }
 
 .side_img:hover {
     filter: drop-shadow(2px 4px 6px black);
-    border-radius: 15%;
-    animation: normal 0.2s;
-    animation-name: hoverBtn;
-    animation-direction: normal;
-    animation-timing-function: ease;
+    border-radius: 10%;
 }
 
 #searchParent{

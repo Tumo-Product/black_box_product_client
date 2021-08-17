@@ -24,9 +24,8 @@ const poster_sys_data = {
             return;
         }
         
-        let req = {};
-
-        let icons = JSON.stringify(poster_handlers.current_dat.icons);
+        let req     = {};
+        let icons   = JSON.stringify(poster_handlers.current_dat.icons);
         
         req._uid            = poster_handlers.current_dat.uid;
         req._intro          = poster_handlers.current_dat.intro;

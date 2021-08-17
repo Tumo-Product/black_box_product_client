@@ -274,8 +274,8 @@ const poster_sys = {
     poster_res      : document.location.href + "images/poster_resolution.png",
 
     def_images      : {
-        full : window.location.href + "images/icon_img.png",
-        obj  : window.location.href + "images/icon_img.png",
+        full : window.location.href + "images/poster_resolution.png",
+        obj  : window.location.href + "images/obj_img.png",
         icon : window.location.href + "images/icon_img.png"
     },
 
@@ -286,6 +286,7 @@ const poster_sys = {
     reset_to_default    : async () => {
         poster_sys.target_set = JSON.parse(JSON.stringify(poster_sys.def_set_values));
         await dt_Handlers.poster_handler.clear_backgrounds();
+        await dt_Handlers.poster_handler.clear_container();
         await poster_sys.handle_set_object(poster_sys.target_set);
     },
 
