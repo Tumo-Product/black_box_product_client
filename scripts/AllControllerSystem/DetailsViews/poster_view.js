@@ -254,7 +254,7 @@ const poster_handlers = {
             dat.icons[i].img    = iconSrc;
             dat.icons[i].obj    = objSrc;
 
-            if (!objSrc.includes("png") || !iconSrc.includes("svg")) {
+            if (objSrc == poster_sys.def_images.obj || iconSrc == poster_sys.def_images.icon) {
                 msg = "Not all icons and object images are uploaded";
             }
         }
