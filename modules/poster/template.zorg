@@ -1,0 +1,36 @@
+<div id="top_panel">
+    <p id="name_text">Name </p>
+    <input type="text" id="name_input" value="Name"/>
+    <button id="btn_rem" onclick="poster_sys_data.onDeleteSet()">      Delete  </button>
+    <button id="btn_url" onclick="poster_sys_data.getURL()">           URL     </button>
+    <button id="btn_cnc" onclick="poster_sys_data.onCancelEdits()">    Cancel  </button>
+    <button id="btn_sav" onclick="poster_sys_data.onSaveEdits()">      Save    </button>
+</div>
+<div id="scroll_content">
+    <div class="element_body">
+        <textarea style="width: 657px" type="text" id="intro" class="poster_text">Intro</textarea>
+    </div>
+
+    <div class="element_body">
+        <div class="poster" id="poster">
+            <h4 class="dublex_name">Poster</h4>
+            <img src="">
+            <button class="gallery_upload_button" onclick="poster_handlers.onUploadPressed('posterInput')">
+                <p class="upload_arrow">↑</p>
+            </button>
+            <input type="file" accept=".png" id="posterInput" style="display:none" onchange="poster_handlers.onUpload(0, this.id, 'poster')"/>
+        </div>
+    </div>
+
+    <div class="element_body">
+        <h1>End Backgrounds</h1>
+    </div>
+
+    <div id="end_backgrounds"></div>
+
+    <div class="element_body">
+        <h1>Icons</h1>
+    </div>
+
+    <div class="element_body icons"></div>
+</div>

@@ -25,13 +25,41 @@ const view_scripts  = {
         {
             name    : "ac_main",
             src     : "scripts/AllControllerSystem/ac_main.js"
+        },
+        {
+            name    : "ac_loading",
+            src     : "scripts/AllControllerSystem/ac_loading.js"
         }
     ],
-    quiz_flow               : [
-        
+    calculator_scripts      : [
+        {
+            name    : "calc_pagehandler",
+            src     : "scripts/AllControllerSystem/DetailsViews/calculator_view.js"
+        },
+        {
+            name    : "calc_systematic",
+            src     : "scripts/AllControllerSystem/DetailsViews/calculator_systematic.js"
+        }
     ],
-    loading_scripts         : [
-
+    gallery_scripts         : [
+        {
+            name    : "gallery_pagehandler",
+            src     : "scripts/AllControllerSystem/DetailsViews/gallery_view.js"
+        },
+        {
+            name    : "gallery_systematic",
+            src     : "scripts/AllControllerSystem/DetailsViews/gallery_systematic.js"
+        }
+    ],
+    poster_scripts          : [
+        {
+            name    : "poster_pagehandler",
+            src     : "scripts/AllControllerSystem/DetailsViews/poster_view.js"
+        },
+        {
+            name    : "poster_systematic",
+            src     : "scripts/AllControllerSystem/DetailsViews/poster_systematic.js"
+        }
     ]
 };
 

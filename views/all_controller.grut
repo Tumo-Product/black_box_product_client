@@ -6,7 +6,7 @@
     </header>
     <div class="inputHolder" id="searchBar">
         <input type="text" placeholder="Search">
-        <button id="addButton">+</button>
+        <button id="addButton" onclick="ac_sidebar.onAddPressed()">+</button>
     </div>
     <div id="searchParent">
         <div  id="smallLoadingScreen">
@@ -26,4 +26,13 @@
             <div class="inner three"></div>
         </div>
     </div>
+</div>
+<div id="popup_container">
+    <div  id="smallLoadingScreen">
+    <div class="sml_loader">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+    </div>
+</div>
 </div>

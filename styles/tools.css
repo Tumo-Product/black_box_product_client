@@ -25,7 +25,6 @@ input {
     min-width: 50px;
     border: none;
     outline: none;
-    min-width: 200px;
     color: white;
 }
 
@@ -36,7 +35,7 @@ input {
 
 .parent {
     margin: 0;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,0 +1,234 @@
+#popup {
+    width:  500px;
+    height: 100px;
+    background-color: #21A96D;
+
+    position: absolute;
+    top:    calc(50% - 50px);
+    left:   calc(50% - 250px);
+    border-radius: 15px;
+    perspective: 800px;
+    padding: 15px;
+
+    animation: popup linear 3s;
+}
+
+@keyframes popup {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#popup p {
+    color: black;
+    background-color: white;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#add_icon_btn {
+    margin-left: 50%;
+    margin-top: 15px;
+}
+
+#add_bg_btn {
+    margin-left: 343px;
+    margin-top: 15px;
+}
+
+.change_pos_button {
+    background: white;
+    border-radius: 10px;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.change_pos_button p {
+    color: #5D6277 !important;
+}
+
+.poster {
+    width:  657px !important;
+
+    position: relative;
+    padding: 15px 15px 15px 15px !important;
+    margin: 0 !important;
+    border-radius: 15px;
+    background: #21A96D;
+    margin-bottom: 15px !important;
+}
+
+.poster img {
+    border-radius: 15px;
+    margin: 0 !important;
+}
+
+.poster .gallery_upload_button {
+    left: 90%;
+}
+
+.images {
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+}
+
+.icons {
+    background: #21A96D;
+    padding: 15px 15px 15px 15px !important;
+    margin-bottom: 15px !important;
+    border-radius: 15px;
+    height: auto;
+    width: 800px;
+}
+
+.icons img {
+    border-radius: 15px;
+}
+
+.icon, .bg {
+    position: relative;
+    margin-top: 30px;
+}
+
+.bg .remove_q_image_button {
+    top: -35px !important;
+}
+
+.bg img, .poster img {
+    width:  657px !important;
+    height: 433px !important;
+    border: 2px solid white;
+}
+
+.bg textarea {
+    width: 630px !important;
+}
+
+.imgContainer {
+    margin-left:  13px;
+    margin-right: 13px;
+    position: relative;
+}
+
+.imgContainer button {
+    left: 5px;
+    top: 28px;
+    width: 20px !important;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.imgContainer button p {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 2px;
+}
+
+.imgContainer img {
+    border: 2px solid white;
+}
+
+.icons .remove_q_image_button {
+    top: -33px
+}
+
+.fullImg img {
+    width: 460px;
+    height: 303px;
+}
+
+.iconImg img {
+    width: 100px;
+    height: 100px;
+}
+
+.objImg img {
+    width: 150px;
+}
+
+.name_input {
+    width: 96%;
+    margin-bottom: 10px;
+    background: #ffffff 0% 0% no-repeat padding-box !important;
+    border-radius: 15px;
+    padding: 0px 15px 0px 15px !important;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 18px;
+    color: #5D6277;
+}
+
+h1 {
+    margin-bottom: 15px;
+    color: white;
+}
+
+.poster_text {
+    padding: 15px 15px 15px 15px !important;
+    background: #ffffff 0% 0% no-repeat padding-box !important;
+    border-radius: 15px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 18px;
+    color: #5D6277;
+    height: 80px;
+}
+
+/* TRANSITIONS, ANIMATIONS, popups */
+
+#positionPicker {
+    position: fixed !important;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    margin-top: -216px !important;
+    margin-left: -329px !important;
+    background-color: rgb(208 179 76);
+}
+
+#positionPicker div {
+    width : 657px;
+    height: 433px;
+    position: relative;
+}
+
+#picker {
+    position: absolute !important;
+    top:  0;
+    left: 0;
+    width: 16px  !important;
+    height: 16px !important;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(228, 228, 228, 0.945);
+    animation: pulse 3s infinite;
+}
+  
+@keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(228, 228, 228, 0.945);
+        background: #ffffff00;
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 40px rgba(255, 255, 255, 0);
+        background: #ffffff86;
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(138, 138, 138, 0);
+    }
+}

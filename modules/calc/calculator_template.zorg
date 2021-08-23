@@ -1,0 +1,17 @@
+<div id="top_panel">
+    <p id="name_text">Name </p>
+    <input type="text" id="name_input" value="Name"/>
+    <button id="btn_rem"    onclick="calc_sys_data.onDeleteSet()">      Delete  </button> 
+    <button id="btn_url"    onclick="calc_sys_data.getURL()">           URL     </button>
+    <button id="btn_cnc"    onclick="calc_sys_data.onCancelEdits()">    Cancel  </button>
+    <button id="btn_sav"    onclick="calc_sys_data.onSaveEdits()">      Save    </button>
+</div>
+<div id="scroll_content">
+    <div id="intro_container">
+        <p id="intro_text">Intro </p>
+        <textarea id="intro_area" >Dummy Ashot</textarea>
+    </div>
+    <div id="questions">
+
+    </div>
+</div>

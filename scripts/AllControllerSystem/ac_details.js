@@ -5,8 +5,14 @@ const ac_details = {
             ac_details.modules = await module_loader.loadZorgList("details_mini");
         }
     },
+    load_handlers   : async (name) => {
+        await script_loader.loadScriptList(name);
+    },
     start_loading   : () => {
-        $("#item_container").html(ac_details.modules.star_loading_md.data);
+        $("#item_container").append(ac_details.modules.star_loading_md.data);
+    },
+    stop_loading    : () => {
+        document.getElementById("smallLoadingScreen").remove();
     },
     clean_details   : () => {
         $("#item_container").html("");
@@ -20,48 +26,87 @@ const ac_details = {
 }
 
 const dt_Handlers = {
-    calculator_handler  : {
-        temp_obj    : {},
-        onSelect    : async (obj) => {
-            ac_details.show_container();
-            await ac_details.load_details();
-            ac_details.start_loading();
-            // let html = dt_Handlers.calculator_handler.generate_details(obj);
-            temp_obj = obj;
-
-            let html = await dt_Handlers.calculator_handler.generate_details(temp_obj);
-            ac_details.clean_details();
+    poster_handler      : {
+        temp_obj            : {},
+        onSelect            : async (obj) => {
+                    ac_details.show_container();
+            await   ac_details.load_details();
+                    ac_details.start_loading();
+            await   ac_details.load_handlers("poster");
+            temp_obj = JSON.parse(JSON.stringify(obj));                         // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+            let html = await dt_Handlers.poster_handler.get_page_template();
             $("#item_container").html(html);
-            // let add_button = document.getElementById("add_question");
-            // add_button.onclick = function (event){
-            //     dt_Handlers.calculator_handler.add_question(html);
-            // };
-        }, 
+            ac_details.start_loading();
+            await poster_sys.set_default_set(temp_obj);
+            await poster_sys.handle_set_object(temp_obj);
+            ac_details.stop_loading();
+        },
 
-        // add_question : (html) => {
-        //     let container = document.getElementById("item_container");
-        //     let save = document.getElementById("save");
-        //     let cancel = document.getElementById("cancel");
-        //     console.log(save);
-        // },
+        clear_container     : async () => {
+            $(".icons").empty();
+        },
 
-        generate_details : (obj) => {
-            let html = "";
-            html += `<h3> Name  : <textarea rows="4" cols="50" id="name_area"> ${obj.name} </textarea></h3>`;
-            html += `<h5> Intro : </h5> <textarea rows="4" cols="50"> ${obj.description} </textarea>  <br>`;
-            for(let i = 0; i < obj.questions.length; i++){
-                html += `<textarea rows="4" cols="50"> ${obj.questions[i].text} </textarea> `;
-                for(let j = 0; j < obj.questions[i].answers.length; j++){
-                    html += `<textarea rows="4" cols="50"> ${obj.questions[i].answers[j].text} </textarea>`;
-                    html += `<p> Points : <input type="text" class="points" value="${obj.questions[i].answers[j].points}"> </p>`;
-                }
-                html += `<br>`
-            }
-            html += `<h5> Final : ${obj.answer} </h5>`;
-            // html += '<button id="add_question">Add question</button>';
-            // html += '<button id="cansel">Cancel</button>';
-            // html += '<button id="save">Save</button>';
-            return html;
+        clear_backgrounds   : async() => {
+            $("#end_backgrounds").empty();
+        },
+
+        get_page_template   : async () => {
+            let data = await module_loader.loadZorgList("poster_modules");
+            return data.main_skelet.data;                                       //Hard coded, due dt_Handlers.gallery_handler is specific for calculator tool
+        }
+    },
+
+    gallery_handler     : {
+        temp_obj            : {},
+        onSelect            : async (obj) => {
+                    ac_details.show_container();
+            await   ac_details.load_details();
+                    ac_details.start_loading();
+            await   ac_details.load_handlers("gallery");
+            temp_obj = JSON.parse(JSON.stringify(obj));                         // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+            let html = await dt_Handlers.gallery_handler.get_page_template();
+            $("#item_container").html(html);
+            ac_details.start_loading();
+            await gallery_sys.set_default_set(temp_obj);
+            await gallery_sys.handle_set_object(temp_obj);
+            ac_details.stop_loading();
+        },
+
+        clear_container     :   async () => {
+            let html = await dt_Handlers.gallery_handler.get_page_template();
+            $("#item_container").html(html);
+        },
+
+        get_page_template   :   async () => {
+            let data = await module_loader.loadZorgList("gallery_modules");
+            return data.main_skelet.data;                                       //Hard coded, due dt_Handlers.gallery_handler is specific for calculator tool
+        }
+    },
+    
+    calculator_handler  : {
+        temp_obj            : {},
+        onSelect            : async (obj) => {
+                    ac_details.show_container();
+            await   ac_details.load_details();
+                    ac_details.start_loading();
+            await   ac_details.load_handlers("calculator");
+            temp_obj = JSON.parse(JSON.stringify(obj));                         // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+            let html = await dt_Handlers.calculator_handler.get_page_template();
+            $("#item_container").html(html);
+            ac_details.start_loading();
+            await   calc_sys.set_default_set(temp_obj);
+            await   calc_sys.handle_set_object(temp_obj);
+            ac_details.stop_loading();
+        },
+        
+        clear_container     :   async () => {
+            let html = await dt_Handlers.calculator_handler.get_page_template();
+            $("#item_container").html(html);
+        },
+
+        get_page_template   :   async () => {
+            let data = await module_loader.loadZorgList("calc_modules");
+            return data.main_skelet.data;                                       //Hard coded, due dt_Handlers.calculator_handel is specific for calculator tool
         }
     }
 }

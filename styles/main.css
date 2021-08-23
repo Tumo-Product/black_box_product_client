@@ -163,7 +163,7 @@ img {
 }
 
 #questions {
-    width: 80%;
+    
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -173,7 +173,7 @@ img {
 #questions div {
     width: 100%;
     text-align: center;
-    margin: .4rem;
+    align-items: center;
 }
 
 #score {
