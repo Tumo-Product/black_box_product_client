@@ -408,6 +408,7 @@ const poster_sys = {
 
     assign_name         : async () => {
         document.getElementById("name_input").value = poster_sys.target_set.name;
+        document.getElementById("intro").value = poster_sys.target_set.intro;
     },
 
     get_scroll          : () => {
