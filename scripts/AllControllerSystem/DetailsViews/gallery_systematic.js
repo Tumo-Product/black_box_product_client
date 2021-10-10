@@ -44,7 +44,7 @@ const gallery_sys_data = {
         for (let i = 0; i < defaultImages.length; i++) {
             if (images[i] === undefined) {
                 let req = {
-                    _uid    : ""
+                    _uuid    : ""
                 }
                       
                 req._uuid   = gallery_handlers.current_dat.uuid;
@@ -57,7 +57,7 @@ const gallery_sys_data = {
         for (let i = 0; i < images.length; i++) {
             if (defaultImages[i] === undefined) {
                 let req = {
-                    _uid    : ""
+                    _uuid    : ""
                 }
                       
                 req._uuid   = gallery_handlers.current_dat.uuid;
@@ -68,9 +68,10 @@ const gallery_sys_data = {
             }
             else if (images[i].img1  != defaultImages[i].img1) {
                 let req = {
-                    _uid    : ""
+                    _uuid    : ""
                 }
                 
+                req._uuid   = gallery_handlers.current_dat.uuid;
                 req._iuid   = images[i].iuid;
                 req._img1   = images[i].img1;
                 req._img2   = images[i].img2;
