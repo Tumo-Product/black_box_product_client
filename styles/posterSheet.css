@@ -209,6 +209,7 @@ h1 {
 }
 
 #picker {
+    pointer-events: none;
     position: absolute !important;
     top:  0;
     left: 0;

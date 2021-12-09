@@ -40,7 +40,7 @@ const poster_handlers = {
         poster_sys.target_set = poster_handlers.current_dat;
         await poster_sys.addIcons();
         
-        poster_sys.scroll_to_bottom(true);
+        poster_sys.scroll_to_bottom();
         ac_loading.closeLoading();
     },
 
@@ -182,8 +182,8 @@ const poster_handlers = {
 
             $("#picker").css("left", x - 8).css("top", y - 8);
 
-            $(`#icon_x_${id}`).val(x);
-            $(`#icon_y_${id}`).val(y);
+            $(`#icon_x_${id}`).val(x - 8);
+            $(`#icon_y_${id}`).val(y - 8);
         });
     },
 
@@ -232,10 +232,8 @@ const poster_handlers = {
             
             let xVal    = parseInt($("#icon_x_" + i).val());
             let yVal    = parseInt($("#icon_y_" + i).val());
-
-            if (xVal < 0 || yVal < 0 || !fullSrc.includes("png")) {
-                dat.icons[i].stick = undefined;
-            } else {
+            
+            if (xVal > -1 && yVal > -1) {
                 dat.icons[i].stick = {x: xVal, y: yVal};
             }
 
@@ -244,11 +242,6 @@ const poster_handlers = {
             }
             else {
                 dat.icons[i].full = fullSrc;
-            }
-
-            if (dat.icons[i].full === undefined || dat.icons[i].stick === undefined) {
-                dat.icons[i].stick  = undefined;
-                dat.icons[i].full   = undefined;
             }
 
             dat.icons[i].img    = iconSrc;
