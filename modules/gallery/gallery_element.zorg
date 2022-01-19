@@ -15,6 +15,7 @@
                 <p class="upload_arrow">↑</p>
             </button>
         </div>
+        <textarea id="firstText_^{id}"    class="question_text" placeholder="Add text if needed.">^{fT}</textarea>
         <br>
         <div class="image_container" id="image_container_^{id}_under">     
             <input type="file" accept=".png" id="input_^{id}_under" style="display:none" onchange="gallery_handlers.onImgUpload(^{id}, 'under')"/>
@@ -23,5 +24,6 @@
                 <p class="upload_arrow">↑</p>
             </button>
         </div>
+        <textarea id="secondText_^{id}"   class="question_text" placeholder="Add text if needed.">^{sT}</textarea>
     </div>
 </div>

@@ -50,8 +50,14 @@ const gallery_handlers = {
         await dt_Handlers.gallery_handler.clear_container();
         await gallery_sys.create_elements();
 
+        let images = gallery_handlers.current_dat.images;
+        for (let i = 0; i < images.length; i++) {
+            images[i].iuid = (i + 1).toString();
+            console.log("running");
+        }
+        
+        gallery_sys.target_set = gallery_handlers.current_dat;
         gallery_sys.scroll_to_pos(scrValue);
-
         ac_loading.closeLoading();
     },
 
@@ -93,6 +99,9 @@ const gallery_handlers = {
         for(let i = 0; i < gallery_handlers.current_dat.images.length; i++) {
             gallery_handlers.current_dat.images[i].img1 = document.getElementById(`upload_image_${i}_top`  ).src;
             gallery_handlers.current_dat.images[i].img2 = document.getElementById(`upload_image_${i}_under`).src;
+
+            gallery_handlers.current_dat.images[i].firstText    = document.getElementById(`firstText_${i}` ).value.trim();
+            gallery_handlers.current_dat.images[i].secondText   = document.getElementById(`secondText_${i}`).value.trim();
         }
     }
 }
@@ -131,16 +140,16 @@ const gallery_sys = {
 
         for(let i = 0; i < length; i++){
             let img1 = default_images[i].img1, img2 = default_images[i].img2;
-            if (!img1.includes("base64") && !img1.includes(document.location.href)) { // check for default image and non base64 image.
-                img1 = "data:image/png;base64, " + img1;
-                img2 = "data:image/png;base64, " + img2;
-            }
+            let fT = default_images[i].firstText;
+            let sT = default_images[i].secondText;
             
             temp_instance       = element_template;
             temp_instance       = temp_instance.replaceAll("^{id}", i);
             temp_instance       = temp_instance.replaceAll("^{sid}", i + 1);            // sid = set id.
             temp_instance       = temp_instance.replaceAll("^{top_img}",    img1);
             temp_instance       = temp_instance.replaceAll("^{under_img}",  img2);
+            temp_instance       = temp_instance.replaceAll("^{fT}", fT !== undefined ? fT : "");
+            temp_instance       = temp_instance.replaceAll("^{sT}", sT !== undefined ? sT : "");
 
             document.getElementById("elements").innerHTML += temp_instance;
         }

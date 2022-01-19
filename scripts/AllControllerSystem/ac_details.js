@@ -75,6 +75,7 @@ const dt_Handlers = {
         clear_container     :   async () => {
             let html = await dt_Handlers.gallery_handler.get_page_template();
             $("#item_container").html(html);
+            await gallery_sys.assign_name();
         },
 
         get_page_template   :   async () => {
