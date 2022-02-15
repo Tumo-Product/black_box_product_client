@@ -41,7 +41,7 @@ let dummyJson = {
         },
         {
             name          : "timeline",
-            img           : "images/gallery.png",
+            img           : "images/timeline.png",
             searchBar     : true,
             addButton     : true,
             lanRequest    : "timeline/list",
