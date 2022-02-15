@@ -17,27 +17,35 @@ const ac_network = {
 //----------------------vvvvvvv------------DUMMY JSON DATA GOES HERE------------vvvvvvv---------------------------------
 
 let dummyJson = {
-    "modulesArr": [
+    modulesArr: [
         {
-            "name"          : "calculator",
-            "img"           : "images/calculator.png",
-            "searchBar"     : true,
-            "addButton"     : true,
-            "getRequest"    : "calc/list"
+            name          : "calculator",
+            img           : "images/calculator.png",
+            searchBar     : true,
+            addButton     : true,
+            getRequest    : "calc/list"
         },
         {
-            "name"          : "gallery",
-            "img"           : "images/gallery.png",
-            "searchBar"     : true,
-            "addButton"     : true,
-            "getRequest"    : "gallery/list"
+            name          : "gallery",
+            img           : "images/gallery.png",
+            searchBar     : true,
+            addButton     : true,
+            getRequest    : "gallery/list"
         },
         {
-            "name"          : "poster",
-            "img"           : "images/poster.png",
-            "searchBar"     : true,
-            "addButton"     : true,
-            "postRequest"   : "interactive_poster/list"
+            name          : "poster",
+            img           : "images/poster.png",
+            searchBar     : true,
+            addButton     : true,
+            postRequest   : "interactive_poster/list"
         },
+        {
+            name          : "timeline",
+            img           : "images/gallery.png",
+            searchBar     : true,
+            addButton     : true,
+            lanRequest    : "timeline/list",
+            languages     : ["FR"]
+        }
     ]
 };

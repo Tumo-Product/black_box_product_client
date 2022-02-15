@@ -10,6 +10,13 @@ const ac_sidebar        = {
             await sideBar_Handlers[module.name + "_handler"].load(module.getRequest);
         } else if (module.postRequest !== undefined) {
             await sideBar_Handlers[module.name + "_handler"].load(module.postRequest, true);
+        } else if (module.lanRequest !== undefined) {
+            let languageHandlers = [];
+            for (let l = 0; l < module.languages.length; l++) {
+                languageHandlers[l] = `sideBar_Handlers.${module.name + "_handler"}.load('${module.lanRequest}', '${module.languages[l]}');`
+            }
+            
+            ac_view.languagePopup(module.languages, languageHandlers);
         }
 
         sideBar_Handlers[module.name + "_handler"].draw();
@@ -147,5 +154,57 @@ const sideBar_Handlers  = {
         onElementClick  : (id)  => {
             dt_Handlers.calculator_handler.onSelect(sideBar_Handlers.calculator_handler.a_c_list[id]);
         },
+    },
+    timeline_handler    : {
+        data: {},
+        request: undefined,
+        language: "",
+
+        load            : async (request, language) => {
+            sideBar_Handlers.timeline_handler.request = request;
+            sideBar_Handlers.timeline_handler.language = language;
+            if (sideBar_Handlers.defaultHtml !== ""){
+                $("#searchParent").html(sideBar_Handlers.defaultHtml);
+            }
+
+            let dat = await ac_network.request_data(request + `?language=${language}`);
+            console.log(request + `?language=${language}`);
+            sideBar_Handlers.timeline_handler.draw(dat);
+            sideBar_Handlers.timeline_handler.data = dat;
+        },
+
+        onAddButton     : async () => {
+            let name = prompt("Name of new set", "name");
+            if (name !== null) {
+                ac_loading.openLoading();
+                let data = await ac_network.post_request('timeline/add', { language: sideBar_Handlers.timeline_handler.language, name: name});
+                await ac_sidebar.configSideBar(ac_sidebar.activeModule);
+                sideBar_Handlers.timeline_handler.load(sideBar_Handlers.timeline_handler.request, sideBar_Handlers.timeline_handler.language);
+                ac_loading.closeLoading();
+            }
+        },
+
+        onElementClick  : (id) => {
+            let dat = sideBar_Handlers.timeline_handler.data;
+            dt_Handlers.timeline_handler.onSelect(dat[id]);
+        },
+
+        draw            : (data) => {
+            if (data !== undefined) {
+                if(sideBar_Handlers.defaultHtml === ""){
+                    sideBar_Handlers.defaultHtml =  $("#searchParent").html();
+                }
+                
+                let html = "";
+                let temp;
+                for(let i = 0; i < data.length; i++){
+                    temp = data[i];
+                    html += `<div id="${i}" class="bar_names" onclick="sideBar_Handlers.timeline_handler.onElementClick(${i})"> <h3>${temp.name}</h3> </div>`;
+                }
+
+                $("#searchParent").html(html);
+                ac_view.closeLanguagePopup();
+            }
+        }
     }
 };

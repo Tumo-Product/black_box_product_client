@@ -72,5 +72,19 @@ const module_zorg   = {
             name    : "q_add_button",
             src     : "modules/calc/calculator_add_question.zorg"
         }
+    ],
+    timeline_module        : [
+        {
+            name    : "mainTemplate",
+            src     : "modules/timeline/mainTemplate.zorg"
+        },
+        {
+            name    : "addButton",
+            src     : "modules/timeline/addButton.zorg"
+        },
+        {
+            name    : "element",
+            src     : "modules/timeline/element.zorg"
+        }
     ]
 };

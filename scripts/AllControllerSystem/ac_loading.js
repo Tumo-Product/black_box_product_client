@@ -1,6 +1,6 @@
 const ac_loading = {
     openLoading : () => {
-        document.getElementById("popup_container").style.display = "block";
+        document.getElementById("popup_container").style.display = "flex";
     },
 
     closeLoading : () => {

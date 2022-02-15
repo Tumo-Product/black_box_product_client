@@ -1,0 +1,23 @@
+<div class="element_body" id="body_^{id}">
+    <div class="nav_arrows_quest_main">
+        <button class="q_answer_up arrows"   onclick="timelineController.onSwitchElements(^{id}, -1)">▲</button>
+        <button class="q_answer_down arrows" onclick="timelineController.onSwitchElements(^{id},  1)">▼</button>
+    </div>
+
+    <div class="element_container" id="element_container_^{id}">
+        <br>
+        <button id="removeImage_^{id}" class="remove_q_image_button" onclick="timelineController.onRemoveElement(^{id})">+</button> 
+
+        <div class="image_container" id="imageContainer_^{id}">
+            <input type="file" id="input_^{id}" style="display:none" onchange="timelineController.onImageUpload(^{id})"/>
+            <img src="^{img}" class="gallery_image" id="image_^{id}">
+            <button class="gallery_upload_button" id="uploadButton_^{id}" onclick="timelineController.onUploadPressed(^{id})">
+                <p class="upload_arrow">↑</p>
+            </button>
+        </div>
+
+        <br>
+        <input type="text"          class="q_answer_input" id="key_^{id}" value="^{key}"/>
+        <textarea id="text_^{id}"   class="question_text" placeholder="Text">^{text}</textarea>
+    </div>
+</div>

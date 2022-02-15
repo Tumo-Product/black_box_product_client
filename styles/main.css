@@ -190,3 +190,42 @@ img {
     min-width: 250px;
     max-width: 400px;
 }
+
+.popup {
+    position: absolute;
+    width: 35vh;
+    height: 15vh;
+    background-color: #21a96d;
+    z-index: 3;
+    padding: 2vh;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2vh;
+}
+
+.popup button {
+    background-color: white;
+    width: 10vh;
+    height: 6vh;
+    border-radius: 5px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vh;
+    color: black;
+    transition: 0.2s;
+}
+
+.popup button:hover {
+    opacity: 0.8;
+}
+
+.popup button:active {
+    opacity: 0.6;
+}

@@ -28,5 +28,19 @@ const ac_view = {
         $(function() {
             $("#" + id).show();
         });
+    },
+
+    languagePopup       : (languages, handlers) => {
+        $("#popup_container").css("display", "flex");
+        $("#popup_container").append('<div class="popup"></div>');
+        
+        for (let l = 0; l < languages.length; l++) {
+            $(".popup").append(`<button onclick="${handlers[l]}">${languages[l]}</button>`);
+        }
+    },
+
+    closeLanguagePopup  : () => {
+        $("#popup_container").hide();
+        $(".popup").remove();
     }
 };

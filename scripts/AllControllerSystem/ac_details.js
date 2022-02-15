@@ -109,5 +109,20 @@ const dt_Handlers = {
             let data = await module_loader.loadZorgList("calc_modules");
             return data.main_skelet.data;                                       //Hard coded, due dt_Handlers.calculator_handel is specific for calculator tool
         }
+    },
+
+    timeline_handler    : {
+        onSelect            : async (obj) => {
+                    ac_details.show_container();
+            await   ac_details.load_details();
+                    ac_details.start_loading();
+            await   ac_details.load_handlers("timeline");
+
+            let objCopy = JSON.parse(JSON.stringify(obj));
+                    timelineModel.setCurrentSet(obj);
+                    timelineModel.setDefaultSet(objCopy);
+            await   timelineModel.setup(obj);
+            ac_details.stop_loading();
+        }
     }
 }

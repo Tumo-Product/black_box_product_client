@@ -60,6 +60,24 @@ const view_scripts  = {
             name    : "poster_systematic",
             src     : "scripts/AllControllerSystem/DetailsViews/poster_systematic.js"
         }
+    ],
+    timeline_scripts        : [
+        {
+            name    : "timelineModel",
+            src     : "scripts/AllControllerSystem/timeline/model.js"
+        },
+        {
+            name    : "timelineView",
+            src     : "scripts/AllControllerSystem/timeline/view.js"
+        },
+        {
+            name    : "timelineController",
+            src     : "scripts/AllControllerSystem/timeline/controller.js"
+        },
+        {
+            name    : "timelineNetwork",
+            src     : "scripts/AllControllerSystem/timeline/network.js"
+        }
     ]
 };
 
