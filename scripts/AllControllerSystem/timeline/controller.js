@@ -44,5 +44,9 @@ const timelineController = {
         timelineView.assignName(updatedSet.name);
 
         ac_loading.closeLoading();
+    },
+
+    getURL          : async () => {
+        prompt("Here is the link", `https://tumo-product.github.io/InteractiveTimeline/?lan=${timelineModel.language}&id=${timelineModel.currentSet._id}`)
     }
 }

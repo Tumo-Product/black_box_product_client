@@ -2,7 +2,7 @@
     <p id="name_text">Name </p>
     <input type="text" id="name_input" value="Name"/>
     <button id="btn_rem" onclick="poster_sys_data.onDeleteSet()">      Delete  </button>
-    <button id="btn_url" onclick="poster_sys_data.getURL()">           URL     </button>
+    <button id="btn_url" onclick="timelineController.getURL()">           URL     </button>
     <button id="btn_cnc" onclick="poster_sys_data.onCancelEdits()">    Cancel  </button>
     <button id="btn_sav" onclick="timelineController.onSave()">      Save    </button>
 </div>
