@@ -12,7 +12,9 @@ const ac_details = {
         $("#item_container").append(ac_details.modules.star_loading_md.data);
     },
     stop_loading    : () => {
-        document.getElementById("smallLoadingScreen").remove();
+        if (document.getElementById("smallLoadingScreen") !== null) {
+            document.getElementById("smallLoadingScreen").remove();
+        }
     },
     clean_details   : () => {
         $("#item_container").html("");
