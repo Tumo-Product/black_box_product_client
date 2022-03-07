@@ -30,6 +30,10 @@ const timelineModel = {
         timelineView.createAddButton();
     },
 
+    resetData       : () => {
+        timelineModel.currentSet = JSON.parse(JSON.stringify(timelineModel.defaultSet));
+    },
+
     updateData      : () => {
         let points = timelineModel.currentSet.points;
 

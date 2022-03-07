@@ -46,6 +46,23 @@ const timelineController = {
         ac_loading.closeLoading();
     },
 
+    onDelete        : async () => {
+        ac_loading.openLoading();
+
+        await timelineNetwork.delete(timelineModel.currentSet._id, timelineModel.language);
+        await ac_sidebar.configSideBar(ac_sidebar.activeModule);
+        sideBar_Handlers.timeline_handler.load(sideBar_Handlers.timeline_handler.request, timelineModel.language);
+        $("#item_container").empty();
+
+        ac_loading.closeLoading();
+    },
+
+    onCancel        : async () => {
+        timelineModel.resetData();
+        timelineView.clearView();
+        timelineModel.addPoints(timelineModel.currentSet.points);
+    },
+
     getURL          : async () => {
         prompt("Here is the link", `https://tumo-product.github.io/InteractiveTimeline/?lan=${timelineModel.language}&id=${timelineModel.currentSet._id}`)
     }
