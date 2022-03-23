@@ -1,12 +1,33 @@
 <div id="top_panel">
     <p id="name_text">Name </p>
     <input type="text" id="name_input" value="Name"/>
-    <button id="btn_rem" onclick="poster_sys_data.onDeleteSet()">      Delete  </button>
-    <button id="btn_url" onclick="poster_sys_data.getURL()">           URL     </button>
-    <button id="btn_cnc" onclick="poster_sys_data.onCancelEdits()">    Cancel  </button>
-    <button id="btn_sav" onclick="poster_sys_data.onSaveEdits()">      Save    </button>
+
+    <div id="btnContainer">
+        <button class="button delete" onclick="poster_sys_data.onDeleteSet()">      Delete  </button>
+        <button class="button" onclick="poster_sys_data.getURL()">           URL     </button>
+        <button class="button" onclick="poster_sys_data.onCancelEdits()">    Cancel  </button>
+        <button class="button" onclick="poster_sys_data.onSaveEdits()">      Save    </button>
+    </div>
 </div>
 <div id="scroll_content">
+    <div id="posterSettings">
+        <div class="settingArea">
+            <p>Finalized: </p>      <input type="checkbox" id="isFinalized">
+        </div>
+        <div class="settingArea">
+            <p>Divisions: </p>
+            <input type="checkbox"  id="divisionsAvailable">
+            <input type="number"    id="divisions" value="0">
+        </div>
+        <div class="settingArea">
+            <p>Object Based: </p>   <input type="checkbox" id="objectBased">
+        </div>
+        <div class="settingArea column">
+            <p id="popupText">Popup Text:</p>
+            <textarea id="popupTextarea" placeholder="Popup text for voice based posters"></textarea>
+        </div>
+    </div>
+
     <div class="element_body">
         <textarea style="width: 657px" type="text" id="intro" class="poster_text">Intro</textarea>
     </div>

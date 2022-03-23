@@ -33,12 +33,88 @@ textarea{
     top: 27px ;
 }
 
-#btn_url{
-    top: 20px;
+#posterSettings {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.settingArea {
+    display: flex;
+    margin-bottom: 3px;
+    border-top: white 1px solid;
+    padding-top: 3px;
+}
+
+.settingArea p {
+    font-size: 18px !important;
+    color: white;
+}
+
+.settingArea input[type=checkbox] {
+    margin-left: 5px;
+    min-width: 0 !important;
+    width: 20px;
+    height: 20px;
     position: absolute;
+    right: 0;
+}
+
+.settingArea input[type=number] {
+    transition: 0.2s;
+    font-variant: lining-nums;
+    width: 30px;
+    height: 20px;
+    background-color: white !important;
+    color: black !important;
+    margin-left: 15px;
+}
+
+input.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+#divisions {
+    padding-left: 4px !important;
+    border-radius: 2px;
+}
+
+#popupText {
+    width: 300px;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+#popupTextarea {
+    width: 400px;
+    height: 150px;
+    font-size: 16px;
+    padding: 9px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    border-radius: 10px;
+    outline: none;
+    background-color: white !important;
+    color: #2d2f38;
+}
+
+#btnContainer {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+
+    display: flex;
+    width: fit-content;
+    gap: 10px;
+}
+
+.button {
     width: 66px;
     height: 42px;
-    right: 170px;
     background: #ffffff 0% 0% no-repeat padding-box;
     border-radius: 15px;
     color: #5D6277;
@@ -46,43 +122,9 @@ textarea{
     font-size: 18px;
 }
 
-#btn_cnc{
-    top: 20px;
-    position: absolute;
-    width: 66px;
-    height: 42px;
-    right: 90px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border-radius: 15px;
-    color: #5D6277;
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: 18px;
-}
-
-#btn_sav{
-    top: 20px;
-    position: absolute;
-    width: 66px;
-    height: 42px;
-    right: 10px; 
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border-radius: 15px;
-    color: #5D6277;
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: 18px;
-}
-
-#btn_rem{
-    top: 20px;
-    position: absolute;
-    width: 66px;
-    height: 42px;
-    right: 250px;
-    background: #e28181 0% 0% no-repeat padding-box;
-    border-radius: 15px;
-    color: #ffffff;
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: 18px;
+.delete.button {
+    background: #e28181 0% 0% no-repeat padding-box !important;
+    color: #ffffff !important;
 }
 
 #intro_container{

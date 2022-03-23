@@ -35,7 +35,7 @@ const dt_Handlers = {
             await   ac_details.load_details();
                     ac_details.start_loading();
             await   ac_details.load_handlers("poster");
-            temp_obj = JSON.parse(JSON.stringify(obj));                         // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+            temp_obj = JSON.parse(JSON.stringify(obj));
             let html = await dt_Handlers.poster_handler.get_page_template();
             $("#item_container").html(html);
             ac_details.start_loading();
@@ -65,7 +65,7 @@ const dt_Handlers = {
             await   ac_details.load_details();
                     ac_details.start_loading();
             await   ac_details.load_handlers("gallery");
-            temp_obj = JSON.parse(JSON.stringify(obj));                         // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+            temp_obj = JSON.parse(JSON.stringify(obj));
             let html = await dt_Handlers.gallery_handler.get_page_template();
             $("#item_container").html(html);
             ac_details.start_loading();

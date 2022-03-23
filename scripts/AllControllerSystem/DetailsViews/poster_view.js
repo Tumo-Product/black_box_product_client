@@ -131,10 +131,9 @@ const poster_handlers = {
             arr[newIndex]   = tempDat;
         }
 
-        let fields      = ["outcomes",          "backgrounds"];
         let dataFields  = { outcomes: "outcome", backgrounds: "background_end"};
 
-        for (let field of fields) {
+        for (let field in dataFields) {
             let newString  = "";
             let arr = bg[field];
             
@@ -230,7 +229,7 @@ const poster_sys = {
     },
 
     set_default_set         : (obj) => {
-        poster_sys.def_set_values = JSON.parse(JSON.stringify(obj));                   // ALERT! THIS IS ABSURD!!!! Somehow OBJ is a referance, and keeps like that
+        poster_sys.def_set_values = JSON.parse(JSON.stringify(obj));
     },
 
     reset_to_default    : async () => {
@@ -242,6 +241,7 @@ const poster_sys = {
 
     handle_set_object   : async (data) => {
         poster_sys.target_set = data;
+        await poster_sys.handleSettings();
         await poster_sys.assign_name();
         await poster_sys.setupBackgrounds();
         await poster_sys.addIcons();
@@ -277,6 +277,19 @@ const poster_sys = {
 
     removePosPicker     : () => {
         $("#positionPicker").remove();
+    },
+
+    handleSettings    : async () => {
+        $("#isFinalized").prop("checked", poster_sys.target_set.finalized);
+        
+        let divisionsAvailable = parseInt(poster_sys.target_set.divisions) !== NaN;
+        $("#divisionsAvailable").prop("checked", divisionsAvailable);
+        if (divisionsAvailable) {
+            $("#divisions").val(poster_sys.target_set.divisions);
+        }
+
+        $("#objectBased").prop("checked", poster_sys.target_set.objectBased);
+        $("#popupTextarea").val(poster_sys.target_set.popupText);
     },
 
     addIcons            : async () => {

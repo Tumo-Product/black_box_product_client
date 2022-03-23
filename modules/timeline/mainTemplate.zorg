@@ -1,10 +1,12 @@
 <div id="top_panel">
     <p id="name_text">Name </p>
     <input type="text" id="name_input" value="Name"/>
-    <button id="btn_rem" onclick="timelineController.onDelete()">      Delete  </button>
-    <button id="btn_url" onclick="timelineController.getURL()">           URL     </button>
-    <button id="btn_cnc" onclick="timelineController.onCancel()">    Cancel  </button>
-    <button id="btn_sav" onclick="timelineController.onSave()">      Save    </button>
+    <div id="btnContainer">
+        <button class="button delete" onclick="timelineController.onDelete()">    Delete  </button>
+        <button class="button" onclick="timelineController.getURL()">      URL     </button>
+        <button class="button" onclick="timelineController.onCancel()">    Cancel  </button>
+        <button class="button" onclick="timelineController.onSave()">      Save    </button>
+    </div>
 </div>
 
 <div id="scroll_content">
