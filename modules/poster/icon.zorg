@@ -34,6 +34,25 @@
         <button class="change_pos_button" id="change_pos_btn_^{id}" onclick="poster_handlers.changePosition(^{id})">
             <p>Change Position</p>
         </button>
-        <p>(Leave at -1 if this is a wrong object)</p
+        <p>(Leave at -1 if this is a wrong object)</p>
+        <img src="images/voiceSwitch.png" class="voiceSwitch" onclick="poster_handlers.toggleVoice(^{id})">
+    </div>
+    <div class="voiceTab">
+        <span class="msg">Wrong Message</span>
+        <p class="upload_arrow" onclick="poster_handlers.onUploadPressed('wrongInput_^{id}')">↑</p>
+        <input type="file" accept=".wav" id="wrongInput_^{id}" style="display:none" onchange="poster_handlers.onUploadAudio(^{id}, 'wrong')"/>
+
+        <div id="wrongMsg_^{id}" class="audioContainer">
+            <audio id="wrongAudio_^{id}" controls></audio>
+            <div class="removeMessage"><img src="images/cancel.png" onclick="poster_handlers.onRemoveAudio('wrongMsg_^{id}')"></div>
+        </div>
+        <div id="correctMsg_^{id}" class="audioContainer">
+            <audio id="correctAudio_^{id}" controls></audio>
+            <div class="removeMessage"><img src="images/cancel.png" onclick="poster_handlers.onRemoveAudio('correctMsg_^{id}')"></div>
+        </div>
+
+        <span class="msg">Correct Message</span>
+        <p class="upload_arrow" onclick="poster_handlers.onUploadPressed('correctInput_^{id}')">↑</p>
+        <input type="file" accept=".wav" id="correctInput_^{id}" style="display:none" onchange="poster_handlers.onUploadAudio(^{id}, 'correct')"/>
     </div>
 </div>

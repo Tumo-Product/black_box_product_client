@@ -107,6 +107,98 @@
     margin-top: 30px;
 }
 
+.voiceSwitch {
+    width: 40px;
+    border-radius: 10px !important;
+    object-fit: cover;
+    margin-left: 10px;
+    padding-right: 3px;
+    border: 2px white solid;
+    transition: 0.2s;
+}
+
+.enabled {
+    display: flex !important;
+}
+
+.voiceSwitch.enabled {
+    background-color: white;
+}
+
+.voiceTab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.voiceTab.enabled {
+    opacity: 1;
+    margin-top: 10px;
+    height: 54px;
+}
+
+.voiceTab .upload_arrow {
+    background: white;
+    padding: 5px !important;
+    border-radius: 5px !important;
+    cursor: pointer;
+}
+
+.voiceTab audio {
+    /* display: none; */
+}
+
+.audioContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.3s;
+    width: 0px;
+    opacity: 0;
+}
+
+.audioContainer.enabled {
+    width: 280px;
+    opacity: 1;
+}
+
+.removeMessage {
+    position: absolute;
+    background-color: #f0f3f4;
+    width: 30px;
+    right: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 100%;
+}
+
+.removeMessage:hover {
+    background-color: white;
+}
+
+.removeMessage img {
+    width: 20px;
+}
+
+.audioContainer audio {
+    width: 280px;
+}
+
+.msg {
+    color: white;
+    width: 70px;
+}
+
 .bg .remove_q_image_button {
     top: -35px !important;
 }

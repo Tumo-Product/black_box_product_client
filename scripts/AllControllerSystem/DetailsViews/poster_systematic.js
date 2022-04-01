@@ -18,12 +18,16 @@ const poster_sys_data = {
         let dat = await poster_handlers.updateData();
         
         let req     = {
-            _uid            : dat.uid,
-            _intro          : dat.intro,
-            _icons          : JSON.stringify(dat.icons),
-            _outcome        : dat.outcome,
-            _background     : dat.background,
-            _background_end : dat.background_end
+            uid             : dat.uid,
+            intro           : dat.intro,
+            icons           : JSON.stringify(dat.icons),
+            outcome         : dat.outcome,
+            background      : dat.background,
+            background_end  : dat.background_end,
+            divisions       : dat.divisions,
+            finalized       : dat.finalized,
+            objectBased     : dat.objectBased,
+            popupText       : dat.popupText
         };
 
         let resp = await ac_network.post_request("interactive_poster/updatesetsone", req);

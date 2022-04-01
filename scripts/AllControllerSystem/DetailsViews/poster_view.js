@@ -1,3 +1,15 @@
+const getBase64 = async (file) => {
+    let fr      = new FileReader();
+    let baseData = await (new Promise((resolve)=>{
+        fr.readAsDataURL(file);
+        fr.onloadend = () => {
+            resolve(fr.result);
+        }
+    }));
+
+    return baseData;
+}
+
 const poster_handlers = {
     current_dat : {},
 
@@ -11,23 +23,23 @@ const poster_handlers = {
     
     onUpload        : async (i, id, type) => {
         let input   = document.getElementById(id);
-        let file    = input.files[0];
-
-        if  (file === undefined) { alert("Upload an SVG!"); return; }
-
-        let fr      = new FileReader();
-        let basedat = await (new Promise((resolve)=>{
-            fr.readAsDataURL(file);
-            fr.onloadend = () => {
-                resolve(fr.result);
-            }
-        }));
-
+        baseData    = await getBase64(input.files[0]);
         if (type == "poster" || type.includes("background_end")) {
-            $(`#${type} img`).attr("src", basedat);
+            $(`#${type} img`).attr("src", baseData);
         } else {
-            document.getElementById(`${type}_img_${i}`).src = basedat;
+            document.getElementById(`${type}_img_${i}`).src = baseData;
         }
+    },
+
+    onUploadAudio   : async (id, msg) => {
+        let input   = document.getElementById(`${msg}Input_${id}`);
+        baseData    = await getBase64(input.files[0]);
+        $(`#${msg}Audio_${id}`).attr("src", baseData);
+        $(`#${msg}Msg_${id}`).addClass("enabled");
+    },
+
+    onRemoveAudio   : async (id) => {
+        $(`#${id}`).removeClass("enabled");
     },
     
     addIcon         : async () => {
@@ -172,14 +184,16 @@ const poster_handlers = {
     },
 
     updateData      : async () => {
-        let msg     = "";                           // for popups.
         let dat     = poster_handlers.current_dat;
         
         dat.intro   = document.getElementById("intro").value;
         dat.background = $("#poster img").attr("src");
 
+        poster_handlers.updateSettings(dat);
+
         let bgDataFields    = ["background_end",        "outcome"];
         let bgElements      = { background_end: "img",   outcome: "textarea" };
+        let defImg          = poster_sys.def_images.full;
 
         for (let field of bgDataFields) {
             let element = bgElements[field];
@@ -191,6 +205,9 @@ const poster_handlers = {
                 newString += i == $(".bg").length - 1 ? val : val + "%{div}";
             });
 
+            if (newString.includes(defImg)) {
+                newString = "";
+            }
             dat[field] = newString;
         }
         
@@ -200,20 +217,56 @@ const poster_handlers = {
             
             let xVal    = parseInt($("#icon_x_" + i).val());
             let yVal    = parseInt($("#icon_y_" + i).val());
-            
+
+            let messages = { correct: $(`#correctAudio_${i}`).attr("src"), wrong: $(`#wrongAudio${i}`).attr("src") }
+            if (!$(`#correctMsg_${i}`).hasClass("enabled")) { messages.correct = undefined; }
+            if (!$(`#wrongMsg_${i}`).hasClass("enabled")) { messages.wrong = undefined; }
+
             if (xVal > -1 && yVal > -1) {
-                dat.icons[i].stick = {x: xVal, y: yVal};
+                dat.icons[i].stick = { x: xVal, y: yVal, correctMsg: messages.correct, wrongMsg: messages.wrong };
             }
 
-            let defImg          = poster_sys.def_images.full;
+            if (messages.correct === undefined && messages.wrong !== undefined) {
+                dat.icons[i].wrongMsg = messages.wrong;
+            }
+
             let fullSrc         = $("#full_img_" + i).attr("src");
-            dat.icons[i].img    = $("#icon_img_" + i).attr("src");
+            let iconSrc         = $("#icon_img_" + i).attr("src");
+            dat.icons[i].img    = iconSrc == poster_sys.def_images.icon ? undefined : iconSrc;
             dat.icons[i].obj    = $("#obj_img_"  + i).attr("src");
             dat.icons[i].full   = fullSrc == defImg ? undefined : fullSrc;
         }
 
         poster_sys.target_set = dat;
         return dat;
+    },
+
+    updateSettings: (dat) => {
+        dat.finalized   = $("#isFinalized").prop("checked") ? true : undefined;
+        dat.objectBased = $("#objectBased").prop("checked") ? true : undefined;
+        dat.divisions   = $("#divisionsAvailable").prop("checked") ? $("#divisions").val() : undefined;
+        if (parseInt(dat.divisions) === NaN) dat.divisions = undefined;
+
+        let popupText   = $("#popupTextarea").val().trim()
+        dat.popupText   = popupText === "" ? undefined : popupText;
+    },
+
+    toggleVoice         : async (index) => {
+        if ($(`#icon_${index} .voiceSwitch`).hasClass("enabled")) {
+            poster_handlers.disableVoice(index);
+        } else {
+            poster_handlers.enableVoice(index);
+        }
+    },
+
+    enableVoice         : async (index) => {
+        $(`#icon_${index} .voiceSwitch`).addClass("enabled");
+        $(`#icon_${index} .voiceTab`).addClass("enabled");
+    },
+
+    disableVoice        : async (index) => {
+        $(`#icon_${index} .voiceSwitch`).removeClass("enabled");
+        $(`#icon_${index} .voiceTab`).removeClass("enabled");
     }
 }
 
@@ -298,12 +351,25 @@ const poster_sys = {
         let add_btn      = modules.add_icon_button.data;
         let iconTemplate = modules.icon_template.data;
 
+        let allMessages = [];
+
         for (let i = 0; i < icons.length; i++) {
             let icon = iconTemplate;
             icon = icon.replaceAll("^{id}",   i);
             icon = icon.replaceAll("^{name}", icons[i].name     !== undefined ? icons[i].name     : "Name");
             icon = icon.replaceAll("^{xval}", icons[i].stick    !== undefined ? icons[i].stick.x  : -1);
             icon = icon.replaceAll("^{yval}", icons[i].stick    !== undefined ? icons[i].stick.y  : -1);
+
+            let messages = { correct: undefined, wrong: undefined}
+
+            if (icons[i].stick !== undefined) {
+                messages.correct    = icons[i].stick.correctMsg;
+                messages.wrong      = icons[i].stick.wrongMsg;
+            } else {
+                messages.wrong      = icons[i].wrongMsg;
+            }
+
+            allMessages[i] = messages;
 
             let imgTypes = ["full", "obj"];
             for (let type of imgTypes) {
@@ -313,6 +379,18 @@ const poster_sys = {
             icon = icon.replaceAll("^{iconImg}", icons[i].img === undefined || icons[i].img == "" ? poster_sys.def_images.icon : icons[i].img);
 
             $(".icons").append(icon);
+        }
+
+        for (let i = 0; i < allMessages.length; i++) {
+            let messages = allMessages[i];
+
+            for (let msg in messages) {
+                if (messages[msg] !== undefined) {
+                    poster_handlers.enableVoice(i);
+                    $(`#${msg}Msg_${i}`).addClass("enabled");
+                    $(`#${msg}Audio_${i}`).attr("src", messages[msg]);
+                }
+            }
         }
 
         $(".icons").append(add_btn);
