@@ -49,7 +49,7 @@ const dt_Handlers = {
         },
 
         clear_backgrounds   : async() => {
-            $("#end_backgrounds").empty();
+            $("#end_backgrounds .element_body").empty();
         },
 
         get_page_template   : async () => {

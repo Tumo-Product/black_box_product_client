@@ -6,9 +6,7 @@
     <div id="background_end_^{id}" class="bg poster">
         <button id="remove_icon_^{id}" class="remove_q_image_button" onclick="poster_handlers.removeEndBackground(^{id})">+</button> 
         
-        <textarea style="width: 657px" type="text" id="outcome" class="poster_text">Outcome</textarea>
-        
-        <img src="">
+        <img class="bgImage" src="">
         <button class="gallery_upload_button" onclick="poster_handlers.onUploadPressed('bg_end_input_^{id}')">
             <p class="upload_arrow">↑</p>
         </button>

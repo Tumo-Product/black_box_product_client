@@ -188,29 +188,31 @@ const poster_handlers = {
         
         dat.intro   = document.getElementById("intro").value;
         dat.background = $("#poster img").attr("src");
-
         poster_handlers.updateSettings(dat);
 
-        let bgDataFields    = ["background_end",        "outcome"];
-        let bgElements      = { background_end: "img",   outcome: "textarea" };
-        let defImg          = poster_sys.def_images.full;
+        let defImg      = poster_sys.def_images.full;
+        let newString   = "";
 
-        for (let field of bgDataFields) {
-            let element = bgElements[field];
-            let newString = "";
-
-            $(`.bg ${element}`).each(function(i) {
-                let val = $(this).attr("src")
-                if (val == undefined) val = $(this).val();
-                newString += i == $(".bg").length - 1 ? val : val + "%{div}";
-            });
-
-            if (newString.includes(defImg)) {
-                newString = "";
-            }
-            dat[field] = newString;
+        // Updating outcomes.
+        if ($("#outcomeAudioTab .audioContainer").hasClass("enabled")) {
+            dat.outcome = $("#bgAudio").attr("src");
+        } else {
+            dat.outcome = "";
         }
-        
+
+        // Updating end backgrounds.
+        $(`.bg img`).each(function(i) {
+            let val = $(this).attr("src")
+            if (val == undefined) val = $(this).val();
+            newString += i == $(".bg").length - 1 ? val : val + "%{div}";
+        });
+
+        if (newString.includes(defImg)) {
+            newString = "";
+        }
+        dat.background_end = newString;
+
+        // Updating icons.
         for (let i = 0; i < $(".icon").length; i++) {
             if (dat.icons[i] == undefined) dat.icons[i] = {};
             dat.icons[i].name = i.toString();
@@ -253,20 +255,41 @@ const poster_handlers = {
 
     toggleVoice         : async (index) => {
         if ($(`#icon_${index} .voiceSwitch`).hasClass("enabled")) {
-            poster_handlers.disableVoice(index);
+            poster_handlers.disableVoice(`#icon_${index}`, ["voiceSwitch", "voiceTab"]);
         } else {
-            poster_handlers.enableVoice(index);
+            poster_handlers.enableVoice(`#icon_${index}`, ["voiceSwitch", "voiceTab"]);
         }
     },
 
-    enableVoice         : async (index) => {
-        $(`#icon_${index} .voiceSwitch`).addClass("enabled");
-        $(`#icon_${index} .voiceTab`).addClass("enabled");
+    onBgAudioUpload     : async (source) => {
+        let src;
+
+        if (source !== undefined) {
+            src = source;
+        } else {
+            let input = document.getElementById("outcomeAudioInput");
+            src = await getBase64(input.files[0]);
+        }
+
+        $("#bgAudio").attr("src", src);
+        $("#outcomeAudioTab .audioContainer").addClass("enabled");
+        $("#outcomeAudioInput").val("");
     },
 
-    disableVoice        : async (index) => {
-        $(`#icon_${index} .voiceSwitch`).removeClass("enabled");
-        $(`#icon_${index} .voiceTab`).removeClass("enabled");
+    onRemoveBgAudio     : () => {
+        $("#outcomeAudioTab .audioContainer").removeClass("enabled");
+    },
+
+    enableVoice         : async (which, classes) => {
+        for (const cls of classes) {
+            $(`${which} .${cls}`).addClass("enabled");
+        }
+    },
+
+    disableVoice        : async (which, classes) => {
+        for (const cls of classes) {
+            $(`${which} .${cls}`).removeClass("enabled");
+        }
     }
 }
 
@@ -386,7 +409,7 @@ const poster_sys = {
 
             for (let msg in messages) {
                 if (messages[msg] !== undefined) {
-                    poster_handlers.enableVoice(i);
+                    poster_handlers.enableVoice(`#icon_${i}`, ["voiceSwitch", "voiceTab"]);
                     $(`#${msg}Msg_${i}`).addClass("enabled");
                     $(`#${msg}Audio_${i}`).attr("src", messages[msg]);
                 }
@@ -412,12 +435,16 @@ const poster_sys = {
 
             bg = bg.replaceAll("^{id}", i);
             $("#end_backgrounds").append(bg);
-            $(`#background_end_${i} img`).attr("src", backgrounds[i] !== "" ? backgrounds[i] : poster_sys.poster_res);
+            $(`#background_end_${i} .bgImage`).attr("src", backgrounds[i] !== "" ? backgrounds[i] : poster_sys.poster_res);
         }
 
         for (let i = 0; i < outcomes.length; i++) {
-            if (outcomes[i] != "")
+            if (outcomes[i] != "") {
                 $(`#background_end_${i} textarea`).val(outcomes[i]);
+                if (outcomes[i].includes("https://content-tools.tumo.world/")) {
+                    poster_handlers.onBgAudioUpload(outcomes[i]);
+                }
+            }
         }
 
         $("#end_backgrounds").append(add_btn);

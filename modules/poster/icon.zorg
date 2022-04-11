@@ -46,6 +46,7 @@
             <audio id="wrongAudio_^{id}" controls></audio>
             <div class="removeMessage"><img src="images/cancel.png" onclick="poster_handlers.onRemoveAudio('wrongMsg_^{id}')"></div>
         </div>
+        <div class="separator"></div>
         <div id="correctMsg_^{id}" class="audioContainer">
             <audio id="correctAudio_^{id}" controls></audio>
             <div class="removeMessage"><img src="images/cancel.png" onclick="poster_handlers.onRemoveAudio('correctMsg_^{id}')"></div>

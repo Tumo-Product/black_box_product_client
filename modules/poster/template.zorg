@@ -47,7 +47,17 @@
         <h1>End Backgrounds</h1>
     </div>
 
-    <div id="end_backgrounds"></div>
+    <div id="end_backgrounds">
+        <div id="outcomeAudioTab">
+            <p class="upload_arrow" onclick="poster_handlers.onUploadPressed('outcomeAudioInput')">↑</p>
+            <input type="file" accept=".wav" id="outcomeAudioInput" style="display:none" onchange="poster_handlers.onBgAudioUpload()"/>
+            
+            <div class="audioContainer">
+                <audio id="bgAudio" controls></audio>
+                <div class="removeMessage"><img src="images/cancel.png" onclick="poster_handlers.onRemoveBgAudio()"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="element_body">
         <h1>Icons</h1>
