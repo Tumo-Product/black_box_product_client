@@ -27,7 +27,8 @@ const poster_sys_data = {
             divisions       : dat.divisions,
             finalized       : dat.finalized,
             objectBased     : dat.objectBased,
-            popupText       : dat.popupText
+            objScale        : dat.objScale,
+            popupText       : dat.popupText,
         };
 
         let resp = await ac_network.post_request("interactive_poster/updatesetsone", req);

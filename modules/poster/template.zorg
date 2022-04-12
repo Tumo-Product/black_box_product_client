@@ -22,6 +22,9 @@
         <div class="settingArea">
             <p>Object Based: </p>   <input type="checkbox" id="objectBased">
         </div>
+        <div class="settingArea">
+            <p>Object Scale: </p>    <input type="number" id="objScale" value="0.25">
+        </div>
         <div class="settingArea column">
             <p id="popupText">Popup Text:</p>
             <textarea id="popupTextarea" placeholder="Popup text for voice based posters"></textarea>

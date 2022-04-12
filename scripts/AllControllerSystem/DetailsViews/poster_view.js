@@ -248,8 +248,10 @@ const poster_handlers = {
         dat.objectBased = $("#objectBased").prop("checked") ? true : undefined;
         dat.divisions   = $("#divisionsAvailable").prop("checked") ? $("#divisions").val() : undefined;
         if (parseInt(dat.divisions) === NaN) dat.divisions = undefined;
+        let scale       = parseFloat($("#objScale").val());
+        dat.objScale    = scale !== NaN ? scale : 0.25;
 
-        let popupText   = $("#popupTextarea").val().trim()
+        let popupText   = $("#popupTextarea").val().trim();
         dat.popupText   = popupText === "" ? undefined : popupText;
     },
 
@@ -365,6 +367,7 @@ const poster_sys = {
         }
 
         $("#objectBased").prop("checked", poster_sys.target_set.objectBased);
+        $("#objScale").val(poster_sys.target_set.objScale);
         $("#popupTextarea").val(poster_sys.target_set.popupText);
     },
 
