@@ -220,7 +220,7 @@ const poster_handlers = {
             let xVal    = parseInt($("#icon_x_" + i).val());
             let yVal    = parseInt($("#icon_y_" + i).val());
 
-            let messages = { correct: $(`#correctAudio_${i}`).attr("src"), wrong: $(`#wrongAudio${i}`).attr("src") }
+            let messages = { correct: $(`#correctAudio_${i}`).attr("src"), wrong: $(`#wrongAudio_${i}`).attr("src") }
             if (!$(`#correctMsg_${i}`).hasClass("enabled")) { messages.correct = undefined; }
             if (!$(`#wrongMsg_${i}`).hasClass("enabled")) { messages.wrong = undefined; }
 
